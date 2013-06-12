@@ -1,0 +1,87 @@
+p {
+	font-family: Tahoma;
+	font-size: 18px;
+	color: #312D24;
+	text-align: justify;
+	letterSpacing: 0.3;
+}
+normal {
+	font-family: Tahoma;
+	font-size: 18px;
+	color: #312D24;
+	text-align: justify;
+	letterSpacing: 0.3;
+}
+title {
+	font-family: Tahoma;
+	font-size: 25px;
+	color: #e0eeff;
+	text-align: left;
+}
+titleright {
+	font-family: Tahoma;
+	font-size: 20px;
+	color: #e0eeff;
+	text-align: right;
+}
+left {
+	font-family: Tahoma;
+	font-size: 18px;
+	color: #312D24;
+	text-align: left;
+}
+leftbold {
+	font-family: Eras;
+	font-size: 18px;
+	color: #312D24;
+	text-align: left;
+}
+right {
+	font-family: Tahoma;
+	font-size: 18px;
+	color: #312D24;
+	text-align: right;
+}
+center {
+	font-family: Tahoma;
+	font-size: 18px;
+	color: #312D24;
+	text-align: center;
+}
+centerbold {
+	font-family: Eras;
+	font-size: 18px;
+	color: #312D24;
+	text-align: center;
+	font-weight: bold;
+}
+bold {
+	font-family: Eras;
+	font-size: 18px;
+	color: #312D24;
+	font-weight: bold;
+}
+boldbig {
+	font-family: Eras;
+	font-size: 20px;
+	color: #312D24;
+	font-weight: bold;
+}
+malus {
+	font-family: Tahoma;
+	font-size: 18px;
+	color: #7e1818;
+	letterSpacing: 0.3;
+}
+bonus {
+	font-family: Tahoma;
+	font-size: 18px;
+	color:#104E15;
+	letterSpacing: 0.3;
+}
+exotic {
+	font-family: Tahoma;
+	font-size: 18px;
+	color:#0342a1;
+	letterSpacing: 0.3;
+}

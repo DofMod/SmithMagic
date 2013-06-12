@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Definition>
+
+	<Constants>
+		<Constant name="assets" value="[config.ui.skin]assets.swf|" />
+		<Constant name="css" value="[config.ui.skin]css/" />
+		
+		<Constant name="over_uri" value="[config.ui.skin]bitmap/over.png" />
+		<Constant name="selected_uri" value="[config.ui.skin]bitmap/selected.png" />
+		<Constant name="acceptDrop_uri" value="[config.ui.skin]bitmap/acceptDrop.png" />
+		<Constant name="refuseDrop_uri" value="[config.ui.skin]bitmap/refuseDrop.png" />
+	</Constants>
+	
+	<Import url="[config.mod.template.button]iconButton.xml" />
+	<Import url="[config.mod.template.button]simpleButton.xml" />
+	
+	<Container>	
+			<Anchors>
+				<Anchor>
+					<AbsDimension x="390" y="85" />
+				</Anchor>
+			</Anchors>	
+				
+		<Container name="ctr_concealable">
+			<mouseEnabled>true</mouseEnabled>
+			
+			<!-- TEXTURE BACKGROUND PRINCIPALE -->
+			<Texture name="tx_bg">
+				<Size>
+					<AbsDimension x="590" y="650" />
+				</Size>
+				<uri>[local.assets]map_tx_bgList</uri>
+				<autoGrid>true</autoGrid>
+			</Texture>
+			
+			<!-- Texture de fond des jets-->
+			<!--<Texture name="tx_grid_bg">
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="0" y="135" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="585" y="475" />
+				</Size>
+				<autoGrid>true</autoGrid>
+				<uri>[local.assets]SocialGuildeMaisons_tx_cadreIllusMaisons</uri>
+			</Texture>-->
+			
+			<!-- Label Nom Rune-->
+			<Label name="lbl_rune_name">
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="170" y="47" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="330" y="20" />
+				</Size>
+				<css>styles.css</css>
+				<cssClass>boldbig</cssClass>
+			</Label>
+			
+			<!-- Label Poids Rune-->
+			<Label name="lbl_rune_poids">
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="170" y="75" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="330" y="20" />
+				</Size>
+				<css>styles.css</css>
+				<cssClass>bold</cssClass>
+				<!--<text>Poids : 100</text>-->
+			</Label>
+			
+			<!-- Label Effet Rune-->
+			<Label name="lbl_rune_effect">
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="170" y="100" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="330" y="20" />
+				</Size>
+				<css>styles.css</css>
+				<cssClass>normal</cssClass>
+				<!--<text>Effet : +1 % de résistance neutre</text>-->
+			</Label>			
+			
+			<!-- Label Résultat-->
+			<Label name="lbl_resultat">
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="40" y="615" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="250" y="20" />
+				</Size>
+				<css>styles.css</css>
+				<cssClass>bold</cssClass>
+				<text>Résultat :</text>
+			</Label>
+		
+			<iconButton name="btn_input">
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="415" y="615" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="66" y="28" />
+				</Size>
+				<uri>[local.assets]tx_inputBackground</uri>
+			</iconButton>
+			
+			<!-- Label PUITS-->
+			<Label name="lbl_puits">
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="353" y="615" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="140" y="20" />
+				</Size>
+				<css>styles.css</css>
+				<cssClass>leftbold</cssClass>
+			</Label>
+			
+			<!-- LES 3 SLOTS -->
+			<Slot name="slot_item">
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="30" y="50" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="70" y="70" />
+				</Size>
+				<emptyTexture>[local.assets]tx_slotDofus</emptyTexture>
+				<css>[local.css]normal.css</css>
+				<highlightTexture>[local.over_uri]</highlightTexture>
+				<selectedTexture>[local.selected_uri]</selectedTexture>
+				<acceptDragTexture>[local.acceptDrop_uri]</acceptDragTexture>
+				<refuseDragTexture>[local.refuseDrop_uri]</refuseDragTexture>
+			</Slot>
+			
+			<Slot name="slot_rune">
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="110" y="46" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="44" y="44" />
+				</Size>
+				<emptyTexture>[local.assets]Forgemagie_tx_slot2</emptyTexture>
+				<css>[local.css]normal.css</css>
+				<highlightTexture>[local.over_uri]</highlightTexture>
+				<selectedTexture>[local.selected_uri]</selectedTexture>
+				<acceptDragTexture>[local.acceptDrop_uri]</acceptDragTexture>
+				<refuseDragTexture>[local.refuseDrop_uri]</refuseDragTexture>
+			</Slot>
+			
+			<Slot name="slot_signature">
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="112" y="95" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="40" y="40" />
+				</Size>
+				<emptyTexture>[local.assets]craft_tx_slotSignature</emptyTexture>
+				<css>[local.css]normal.css</css>
+				<highlightTexture>[local.over_uri]</highlightTexture>
+				<selectedTexture>[local.selected_uri]</selectedTexture>
+				<acceptDragTexture>[local.acceptDrop_uri]</acceptDragTexture>
+				<refuseDragTexture>[local.refuseDrop_uri]</refuseDragTexture>
+			</Slot>
+			
+			<!-- Label Min-->
+			<Label>
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="5" y="143" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="50" y="20" />
+				</Size>
+				<css>styles.css</css>
+				<cssClass>centerbold</cssClass>
+				<text>Min</text>
+			</Label>
+					
+			<!-- Label Max-->
+			<Label>
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="360" y="143" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="50" y="20" />
+				</Size>
+				<css>styles.css</css>
+				<cssClass>centerbold</cssClass>
+				<text>Max</text>
+			</Label>
+			
+			<!-- Label Caractéristiques-->
+			<Label>
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="60" y="143" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="295" y="25" />
+				</Size>
+				<css>styles.css</css>
+				<cssClass>centerbold</cssClass>
+				<text>Caractéristiques</text>
+			</Label> 
+			
+			<Grid name="maGrid">
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="10" y="170" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="570" y="432" />
+				</Size>
+				<rendererName>InlineXmlGridRender</rendererName>
+				<verticalScrollbarCss>[local.css]scrollBar.css</verticalScrollbarCss>
+				<rendererArgs>updateGrid,[colors.grid.line],[colors.grid.bg]</rendererArgs>
+				<!--<scrollDisplay>always</scrollDisplay>-->
+				<slotWidth>551</slotWidth>
+				<slotHeight>27</slotHeight>
+
+				<Container name="ctr_jet">
+					<Size>
+						<AbsDimension x="551" y="27" />
+					</Size>
+					<Button name="btn_jet">
+
+						<Common>
+														
+							<!-- Label jetmin-->
+							<Label name="lb_jetmin">
+								<Anchors>
+									<Anchor>
+										<AbsDimension x="0" y="0" />
+									</Anchor>
+								</Anchors>
+								<Size>
+									<AbsDimension x="50" y="22" />
+								</Size>
+								<css>styles.css</css>
+								<cssClass>center</cssClass>
+								<text>1</text>
+							</Label>
+							
+							<!-- Label jetactuel-->
+							<Label name="lb_jet">
+								<Anchors>
+									<Anchor>
+										<AbsDimension x="54" y="0" />
+									</Anchor>
+								</Anchors>
+								<Size>
+									<AbsDimension x="296" y="22" />
+								</Size>
+								<css>styles.css</css>
+								<text>Augmente les dommages de 50%</text>
+								<hyperlinkEnabled>true</hyperlinkEnabled>
+								<useStyleSheet>true</useStyleSheet>
+							</Label>
+					
+							<!-- Label jetmax-->
+							<Label name="lb_jetmax">
+								<Anchors>
+									<Anchor>
+										<AbsDimension x="350" y="0" />
+									</Anchor>
+								</Anchors>
+								<Size>
+									<AbsDimension x="51" y="22" />
+								</Size>
+								<css>styles.css</css>
+								<cssClass>center</cssClass>
+								<text>100</text>
+							</Label>
+							
+						</Common>
+
+						<State type="OVER">
+							<SetProperties target="btn_jet">
+								<bgColor>[colors.grid.over]</bgColor>
+							</SetProperties>
+						</State>
+					</Button>	
+					
+					<Texture name="tx_bulle">
+						<Anchors>
+							<Anchor>
+								<AbsDimension x="395" y="0" />
+							</Anchor>
+						</Anchors>
+						<Size>
+							<AbsDimension x="45" y="27" />
+						</Size>
+						
+						<uri>[local.assets]state_3</uri>
+					</Texture>	
+							
+					<Slot name="slot_simple">
+						<Anchors>
+							<Anchor>
+								<AbsDimension x="438" y="0" />
+							</Anchor>
+						</Anchors>
+						<Size>
+							<AbsDimension x="26" y="26" />
+						</Size>
+						<emptyTexture>[local.assets]Forgemagie_tx_slot2</emptyTexture>
+						<css>[local.css]normal.css</css>
+						<highlightTexture>[local.over_uri]</highlightTexture>
+						<selectedTexture>[local.selected_uri]</selectedTexture>
+						<acceptDragTexture>[local.acceptDrop_uri]</acceptDragTexture>
+						<refuseDragTexture>[local.refuseDrop_uri]</refuseDragTexture>
+					</Slot>
+					
+					<Slot name="slot_pa">
+						<Anchors>
+							<Anchor>
+								<AbsDimension x="478" y="0" />
+							</Anchor>
+						</Anchors>
+						<Size>
+							<AbsDimension x="26" y="26" />
+						</Size>
+						<emptyTexture>[local.assets]Forgemagie_tx_slot2</emptyTexture>
+						<css>[local.css]normal.css</css>
+						<highlightTexture>[local.over_uri]</highlightTexture>
+						<selectedTexture>[local.selected_uri]</selectedTexture>
+						<acceptDragTexture>[local.acceptDrop_uri]</acceptDragTexture>
+						<refuseDragTexture>[local.refuseDrop_uri]</refuseDragTexture>
+					</Slot>	
+					
+					<Slot name="slot_ra">
+						<Anchors>
+							<Anchor>
+								<AbsDimension x="518" y="0" />
+							</Anchor>
+						</Anchors>
+						<Size>
+							<AbsDimension x="26" y="26" />
+						</Size>
+						<emptyTexture>[local.assets]Forgemagie_tx_slot2</emptyTexture>
+						<css>[local.css]normal.css</css>
+						<highlightTexture>[local.over_uri]</highlightTexture>
+						<selectedTexture>[local.selected_uri]</selectedTexture>
+						<acceptDragTexture>[local.acceptDrop_uri]</acceptDragTexture>
+						<refuseDragTexture>[local.refuseDrop_uri]</refuseDragTexture>
+					</Slot>
+					
+				</Container>
+				
+			</Grid>	
+			
+			<!-- BARRE VERTICALE JET MIN -->
+			<Container>
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="60" y="170" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="1" y="432" />
+				</Size>
+				<bgColor>0x808080</bgColor>
+			</Container>
+			
+			<!-- BARRE VERTICALE CARACS -->
+			<Container>
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="360" y="170" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="1" y="432" />
+				</Size>
+				<bgColor>0x808080</bgColor>
+			</Container>
+			
+			<!-- BARRE VERTICALE JET MAX -->
+			<Container>
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="415" y="170" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="1" y="432" />
+				</Size>
+				<bgColor>0x808080</bgColor>
+			</Container>
+			
+			<!-- BARRE VERTICALE BULLE -->
+			<Container>
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="440" y="170" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="1" y="432" />
+				</Size>
+				<bgColor>0x808080</bgColor>
+			</Container>
+			
+			<!-- BARRE VERTICALE RUNE SIMPLE -->
+			<Container>
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="480" y="170" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="1" y="432" />
+				</Size>
+				<bgColor>0x808080</bgColor>
+			</Container>
+			
+			<!-- BARRE VERTICALE RUNE PA -->
+			<Container>
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="520" y="170" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="1" y="432" />
+				</Size>
+				<bgColor>0x808080</bgColor>
+			</Container>
+						
+		</Container>
+		
+		<Container name="ctr_topbar">
+			
+			<Texture name="tx_topbar">
+				<Size>
+					<AbsDimension x="590" y="40" />
+				</Size>
+				<uri>[local.assets]tx_titleBackground</uri>
+				<autoGrid>true</autoGrid>
+			</Texture>
+			
+			<!-- Label lbl_name-->
+			<Label name="lbl_name">
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="10" y="-3" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="340" y="25" />
+				</Size>
+				<css>styles.css</css>
+				<cssClass>title</cssClass>
+			</Label>
+			
+			<!-- Label lbl_level-->
+			<Label name="lbl_level">
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="450" y="3" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="95" y="25" />
+				</Size>
+				<css>styles.css</css>
+				<cssClass>titleright</cssClass>
+			</Label>
+			
+			<iconButton name="btn_close">
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT">
+							<AbsDimension x="-4" y="6" />
+						</Anchor>
+					</Anchors>
+					<Size>
+						<AbsDimension x="20" y="20" />
+					</Size>
+					<uri>[local.assets]btn_reduce</uri>
+					<visible>true</visible>
+			</iconButton>
+		</Container>
+		
+		<!-- Bouton pour afficher l'interface, invisible de base -->
+		<iconButton name="btn_open">
+			<Anchors>
+				<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT">
+					<AbsDimension x="-4" y="6" />
+				</Anchor>
+			</Anchors>
+			<Size>
+				<AbsDimension x="20" y="20" />
+			</Size>
+			<uri>[local.assets]btn_extend</uri>
+			<visible>false</visible>
+		</iconButton>
+			
+	</Container>
+</Definition>
