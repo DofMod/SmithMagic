@@ -9,6 +9,9 @@
 		<Constant name="selected_uri" value="[config.ui.skin]bitmap/selected.png" />
 		<Constant name="acceptDrop_uri" value="[config.ui.skin]bitmap/acceptDrop.png" />
 		<Constant name="refuseDrop_uri" value="[config.ui.skin]bitmap/refuseDrop.png" />
+
+		<Constant name="localCss" value="[config.mod.path]SmithMagic/css/" />
+		<Constant name="localAssets" value="[config.mod.path]SmithMagic/assets/assets.swf|" />
 	</Constants>
 	
 	<Import url="[config.mod.template.button]iconButton.xml" />
@@ -57,7 +60,7 @@
 				<Size>
 					<AbsDimension x="330" y="20" />
 				</Size>
-				<css>styles.css</css>
+				<css>[local.localCss]styles.css</css>
 				<cssClass>boldbig</cssClass>
 			</Label>
 			
@@ -71,7 +74,7 @@
 				<Size>
 					<AbsDimension x="330" y="20" />
 				</Size>
-				<css>styles.css</css>
+				<css>[local.localCss]styles.css</css>
 				<cssClass>bold</cssClass>
 				<!--<text>Poids : 100</text>-->
 			</Label>
@@ -86,7 +89,7 @@
 				<Size>
 					<AbsDimension x="330" y="20" />
 				</Size>
-				<css>styles.css</css>
+				<css>[local.localCss]styles.css</css>
 				<cssClass>normal</cssClass>
 				<!--<text>Effet : +1 % de résistance neutre</text>-->
 			</Label>			
@@ -101,7 +104,7 @@
 				<Size>
 					<AbsDimension x="250" y="20" />
 				</Size>
-				<css>styles.css</css>
+				<css>[local.localCss]styles.css</css>
 				<cssClass>bold</cssClass>
 				<text>Résultat :</text>
 			</Label>
@@ -128,7 +131,7 @@
 				<Size>
 					<AbsDimension x="140" y="20" />
 				</Size>
-				<css>styles.css</css>
+				<css>[local.localCss]styles.css</css>
 				<cssClass>leftbold</cssClass>
 			</Label>
 			
@@ -194,7 +197,7 @@
 				<Size>
 					<AbsDimension x="50" y="20" />
 				</Size>
-				<css>styles.css</css>
+				<css>[local.localCss]styles.css</css>
 				<cssClass>centerbold</cssClass>
 				<text>Min</text>
 			</Label>
@@ -209,7 +212,7 @@
 				<Size>
 					<AbsDimension x="50" y="20" />
 				</Size>
-				<css>styles.css</css>
+				<css>[local.localCss]styles.css</css>
 				<cssClass>centerbold</cssClass>
 				<text>Max</text>
 			</Label>
@@ -224,7 +227,7 @@
 				<Size>
 					<AbsDimension x="295" y="25" />
 				</Size>
-				<css>styles.css</css>
+				<css>[local.localCss]styles.css</css>
 				<cssClass>centerbold</cssClass>
 				<text>Caractéristiques</text>
 			</Label> 
@@ -263,7 +266,7 @@
 								<Size>
 									<AbsDimension x="50" y="22" />
 								</Size>
-								<css>styles.css</css>
+								<css>[local.localCss]styles.css</css>
 								<cssClass>center</cssClass>
 								<text>1</text>
 							</Label>
@@ -278,7 +281,7 @@
 								<Size>
 									<AbsDimension x="296" y="22" />
 								</Size>
-								<css>styles.css</css>
+								<css>[local.localCss]styles.css</css>
 								<text>Augmente les dommages de 50%</text>
 								<hyperlinkEnabled>true</hyperlinkEnabled>
 								<useStyleSheet>true</useStyleSheet>
@@ -294,7 +297,7 @@
 								<Size>
 									<AbsDimension x="51" y="22" />
 								</Size>
-								<css>styles.css</css>
+								<css>[local.localCss]styles.css</css>
 								<cssClass>center</cssClass>
 								<text>100</text>
 							</Label>
@@ -476,7 +479,7 @@
 				<Size>
 					<AbsDimension x="340" y="25" />
 				</Size>
-				<css>styles.css</css>
+				<css>[local.localCss]styles.css</css>
 				<cssClass>title</cssClass>
 			</Label>
 			
@@ -490,7 +493,7 @@
 				<Size>
 					<AbsDimension x="95" y="25" />
 				</Size>
-				<css>styles.css</css>
+				<css>[local.localCss]styles.css</css>
 				<cssClass>titleright</cssClass>
 			</Label>
 			
