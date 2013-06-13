@@ -4,6 +4,7 @@ package {
 	import d2api.UiApi;
 	import d2data.EffectInstanceDice;
 	import d2data.Item;
+	import d2hooks.ExchangeLeave;
 	import d2hooks.ExchangeStartOkCraft;
 	import d2hooks.ExchangeStartOkMultiCraft;
 	import d2hooks.StorageModChanged;
@@ -19,6 +20,9 @@ package {
 		
 		import ui.SmithMagicUi;
 		protected var smithMagicUi : SmithMagicUi;
+		
+		private static const uiName : String = "smithmagic";
+		private static const uiInstanceName : String = "exited_smithmagic";
 		
 		// Déclaration des API dont on veut se servir dans cette classe.
 		public var sysApi : SystemApi;
@@ -88,6 +92,7 @@ package {
 			//sysApi.addHook(StorageModChanged, onStorageModChanged);
 			sysApi.addHook(ExchangeStartOkCraft, onExchangeStartOkCraft);
 			sysApi.addHook(ExchangeStartOkMultiCraft, onExchangeStartOkMultiCraft);
+			sysApi.addHook(ExchangeLeave, onExchangeLeave);
 			
 		}
 
@@ -97,18 +102,24 @@ package {
 	
 		private function onStorageModChanged( mode:int) : void
 		{
-			if (mode == 0){	uiApi.unloadUi("smithmagic"); }
+			if (mode == 0){	uiApi.unloadUi(uiInstanceName); }
 		}
 		
 		private function onExchangeStartOkCraft(recettes:Object, skillId:uint, nbCases:uint):void {
 			_coop = false;
-			uiApi.loadUi("smithmagic", "smithmagic", skillId);
+			uiApi.loadUi(uiName, uiInstanceName, skillId);
 		}
 		
 		private function onExchangeStartOkMultiCraft(skillId: int , recettes : Object , arg2 : int , arg3 : Object, arg4 : Object) : void {
 			_coop = true;
-			uiApi.loadUi("smithmagic", "smithmagic", skillId);
+			uiApi.loadUi(uiName, uiInstanceName, skillId);
 		}
-				
+		
+		private function onExchangeLeave(param1 : Boolean) : void	{
+			if (uiApi.getUi(uiInstanceName))
+            {
+				uiApi.unloadUi(uiInstanceName);
+            }
+		}
 	}
 }
