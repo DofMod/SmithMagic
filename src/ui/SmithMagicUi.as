@@ -270,19 +270,6 @@ package ui
 			}
 		}
 		
-		public function getSigneBonus(effect:Object):int
-		{
-			// On affecte le style css en fonction du type de jet (malus, bonus ou pas de signe)
-			if (effect.description.charAt(0) == "-")
-			{
-				return -1;
-			}
-			else
-			{
-				return 1;
-			}
-		}
-		
 		public function onExchangeObjectModified(item:ItemWrapper):void
 		{
 			// Permet de mettre à jour la quantité des runes ou des potions présentent dans le slot de l'atelier
@@ -698,6 +685,19 @@ package ui
 		//::///////////////////////////////////////////////////////////
 		//::// Méthodes Privées
 		//::///////////////////////////////////////////////////////////
+		
+		private function getSigneBonus(effect:Object):int
+		{
+			// On affecte le style css en fonction du type de jet (malus, bonus ou pas de signe)
+			if (effect.description.charAt(0) == "-")
+			{
+				return -1;
+			}
+			else
+			{
+				return 1;
+			}
+		}
 		
 		private function updateRune(item:ItemWrapper):void
 		{
