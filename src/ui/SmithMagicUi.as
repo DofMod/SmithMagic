@@ -211,22 +211,22 @@ package ui
 				// Si l'effet à Diminué
 				if (effect.old > effect.neww)
 				{
-					poidsPertes += ((effect.old - effect.neww) * SmithMagic.poidsUnitaireEffect[effect.id])
+					poidsPertes += ((effect.old - effect.neww) * SmithMagic.runeWeight[effect.id])
 				}
 				// Si l'effet à Augmenté
 				else if (effect.old < effect.neww)
 				{
-					poidsGains += ((effect.neww - effect.old) * SmithMagic.poidsUnitaireEffect[effect.id])
+					poidsGains += ((effect.neww - effect.old) * SmithMagic.runeWeight[effect.id])
 				}
 				// Si l'effet vient d'être ajouté à l'objet
 				else if (effect.old == false && effect.neww != false)
 				{
-					poidsGains += (effect.neww * SmithMagic.poidsUnitaireEffect[effect.id])
+					poidsGains += (effect.neww * SmithMagic.runeWeight[effect.id])
 				}
 				// Si l'effet vient d'être supprimé de l'objet
 				else if (effect.neww == false && effect.old != false)
 				{
-					poidsPertes += (effect.old * SmithMagic.poidsUnitaireEffect[effect.id])
+					poidsPertes += (effect.old * SmithMagic.runeWeight[effect.id])
 				}
 			}
 			
@@ -444,7 +444,7 @@ package ui
 					if (_btnRef[target] !== null && target.name.search("btn_jet") != -1 && _btnRef[target] is EffectInstanceInteger)
 					{
 						data = _btnRef[target] as EffectInstanceInteger;
-						var poidsEffect:int = data.value * SmithMagic.poidsUnitaireEffect[getIdEffectMalusToBonus(data.effectId)] * 100;
+						var poidsEffect:int = data.value * SmithMagic.runeWeight[getIdEffectMalusToBonus(data.effectId)] * 100;
 						toolTip = uiApi.textTooltipInfo("Poids total : " + poidsEffect / 100);
 						uiApi.showTooltip(toolTip, new Rectangle(uiApi.getMouseX(),uiApi.getMouseY(),0,0), false, "standard",7,1,3);
 					}
@@ -725,9 +725,9 @@ package ui
 			}
 			
 			// On met à jour le poids de la rune
-			if (SmithMagic.poidsUnitaireEffect[effectId])
+			if (SmithMagic.runeWeight[effectId])
 			{
-				_poidsRune = effectValue * SmithMagic.poidsUnitaireEffect[effectId];
+				_poidsRune = effectValue * SmithMagic.runeWeight[effectId];
 				lbl_rune_poids.text = "Poids : " + _poidsRune;
 			}
 			else

@@ -10,6 +10,7 @@ package
 	import d2hooks.ExchangeStartOkMultiCraft;
 	import d2hooks.StorageModChanged;
 	import d2hooks.UiLoaded;
+	import enum.effectIdEnum;
 	import flash.display.Sprite;
 	import flash.utils.Dictionary;
 	
@@ -38,7 +39,7 @@ package
 		// Déclaration des variables
 		public static var puits:Number = 0;
 		public static var allRune:Dictionary = new Dictionary();
-		public static var poidsUnitaireEffect:Dictionary = new Dictionary();
+		public static var runeWeight:Dictionary = new Dictionary();
 		public static var _coop:Boolean;
 		
 		//::///////////////////////////////////////////////////////////
@@ -47,52 +48,65 @@ package
 		
 		public function main():void
 		{
-			poidsUnitaireEffect[118] = 1; // Force
-			poidsUnitaireEffect[126] = 1; // Intell
-			poidsUnitaireEffect[123] = 1; // Chance
-			poidsUnitaireEffect[119] = 1; // Agilité
-			poidsUnitaireEffect[124] = 3; // Sagesse
-			poidsUnitaireEffect[125] = 0.25; // Vitalité
-			poidsUnitaireEffect[174] = 0.1; // Initiative
-			poidsUnitaireEffect[242] = 2; // Res +Air
-			poidsUnitaireEffect[241] = 2; // Res +Eau
-			poidsUnitaireEffect[243] = 2; // Res +Feu
-			poidsUnitaireEffect[244] = 2; // Res +Neutre
-			poidsUnitaireEffect[240] = 2; // Res +Terre
-			poidsUnitaireEffect[212] = 6; // Res %Air
-			poidsUnitaireEffect[211] = 6; // Res %Eau
-			poidsUnitaireEffect[213] = 6; // Res %Feu
-			poidsUnitaireEffect[214] = 6; // Res %Neutre
-			poidsUnitaireEffect[210] = 6; // Res %Terre
-			poidsUnitaireEffect[416] = 2; // Res poussé
-			poidsUnitaireEffect[420] = 2; // Res critique
-			poidsUnitaireEffect[160] = 7; // Esquive PA
-			poidsUnitaireEffect[161] = 7; // Esquive PM
-			poidsUnitaireEffect[176] = 3; // Prospection
-			poidsUnitaireEffect[138] = 2; // % Dom
-			poidsUnitaireEffect[226] = 2; // % Dom Pièges
-			poidsUnitaireEffect[225] = 15; // + Dom Pièges
-			poidsUnitaireEffect[753] = 4; // Tacle
-			poidsUnitaireEffect[752] = 4; // Fuite
-			poidsUnitaireEffect[410] = 7; // Retrait PA
-			poidsUnitaireEffect[412] = 7; // Retrait PM
-			poidsUnitaireEffect[178] = 20; // Soins
-			poidsUnitaireEffect[115] = 30; // CC
-			poidsUnitaireEffect[182] = 30; // Créa
-			poidsUnitaireEffect[220] = 30; // Renvoie dom
-			poidsUnitaireEffect[117] = 51; // PO
-			poidsUnitaireEffect[111] = 100; // PA
-			poidsUnitaireEffect[128] = 90; // PM
-			poidsUnitaireEffect[112] = 20; // + Dom
-			poidsUnitaireEffect[430] = 5; // + Dom Neutre
-			poidsUnitaireEffect[424] = 5; // + Dom Feu
-			poidsUnitaireEffect[428] = 5; // + Dom Air
-			poidsUnitaireEffect[422] = 5; // + Dom Terre
-			poidsUnitaireEffect[426] = 5; // + Dom Eau
-			poidsUnitaireEffect[414] = 5; // + Dom Poussée
-			poidsUnitaireEffect[158] = 0.25; // PODS
-			poidsUnitaireEffect[795] = 5; // Arme de chasse
-			poidsUnitaireEffect[110] = 0.25; // ANCIEN EFFET +VIE
+			runeWeight[effectIdEnum.INITIATIVE] = 0.1;
+			
+			runeWeight[effectIdEnum.LIFE] = 0.25;
+			runeWeight[effectIdEnum.VITALITY] = 0.25;
+			runeWeight[effectIdEnum.PODS] = 0.25;
+
+			runeWeight[effectIdEnum.STRENGTH] = 1;
+			runeWeight[effectIdEnum.INTELLIGENCE] = 1;
+			runeWeight[effectIdEnum.LUCK] = 1;
+			runeWeight[effectIdEnum.AGILITY] = 1;
+			
+			runeWeight[effectIdEnum.DAMAGE_PERCENT] = 2;
+			runeWeight[effectIdEnum.DAMAGE_PERCENT_TRAP] = 2;
+			runeWeight[effectIdEnum.RESISTANCE_AIR] = 2;
+			runeWeight[effectIdEnum.RESISTANCE_WATER] = 2;
+			runeWeight[effectIdEnum.RESISTANCE_FIRE] = 2;
+			runeWeight[effectIdEnum.RESISTANCE_NEUTRAL] = 2;
+			runeWeight[effectIdEnum.RESISTANCE_EARTH] = 2;
+			runeWeight[effectIdEnum.RESISTANCE_PUSH] = 2;
+			runeWeight[effectIdEnum.RESISTANCE_CRITICAL] = 2;
+			
+			runeWeight[effectIdEnum.WISDOM] = 3;
+			runeWeight[effectIdEnum.PROSPECTION] = 3;
+			
+			runeWeight[effectIdEnum.TACKLE] = 4;
+			runeWeight[effectIdEnum.ESCAPE] = 4;
+			
+			runeWeight[effectIdEnum.DAMAGE_NEUTRAL] = 5;
+			runeWeight[effectIdEnum.DAMAGE_FIRE] = 5;
+			runeWeight[effectIdEnum.DAMAGE_AIR] = 5;
+			runeWeight[effectIdEnum.DAMAGE_EARTH] = 5;
+			runeWeight[effectIdEnum.DAMAGE_WATER] = 5;
+			runeWeight[effectIdEnum.DAMAGE_PUSH] = 5;
+			runeWeight[effectIdEnum.HUNTER] = 5;
+
+			runeWeight[effectIdEnum.RESISTANCE_PERCENT_AIR] = 6;
+			runeWeight[effectIdEnum.RESISTANCE_PERCENT_WATER] = 6;
+			runeWeight[effectIdEnum.RESISTANCE_PERCENT_FIRE] = 6;
+			runeWeight[effectIdEnum.RESISTANCE_PERCENT_NEUTRAL] = 6;
+			runeWeight[effectIdEnum.RESISTANCE_PERCENT_EARTH] = 6;
+			
+			runeWeight[effectIdEnum.DODGE_AP] = 7;
+			runeWeight[effectIdEnum.DODGE_MP] = 7;
+			
+			runeWeight[effectIdEnum.WITHDRAW_AP] = 7;
+			runeWeight[effectIdEnum.WITHDRAW_MP] = 7;
+			
+			runeWeight[effectIdEnum.DAMAGE_TRAP] = 15;
+			
+			runeWeight[effectIdEnum.CARE] = 20;
+			runeWeight[effectIdEnum.DAMAGE] = 20;
+			
+			runeWeight[effectIdEnum.CRITICAL] = 30;
+			runeWeight[effectIdEnum.INVOCATION] = 30;
+			runeWeight[effectIdEnum.RETURN_DAMAGE] = 30;
+			
+			runeWeight[effectIdEnum.PO] = 51;
+			runeWeight[effectIdEnum.MP] = 90;
+			runeWeight[effectIdEnum.AP] = 100;
 			
 			// Durant la session de jeu, à chaque fois que l'un d'eux sera envoyé par dofus,
 			//sysApi.addHook(StorageModChanged, onStorageModChanged);
