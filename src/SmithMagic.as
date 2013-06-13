@@ -1,18 +1,14 @@
 package
 {
-	import d2api.DataApi;
 	import d2api.SystemApi;
 	import d2api.UiApi;
-	import d2data.EffectInstanceDice;
-	import d2data.Item;
 	import d2hooks.ExchangeLeave;
 	import d2hooks.ExchangeStartOkCraft;
 	import d2hooks.ExchangeStartOkMultiCraft;
-	import d2hooks.StorageModChanged;
-	import d2hooks.UiLoaded;
 	import enum.effectIdEnum;
 	import flash.display.Sprite;
 	import flash.utils.Dictionary;
+	import ui.SmithMagicUi;
 	
 	/**
 	 * ...
@@ -25,8 +21,7 @@ package
 		//::// Variables
 		//::///////////////////////////////////////////////////////////
 		
-		import ui.SmithMagicUi;
-		protected var smithMagicUi:SmithMagicUi;
+		private var includes:Array = [SmithMagicUi];
 		
 		private static const uiName:String = "smithmagic";
 		private static const uiInstanceName:String = "exited_smithmagic";
@@ -34,7 +29,6 @@ package
 		// Déclaration des API dont on veut se servir dans cette classe.
 		public var sysApi:SystemApi;
 		public var uiApi:UiApi;
-		public var dataApi:DataApi;
 		
 		// Déclaration des variables
 		public static var well:Number = 0;
