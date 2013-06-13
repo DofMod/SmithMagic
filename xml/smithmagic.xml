@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Definition>
-
 	<Constants>
 		<Constant name="assets" value="[config.ui.skin]assets.swf|" />
 		<Constant name="css" value="[config.ui.skin]css/" />
@@ -18,11 +17,11 @@
 	<Import url="[config.mod.template.button]simpleButton.xml" />
 	
 	<Container>	
-			<Anchors>
-				<Anchor>
-					<AbsDimension x="390" y="85" />
-				</Anchor>
-			</Anchors>	
+		<Anchors>
+			<Anchor>
+				<AbsDimension x="390" y="85" />
+			</Anchor>
+		</Anchors>	
 				
 		<Container name="ctr_concealable">
 			<mouseEnabled>true</mouseEnabled>
