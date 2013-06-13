@@ -53,7 +53,7 @@ package ui
 		
 		// Variables Les Globales
 		public var _skill:Object;
-		public var _coop:Boolean;
+		public var _inCooperatingMode:Boolean;
 		public var _poidsRune:Number = 0;
 		public var _signeReliquat:int;
 		public var _waitingObject:Object;		
@@ -105,7 +105,7 @@ package ui
 		{
 			// On récupère l'id du métier de forgemagie argument du hook de la classe principale
 			_skill = jobsApi.getSkillFromId(skillId as uint);
-			_coop = SmithMagic._coop;
+			_inCooperatingMode = SmithMagic.inCooperatingMode;
 			
 			// On enregistre les 3 slots de l'atelier
 			addHooksToSlot(slot_item);
@@ -116,7 +116,7 @@ package ui
 			updateItem(null);
 			
 			// On fixe la valeur du puits
-			setPuits(SmithMagic.puits);
+			setPuits(SmithMagic.well);
 			
 			lbl_rune_name.colorText = 0x7F0000;
 			lbl_puits.colorText = 0x004A7F;
@@ -211,22 +211,22 @@ package ui
 				// Si l'effet à Diminué
 				if (effect.old > effect.neww)
 				{
-					poidsPertes += ((effect.old - effect.neww) * SmithMagic.runeWeight[effect.id])
+					poidsPertes += ((effect.old - effect.neww) * SmithMagic.runesWeight[effect.id])
 				}
 				// Si l'effet à Augmenté
 				else if (effect.old < effect.neww)
 				{
-					poidsGains += ((effect.neww - effect.old) * SmithMagic.runeWeight[effect.id])
+					poidsGains += ((effect.neww - effect.old) * SmithMagic.runesWeight[effect.id])
 				}
 				// Si l'effet vient d'être ajouté à l'objet
 				else if (effect.old == false && effect.neww != false)
 				{
-					poidsGains += (effect.neww * SmithMagic.runeWeight[effect.id])
+					poidsGains += (effect.neww * SmithMagic.runesWeight[effect.id])
 				}
 				// Si l'effet vient d'être supprimé de l'objet
 				else if (effect.neww == false && effect.old != false)
 				{
-					poidsPertes += (effect.old * SmithMagic.runeWeight[effect.id])
+					poidsPertes += (effect.old * SmithMagic.runesWeight[effect.id])
 				}
 			}
 			
@@ -247,10 +247,10 @@ package ui
 				if (poidsRune > poidsPertes)
 				{
 					// Ici on inverse les deux car sinon le résultat est négatif
-					if (SmithMagic.puits >= (poidsRune - poidsPertes))
+					if (SmithMagic.well >= (poidsRune - poidsPertes))
 					{
 						//sysApi.log(1, "On doit perdre du puits et il est suffisant");
-						setPuits(SmithMagic.puits + poidsPertes - poidsRune);
+						setPuits(SmithMagic.well + poidsPertes - poidsRune);
 					}
 					else
 					{
@@ -261,7 +261,7 @@ package ui
 				else if (poidsRune < poidsPertes)
 				{
 					//sysApi.log(1, "On a trop perdu");
-					setPuits(SmithMagic.puits + poidsPertes - poidsRune);
+					setPuits(SmithMagic.well + poidsPertes - poidsRune);
 				}
 				else
 				{
@@ -320,7 +320,7 @@ package ui
 		{
 			var item:Object;
 			
-			if (_coop)
+			if (_inCooperatingMode)
 			{
 				item = dataApi.getItem(itemUid) as Item;
 			}
@@ -444,7 +444,7 @@ package ui
 					if (_btnRef[target] !== null && target.name.search("btn_jet") != -1 && _btnRef[target] is EffectInstanceInteger)
 					{
 						data = _btnRef[target] as EffectInstanceInteger;
-						var poidsEffect:int = data.value * SmithMagic.runeWeight[getIdEffectMalusToBonus(data.effectId)] * 100;
+						var poidsEffect:int = data.value * SmithMagic.runesWeight[getIdEffectMalusToBonus(data.effectId)] * 100;
 						toolTip = uiApi.textTooltipInfo("Poids total : " + poidsEffect / 100);
 						uiApi.showTooltip(toolTip, new Rectangle(uiApi.getMouseX(),uiApi.getMouseY(),0,0), false, "standard",7,1,3);
 					}
@@ -486,7 +486,7 @@ package ui
 				
 				// Quand on clique sur la texture de l'input on affiche un popup qui demande la valeur du puits
 				case btn_input:
-					modCommon.openInputPopup("Réglage manuel du puits", "Entrez la valeur souhaitée", onValidQuantity, null, SmithMagic.puits, "0-9.", 5);
+					modCommon.openInputPopup("Réglage manuel du puits", "Entrez la valeur souhaitée", onValidQuantity, null, SmithMagic.well, "0-9.", 5);
 					
 					break;
 			}
@@ -725,9 +725,9 @@ package ui
 			}
 			
 			// On met à jour le poids de la rune
-			if (SmithMagic.runeWeight[effectId])
+			if (SmithMagic.runesWeight[effectId])
 			{
-				_poidsRune = effectValue * SmithMagic.runeWeight[effectId];
+				_poidsRune = effectValue * SmithMagic.runesWeight[effectId];
 				lbl_rune_poids.text = "Poids : " + _poidsRune;
 			}
 			else
@@ -782,7 +782,7 @@ package ui
 		private function setPuits(puits:Number):void
 		{
 			// Mise à jour de la variable puits et du label puits
-			SmithMagic.puits = puits;
+			SmithMagic.well = puits;
 			lbl_puits.text = "Puits : " + puits;
 		}
 		
