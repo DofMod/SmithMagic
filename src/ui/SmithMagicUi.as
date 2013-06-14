@@ -652,6 +652,8 @@ package ui
 						{
 							componentsRef.tx_bulle.uri = _bubbleOrangeUri;
 						}
+						
+						break;
 					}
 				}
 				
