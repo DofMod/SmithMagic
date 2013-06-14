@@ -441,9 +441,9 @@ package ui
 					var toolTip:Object;
 					
 					// Le Cas du Rollover sur un jet, data de type EffectInstanceInteger
-					if (_btnRef[target] !== null && target.name.search("btn_jet") != -1 && _btnRef[target] is EffectInstanceInteger)
+					if (_btnRef[target] !== null && target.name.search("btn_jet") != -1 && _btnRef[target].effect is EffectInstanceInteger)
 					{
-						data = _btnRef[target] as EffectInstanceInteger;
+						data = _btnRef[target].effect;
 						var poidsEffect:int = data.value * SmithMagic.runesWeight[getIdEffectMalusToBonus(data.effectId)] * 100;
 						toolTip = uiApi.textTooltipInfo("Poids total : " + poidsEffect / 100);
 						uiApi.showTooltip(toolTip, new Rectangle(uiApi.getMouseX(),uiApi.getMouseY(),0,0), false, "standard",7,1,3);
