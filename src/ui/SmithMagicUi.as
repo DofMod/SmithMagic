@@ -479,7 +479,7 @@ package ui
 						}
 						else if (target.uri.toString() == _bubbleGreenUri.toString())
 						{
-							toolTip = uiApi.textTooltipInfo("Jet moyen/mauvais");
+							toolTip = uiApi.textTooltipInfo("Jet moyen");
 						}
 						else if (target.uri.toString() == _bubbleOrangeUri.toString())
 						{
@@ -487,11 +487,11 @@ package ui
 						}
 						else if (target.uri.toString() == _bubbleRedUri.toString())
 						{
-							toolTip = uiApi.textTooltipInfo("Jet parfait ou over");
+							toolTip = uiApi.textTooltipInfo("Jet overmax");
 						}
 						else if (target.uri.toString() == _bubbleBlueUri.toString())
 						{
-							toolTip = uiApi.textTooltipInfo("Jet exotique");
+							toolTip = uiApi.textTooltipInfo("Jet éxotique");
 						}
 						else
 						{
