@@ -661,7 +661,7 @@ package ui
 									_runeRef[componentsRef.slot_simple] = item;
 									componentsRef.slot_simple.data = item;
 									componentsRef.slot_simple.visible = true;										
-								}								
+								}
 							}
 						}
 					}
