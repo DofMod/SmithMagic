@@ -578,8 +578,8 @@ package ui
 				componentsRef.tx_bulle.uri = _bubbleGreenUri;
 				
 				// On initialise les labels min et max et actuel
-				componentsRef.lb_jetmin.text = "-";			
-				componentsRef.lb_jetmax.text = "-";	
+				componentsRef.lb_jetmin.text = "";
+				componentsRef.lb_jetmax.text = "";
 				componentsRef.lb_jet.text = effect.description;
 				
 				// On affecte le style css en fonction du type de jet (malus, bonus ou pas de signe)
