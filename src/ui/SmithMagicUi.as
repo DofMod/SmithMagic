@@ -439,7 +439,7 @@ package ui
 					//sysApi.log(8, "target.name : " + target.name);
 					var data:Object;
 					var toolTip:Object;
-					var effectWeight:int;
+					var effectWeight:Number;
 					
 					// Le Cas du Rollover sur un jet, data de type EffectInstanceInteger
 					if (_btnRef[target] !== null && target.name.search("btn_jet") != -1 && _btnRef[target].effect is EffectInstanceInteger)
@@ -448,16 +448,21 @@ package ui
 						effectWeight = data.value * SmithMagic.runesWeight[getIdEffectMalusToBonus(data.effectId)];
 						
 						toolTip = uiApi.textTooltipInfo("Poids total : " + effectWeight);
-						uiApi.showTooltip(toolTip, target, false, "standard",7,1,3);
+						uiApi.showTooltip(toolTip, target, false, "standard", 7, 1, 3);
+						
+						break;
 					}
 					
 					// Si les infos existent on affiche la tooltip
 					if (_runeRef[target] !== null && target.name.search("slot_") != -1)
 					{
 						data = _runeRef[target] as ItemWrapper;
+						effectWeight = SmithMagic.runesWeight[data.effects[0].effectId] * data.effects[0].parameter0;
 						
-						toolTip = uiApi.textTooltipInfo(data.name);						
-						uiApi.showTooltip(toolTip, target, false, "standard",7,1,3);
+						toolTip = uiApi.textTooltipInfo(data.name + " (poid : " + effectWeight + ")");						
+						uiApi.showTooltip(toolTip, target, false, "standard", 7, 1, 3);
+						
+						break;
 					}
 			}
 		}
