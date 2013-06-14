@@ -459,7 +459,7 @@ package ui
 						data = _runeRef[target] as ItemWrapper;
 						effectWeight = SmithMagic.runesWeight[data.effects[0].effectId] * data.effects[0].parameter0;
 						
-						toolTip = uiApi.textTooltipInfo(data.name + " (poid : " + effectWeight + ")");						
+						toolTip = uiApi.textTooltipInfo(data.name + ", + " + data.effects[0].description + "\nPoid : " + effectWeight + "\nProbabilité : " + 50 + "%");						
 						uiApi.showTooltip(toolTip, target, false, "standard", 7, 1, 3);
 						
 						break;
