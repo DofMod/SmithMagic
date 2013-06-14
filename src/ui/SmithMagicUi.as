@@ -943,7 +943,7 @@ package ui
 		
 		private function fillSlot(target:Object, data:Object, qty:int):void
 		{
-			if (((!((target.data == null))) && ((((((target == slot_item)) || ((target == slot_signature)))) || ((((target == slot_rune)) && (!((target.data.objectGID == data.objectGID)))))))))
+			if ((!(target.data == null)) && ((((target == slot_item) || (target == slot_signature)) || ((target == slot_rune) && (!(target.data.objectGID == data.objectGID))))))
 			{
 				unfillSlot(target, -1);
 			}
