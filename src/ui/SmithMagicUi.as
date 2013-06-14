@@ -439,22 +439,25 @@ package ui
 					//sysApi.log(8, "target.name : " + target.name);
 					var data:Object;
 					var toolTip:Object;
+					var effectWeight:int;
 					
 					// Le Cas du Rollover sur un jet, data de type EffectInstanceInteger
 					if (_btnRef[target] !== null && target.name.search("btn_jet") != -1 && _btnRef[target].effect is EffectInstanceInteger)
 					{
-						data = _btnRef[target].effect;
-						var poidsEffect:int = data.value * SmithMagic.runesWeight[getIdEffectMalusToBonus(data.effectId)] * 100;
-						toolTip = uiApi.textTooltipInfo("Poids total : " + poidsEffect / 100);
-						uiApi.showTooltip(toolTip, new Rectangle(uiApi.getMouseX(),uiApi.getMouseY(),0,0), false, "standard",7,1,3);
+						data = _btnRef[target].effect as EffectInstanceInteger;
+						effectWeight = data.value * SmithMagic.runesWeight[getIdEffectMalusToBonus(data.effectId)];
+						
+						toolTip = uiApi.textTooltipInfo("Poids total : " + effectWeight);
+						uiApi.showTooltip(toolTip, target, false, "standard",7,1,3);
 					}
 					
 					// Si les infos existent on affiche la tooltip
 					if (_runeRef[target] !== null && target.name.search("slot_") != -1)
 					{
 						data = _runeRef[target] as ItemWrapper;
+						
 						toolTip = uiApi.textTooltipInfo(data.name);						
-						uiApi.showTooltip(toolTip, new Rectangle(uiApi.getMouseX(),uiApi.getMouseY(),0,0), false, "standard",7,1,3);
+						uiApi.showTooltip(toolTip, target, false, "standard",7,1,3);
 					}
 			}
 		}
