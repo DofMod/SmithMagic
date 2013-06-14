@@ -461,20 +461,44 @@ package ui
 						
 						toolTip = uiApi.textTooltipInfo("Poids de l'effet : " + effectWeight);
 						uiApi.showTooltip(toolTip, target, false, "standard", 7, 1, 3);
-						
-						break;
 					}
-					
 					// Si les infos existent on affiche la tooltip
-					if (_runeRef[target] !== null && target.name.search("slot_") != -1)
+					else if (_runeRef[target] !== null && target.name.search("slot_") != -1)
 					{
 						data = _runeRef[target] as ItemWrapper;
 						effectWeight = SmithMagic.runesWeight[data.effects[0].effectId] * data.effects[0].parameter0;
 						
-						toolTip = uiApi.textTooltipInfo(data.name + ", + " + data.effects[0].description + "\nPoid de la rune : " + effectWeight + "\nProbabilité : " + 50 + "%");						
+						toolTip = uiApi.textTooltipInfo(data.name + ", + " + data.effects[0].description + "\nPoid de la rune : " + effectWeight + "\nProbabilité : " + 50 + "%");
 						uiApi.showTooltip(toolTip, target, false, "standard", 7, 1, 3);
+					}
+					else if (target.name.search("tx_bulle") != -1)
+					{
+						if (target.uri.toString() == _bubbleGreyUri.toString())
+						{
+							toolTip = uiApi.textTooltipInfo("Jet inférieur au jet min");
+						}
+						else if (target.uri.toString() == _bubbleGreenUri.toString())
+						{
+							toolTip = uiApi.textTooltipInfo("Jet moyen/mauvais");
+						}
+						else if (target.uri.toString() == _bubbleOrangeUri.toString())
+						{
+							toolTip = uiApi.textTooltipInfo("Bon jet (>80% du jet max)");
+						}
+						else if (target.uri.toString() == _bubbleRedUri.toString())
+						{
+							toolTip = uiApi.textTooltipInfo("Jet parfait ou over");
+						}
+						else if (target.uri.toString() == _bubbleBlueUri.toString())
+						{
+							toolTip = uiApi.textTooltipInfo("Jet exotique");
+						}
+						else
+						{
+							break;
+						}
 						
-						break;
+						uiApi.showTooltip(toolTip, target, false, "standard", 7, 1, 3);
 					}
 			}
 		}
@@ -542,6 +566,9 @@ package ui
 			{
 				uiApi.addComponentHook(componentsRef.btn_jet, "onRollOver");
 				uiApi.addComponentHook(componentsRef.btn_jet, "onRollOut");
+				
+				uiApi.addComponentHook(componentsRef.tx_bulle, "onRollOver");
+				uiApi.addComponentHook(componentsRef.tx_bulle, "onRollOut");
 				
 				var effect:EffectInstanceInteger = data.effect as EffectInstanceInteger;
 				var isNull:Boolean = data.isNull as Boolean;
