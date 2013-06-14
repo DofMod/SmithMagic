@@ -656,7 +656,7 @@ package ui
 							componentsRef.tx_bulle.uri = _bubbleGreyUri;
 						}
 						// On change l'état de la bulle entre 80 et 100% de la fourchette du jet
-						else if ((((jetActuel - jetMin) * 100) / (jetMax - jetMin))  >= 80)
+						else if ((jetActuel == jetMax) || (((jetActuel - jetMin) / (jetMax - jetMin))  >= 0.8))
 						{
 							componentsRef.tx_bulle.uri = _bubbleOrangeUri;
 						}
