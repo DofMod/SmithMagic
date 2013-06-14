@@ -663,7 +663,6 @@ package ui
 					}
 				}
 				
-				// Si le jet est exotique
 				if (isExotic)
 				{
 					componentsRef.lb_jet.cssClass = "exotic"; 
