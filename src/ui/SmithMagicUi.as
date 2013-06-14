@@ -634,7 +634,7 @@ package ui
 				componentsRef.slot_ra.visible = false;
 				
 				//var t0:int = getTimer();
-				for each (var item:ItemWrapper in storageApi.getViewContent("storageRessources"))
+				for each (var item:ItemWrapper in storageApi.getViewContent("storageResources"))
 				{
 					//sysApi.log(16, "item.name : " + item.name);
 					if (item.typeId == SMITHMAGIC_RUNE_ID)
