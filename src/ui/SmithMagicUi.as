@@ -588,23 +588,14 @@ package ui
 					componentsRef.lb_jet.cssClass = "malus";
 					signeBonus = -1;
 				}
-				else
-				{
-					if (effect.description.charAt(0) == "+")
-					{
-						componentsRef.lb_jet.cssClass = "bonus";
-						signeBonus = 1;
-					}
-					else
-					{
-						componentsRef.lb_jet.cssClass = "normal";
-						signeBonus = 1;
-					}
-				}
-				
-				if (isNull)
+				else if (isNull)
 				{
 					componentsRef.lb_jet.cssClass = "bold";
+				}
+				else
+				{
+					componentsRef.lb_jet.cssClass = "bonus";
+					signeBonus = 1;
 				}
 				
 				var isExotic:Boolean = true;
