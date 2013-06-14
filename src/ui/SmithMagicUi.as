@@ -60,6 +60,12 @@ package ui
 		public var _btnRef:Dictionary = new Dictionary(false);
 		public var _runeRef:Dictionary = new Dictionary(false);
 		
+		public var _bubbleGreyUri:Object;
+		public var _bubbleGreenUri:Object;
+		public var _bubbleOrangeUri:Object;
+		public var _bubbleRedUri:Object;
+		public var _bubbleBlueUri:Object;
+		
 		// Utilisation du modCommon pour l'inputBox du puits
 		[Module(name="Ankama_Common")]
 		public var modCommon:Object;
@@ -103,6 +109,12 @@ package ui
 		
 		public function main(skillId:Object):void
 		{
+			_bubbleGreyUri = uiApi.createUri((uiApi.me().getConstant("assets") + "state_0"));
+			_bubbleGreenUri = uiApi.createUri((uiApi.me().getConstant("assets") + "state_3"));
+			_bubbleOrangeUri = uiApi.createUri((uiApi.me().getConstant("assets") + "state_2"));			
+			_bubbleRedUri = uiApi.createUri((uiApi.me().getConstant("assets") + "state_6"));
+			_bubbleBlueUri = uiApi.createUri((uiApi.me().getConstant("assets") + "state_7"));
+			
 			// On récupère l'id du métier de forgemagie argument du hook de la classe principale
 			_skill = jobsApi.getSkillFromId(skillId as uint);
 			_inCooperatingMode = SmithMagic.inCooperatingMode;
@@ -536,7 +548,7 @@ package ui
 				var signeBonus:int = 0;
 				
 				// On initialise l'état sur la bulle verte (entre le jet min et 80% du jet)
-				componentsRef.tx_bulle.uri = uiApi.createUri((uiApi.me().getConstant("assets") + "state_3"));
+				componentsRef.tx_bulle.uri = _bubbleGreenUri;
 				
 				// On initialise les labels min et max et actuel
 				componentsRef.lb_jetmin.text = "-";			
@@ -609,17 +621,17 @@ package ui
 						// On change l'état de la bulle si le jet est overmax
 						if (jetActuel > jetMax)
 						{
-							componentsRef.tx_bulle.uri = uiApi.createUri((uiApi.me().getConstant("assets") + "state_6"));
+							componentsRef.tx_bulle.uri = _bubbleRedUri;
 						}
 						// On change l'état de la bulle si le jet est sous le jet max
 						else if (jetActuel < jetMin)
 						{
-							componentsRef.tx_bulle.uri = uiApi.createUri((uiApi.me().getConstant("assets") + "state_0"));
+							componentsRef.tx_bulle.uri = _bubbleGreyUri;
 						}
 						// On change l'état de la bulle entre 80 et 100% de la fourchette du jet
 						else if ((((jetActuel - jetMin) * 100) / (jetMax - jetMin))  >= 80)
 						{
-							componentsRef.tx_bulle.uri = uiApi.createUri((uiApi.me().getConstant("assets") + "state_2"));
+							componentsRef.tx_bulle.uri = _bubbleOrangeUri;
 						}
 					}
 				}
@@ -628,7 +640,7 @@ package ui
 				if (isExotic)
 				{
 					componentsRef.lb_jet.cssClass = "exotic"; 
-					componentsRef.tx_bulle.uri = uiApi.createUri((uiApi.me().getConstant("assets") + "state_7"));
+					componentsRef.tx_bulle.uri = _bubbleBlueUri;
 				}
 				
 				// On enregistre les slots rune simple/pa/ra
