@@ -93,7 +93,6 @@ package ui
 		
 		// Les Container de l'interface
 		public var ctr_concealable:GraphicContainer;
-		public var ctr_topbar:GraphicContainer;
 				
 		// Les 3 Slots de l'interface
 		public var slot_item:Slot;
