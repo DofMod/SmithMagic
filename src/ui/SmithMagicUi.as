@@ -764,6 +764,11 @@ package ui
 			}
 		}
 		
+		/**
+		 * Update the fields relative to the forgeable item.
+		 * 
+		 * @param	item
+		 */
 		private function updateItem(item:ItemWrapper):void
 		{
 			if (item == null)
