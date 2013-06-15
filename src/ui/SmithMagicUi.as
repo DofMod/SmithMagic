@@ -730,9 +730,10 @@ package ui
 		}
 		
 		/**
-		 * Update the fields relative to the rune.
+		 * Update the fields relative to the selectioned rune.
 		 * 
-		 * @param	rune
+		 * @param	rune	The selectioned rune. Null to reset de default
+		 * 					fields values.
 		 */
 		private function updateRune(rune:ItemWrapper):void
 		{
@@ -765,9 +766,10 @@ package ui
 		}
 		
 		/**
-		 * Update the fields relative to the forgeable item.
+		 * Update the fields relative to the selectioned forgeable item.
 		 * 
-		 * @param	item
+		 * @param	item	The selectioned item. Null to reset the default
+		 * 					fields values.
 		 */
 		private function updateItem(item:ItemWrapper):void
 		{
