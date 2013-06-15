@@ -54,7 +54,7 @@ package ui
 		// Variables Les Globales
 		public var _skill:Object;
 		public var _inCooperatingMode:Boolean;
-		public var _poidsRune:Number = 0;
+		public var _runeWeight:Number = 0;
 		public var _signeReliquat:int;
 		public var _waitingObject:Object;		
 		public var _btnRef:Dictionary = new Dictionary(false);
@@ -241,7 +241,7 @@ package ui
 				}
 			}
 			
-			var poidsRune:Number = _poidsRune;
+			var poidsRune:Number = _runeWeight;
 			
 			sysApi.log(16, "poidsRune : " +  poidsRune);
 			sysApi.log(16, "poidsPertes : " +  poidsPertes);
@@ -729,10 +729,14 @@ package ui
 			}
 		}
 		
-		private function updateRune(item:ItemWrapper):void
+		/**
+		 * Update the fields relative to the rune.
+		 * 
+		 * @param	rune
+		 */
+		private function updateRune(rune:ItemWrapper):void
 		{
-			// Permet d'effacer les labels quand on retire la rune du slot
-			if (item == null)
+			if (rune == null)
 			{
 				lbl_rune_name.text = "";
 				lbl_rune_effect.text = "";
@@ -741,29 +745,22 @@ package ui
 				return;
 			}
 			
-			// On met à jour le nom de la rune
-			lbl_rune_name.text = item.name;
+			var effect:Object = rune.effects[0];
 			
-			// On met à jour l'unique effet de la rune
-			for each (var effect:EffectInstanceInteger in item.effects)
+			lbl_rune_name.text = rune.name;
+			lbl_rune_effect.text = "+" + effect.description;
+			
+			if (SmithMagic.runesWeight[effect.effectId])
 			{
-				lbl_rune_effect.text = effect.description;
+				_runeWeight = SmithMagic.runesWeight[effect.effectId] * effect.value;
 				
-				// On stock ces valeurs pour calculer le poids de la rune
-				var effectId:int = effect.effectId;
-				var effectValue:int = effect.value;
-			}
-			
-			// On met à jour le poids de la rune
-			if (SmithMagic.runesWeight[effectId])
-			{
-				_poidsRune = effectValue * SmithMagic.runesWeight[effectId];
-				lbl_rune_poids.text = "Poids : " + _poidsRune;
+				lbl_rune_poids.text = "Poid : " + _runeWeight;
 			}
 			else
 			{
-				lbl_rune_poids.text = "Aucun effet visible";
-				//sysApi.log(8, "effet inconnu, ID : " + effectId);
+				_runeWeight = 0;
+				
+				lbl_rune_poids.text = "Poid : Inconnu";
 			}
 		}
 		
