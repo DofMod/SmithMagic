@@ -127,7 +127,7 @@ package ui
 			updateItem(null);
 			
 			// On fixe la valeur du puits
-			setPuits(SmithMagic.well);
+			setWell(SmithMagic.well);
 			
 			lbl_rune_name.colorText = 0x7F0000;
 			lbl_puits.colorText = 0x004A7F;
@@ -261,18 +261,18 @@ package ui
 					if (SmithMagic.well >= (poidsRune - poidsPertes))
 					{
 						//sysApi.log(1, "On doit perdre du puits et il est suffisant");
-						setPuits(SmithMagic.well + poidsPertes - poidsRune);
+						setWell(SmithMagic.well + poidsPertes - poidsRune);
 					}
 					else
 					{
 						//sysApi.log(1, "On doit perdre du puits mais il est insuffisant");
-						setPuits(0);
+						setWell(0);
 					}
 				}
 				else if (poidsRune < poidsPertes)
 				{
 					//sysApi.log(1, "On a trop perdu");
-					setPuits(SmithMagic.well + poidsPertes - poidsRune);
+					setWell(SmithMagic.well + poidsPertes - poidsRune);
 				}
 				else
 				{
@@ -805,18 +805,33 @@ package ui
 			maGrid.dataProvider = forgeableEffectList;
 		}
 		
+		/**
+		 * Callback called when the user valid the new well value.
+		 * 
+		 * @param	string	The new well value.
+		 */
 		private function onValidQuantity(string:String):void
 		{
-			setPuits(Number(string));
+			setWell(Number(string));
 		}
 		
-		private function setPuits(puits:Number):void
+		/**
+		 * Update the well value and relative fields.
+		 * 
+		 * @param	puits	The new well value.
+		 */
+		private function setWell(puits:Number):void
 		{
-			// Mise à jour de la variable puits et du label puits
 			SmithMagic.well = puits;
-			lbl_puits.text = "Puits : " + puits;
+			
+			lbl_puits.text = "Puit : " + puits;
 		}
 		
+		/**
+		 * Add basics hook listener to a slot.
+		 * 
+		 * @param	slot	A slot.
+		 */
 		private function addHooksToSlot(slot:Slot):void
 		{
 			uiApi.addComponentHook(slot, "onRollOver");
