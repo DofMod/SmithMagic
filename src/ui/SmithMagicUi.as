@@ -505,25 +505,16 @@ package ui
 		public function onRelease(target:Object):void
 		{
 			switch (target)
-			{
-				// Quand on clique sur agrandir l'interface
-				case slot_item:
-					updateItem(slot_item.data);
-					updateRune(slot_rune.data);
-					
-					break;
-				
+			{	
 				// Masquage de l'interface et affichage du bouton de réouverture
 				case btn_close:
 					ctr_concealable.visible = false;
-					btn_open.visible = true;
 					
 					break;
 				
 				// Affichage de l'interface et masquage de ce bouton
 				case btn_open:
 					ctr_concealable.visible = true;
-					btn_open.visible = false;
 					
 					break;
 				
@@ -830,7 +821,6 @@ package ui
 			uiApi.addComponentHook(slot, "onRollOver");
 			uiApi.addComponentHook(slot, "onRollOut");
 			uiApi.addComponentHook(slot, "onDoubleClick");
-			uiApi.addComponentHook(slot, "onRelease");
 		}
 		
 		private function isValidSlot(slot:Object, itemWp:Object):Boolean
