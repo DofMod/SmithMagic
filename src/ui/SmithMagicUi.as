@@ -769,40 +769,37 @@ package ui
 		
 		private function updateItem(item:ItemWrapper):void
 		{
-			var tabEffect:Array = new Array();
-			var visibleEffect:Dictionary = new Dictionary();
-			
-			// Permet d'effacer la grid quand on pass null en argument
 			if (item == null)
 			{
-				maGrid.dataProvider = tabEffect;
+				maGrid.dataProvider = new Array();
 				
 				return;
 			}
 			
-			// On parcours les jets actuel de l'objetEnCours pour les stocker dans un tableau
-			for each (var effect:Object in item.effects)
+			var effect:Object;
+			var forgeableEffectList:Array = new Array();
+			var presentEffectList:Dictionary = new Dictionary();
+			
+			for each (effect in item.effects)
 			{
-				// Si c'est un jet normal sinon c'est ( EffectInstanceMinMax = DMG DE CAC) ou (EffectInstanceString = Signature)
+				// Exclude damages effects (EffectInstanceMinMax) and Signature/Hunter mark/follower bonus (EffectInstanceString)
 				if (effect is EffectInstanceInteger)
 				{
-					tabEffect.push({ effect : effect, isNull : false});
-					visibleEffect[effect.effectId] = true;
+					forgeableEffectList.push({effect : effect, isNull : false});
+					presentEffectList[effect.effectId] = true;
 				}
 			}
 			
-			// On parcours les jets actuel de l'objetEnCours pour les stocker dans un tableau
-			for each (var possibleEffect:Object in item.possibleEffects)
+			for each (effect in item.possibleEffects)
 			{
-				// Si c'est un jet normal sinon c'est ( EffectInstanceMinMax = DMG DE CAC ) ou (EffectInstanceString = Signature)
-				if (possibleEffect is EffectInstanceInteger && (visibleEffect[possibleEffect.effectId] != true))
+				if (effect is EffectInstanceInteger && !(presentEffectList[effect.effectId]))
 				{
-					tabEffect.push({ effect : possibleEffect, isNull : true});
+					forgeableEffectList.push({effect : effect, isNull : true});
 				}
-			}			
+			}
 			
-			maGrid.dataProvider = tabEffect;
-		}	
+			maGrid.dataProvider = forgeableEffectList;
+		}
 		
 		private function onValidQuantity(string:String):void
 		{
