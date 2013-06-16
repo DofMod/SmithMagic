@@ -57,7 +57,7 @@ package ui
 		public var _runeWeight:Number = 0;
 		public var _signeReliquat:int;
 		public var _waitingObject:ItemWrapper;
-		public var _btnRef:Dictionary = new Dictionary(false);
+		public var _dataOfEffectButtons:Dictionary = new Dictionary(false);
 		public var _dataOfAvailableRuneSlots:Dictionary = new Dictionary(false);
 		
 		public var _bubbleGreyUri:Object;
@@ -476,9 +476,9 @@ package ui
 					var effectWeight:Number;
 					
 					// Le Cas du Rollover sur un jet, data de type EffectInstanceInteger
-					if (_btnRef[target] !== null && target.name.search("btn_jet") != -1 && _btnRef[target].effect is EffectInstanceInteger)
+					if (_dataOfEffectButtons[target] !== null && target.name.search("btn_jet") != -1 && _dataOfEffectButtons[target].effect is EffectInstanceInteger)
 					{
-						data = _btnRef[target].effect as EffectInstanceInteger;
+						data = _dataOfEffectButtons[target].effect as EffectInstanceInteger;
 						effectWeight = data.value * SmithMagic.runesWeight[getIdEffectMalusToBonus(data.effectId)];
 						
 						toolTip = uiApi.textTooltipInfo("Poids de l'effet : " + effectWeight);
@@ -570,7 +570,7 @@ package ui
 		
 		public function updateGrid(data:*, componentsRef:*, selected:Boolean):void
 		{
-			_btnRef[componentsRef.btn_jet] = data;
+			_dataOfEffectButtons[componentsRef.btn_jet] = data;
 			_dataOfAvailableRuneSlots[componentsRef.slot_pa] = null;
 			_dataOfAvailableRuneSlots[componentsRef.slot_ra] = null;
 			_dataOfAvailableRuneSlots[componentsRef.slot_simple] = null;
