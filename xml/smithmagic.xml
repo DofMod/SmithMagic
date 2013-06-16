@@ -71,7 +71,7 @@
 			</Label>
 
 			<!-- Label Poids Rune-->
-			<Label name="lbl_rune_poids">
+			<Label name="lbl_rune_weight">
 				<Anchors>
 					<Anchor>
 						<AbsDimension x="170"
@@ -105,7 +105,7 @@
 			</Label>
 
 			<!-- Label Résultat-->
-			<Label name="lbl_resultat">
+			<Label name="lbl_result">
 				<Anchors>
 					<Anchor>
 						<AbsDimension x="40"
@@ -121,7 +121,7 @@
 				<text>Résultat :</text>
 			</Label>
 
-			<iconButton name="btn_input">
+			<iconButton name="btn_wellInput">
 				<Anchors>
 					<Anchor>
 						<AbsDimension x="415"
@@ -260,7 +260,7 @@
 				<text>Caractéristiques</text>
 			</Label>
 
-			<Grid name="maGrid">
+			<Grid name="effectsGrid">
 				<Anchors>
 					<Anchor>
 						<AbsDimension x="15"
@@ -301,7 +301,7 @@
 							</Size>
 
 							<!-- Label jetmin-->
-							<Label name="lb_jetmin">
+							<Label name="lbl_jetMin">
 								<Anchors>
 									<Anchor>
 										<AbsDimension x="0"
@@ -318,7 +318,7 @@
 							</Label>
 
 							<!-- Label jetactuel-->
-							<Label name="lb_jet">
+							<Label name="lbl_jet">
 								<Anchors>
 									<Anchor>
 										<AbsDimension x="47"
@@ -336,7 +336,7 @@
 							</Label>
 
 							<!-- Label jetmax-->
-							<Label name="lb_jetmax">
+							<Label name="lbl_jetMax">
 								<Anchors>
 									<Anchor>
 										<AbsDimension x="290"

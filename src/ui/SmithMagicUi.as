@@ -80,15 +80,15 @@ package ui
 		// Les boutons de fermeture et reouverture de l'interface
 		public var btn_close:ButtonContainer;
 		public var btn_open:ButtonContainer;
-		public var btn_input:ButtonContainer;
+		public var btn_wellInput:ButtonContainer;
 		
 		// Les Labels de l'interface
 		public var lbl_level:Label;
 		public var lbl_name:Label;
 		public var lbl_rune_effect:Label;
 		public var lbl_rune_name:Label;
-		public var lbl_rune_poids:Label;
-		public var lbl_resultat:Label;
+		public var lbl_rune_weight:Label;
+		public var lbl_result:Label;
 		public var lbl_well:Label;
 		
 		// Les Container de l'interface
@@ -100,7 +100,7 @@ package ui
 		public var slot_signature:Slot;
 		
 		// La Grid de l'interface
-		public var maGrid:Grid;
+		public var effectsGrid:Grid;
 		
 		//::///////////////////////////////////////////////////////////
 		//::// Méthodes publiques
@@ -151,7 +151,7 @@ package ui
 			
 			uiApi.addComponentHook(btn_close, "onRelease");
 			uiApi.addComponentHook(btn_open, "onRelease");
-			uiApi.addComponentHook(btn_input, "onRelease");
+			uiApi.addComponentHook(btn_wellInput, "onRelease");
 		}
 						
 		//::///////////////////////////////////////////////////////////
@@ -177,7 +177,7 @@ package ui
 			var resultat:String = "";
 			
 			// Mise à jour du résultat
-			lbl_resultat.text = "Résultat : " + resultat;
+			lbl_result.text = "Résultat : " + resultat;
 		}		
 		
 		public function onExchangeCraftResult(resultId:int, item:ItemWrapper):void
@@ -541,7 +541,7 @@ package ui
 					
 					break;
 				
-				case btn_input:
+				case btn_wellInput:
 					modCommon.openInputPopup("Réglage manuel du puits", "Entrez la valeur souhaitée", onValidWellValue, null, SmithMagic.well, "0-9.", 5);
 					
 					break;
@@ -612,25 +612,25 @@ package ui
 			componentsRef.tx_bulle.uri = _bubbleGreenUri;
 			
 			// On initialise les labels min et max et actuel
-			componentsRef.lb_jetmin.text = "";
-			componentsRef.lb_jetmax.text = "";
-			componentsRef.lb_jet.text = effect.description;
+			componentsRef.lbl_jetMin.text = "";
+			componentsRef.lbl_jetMax.text = "";
+			componentsRef.lbl_jet.text = effect.description;
 			
 			// On affecte le style css en fonction du type de jet (malus, bonus ou pas de signe)
 			if (effect.description.charAt(0) == "-")
 			{
-				componentsRef.lb_jet.cssClass = "malus";
+				componentsRef.lbl_jet.cssClass = "malus";
 				signeBonus = -1;
 			}
 			else
 			{
-				componentsRef.lb_jet.cssClass = "bonus";
+				componentsRef.lbl_jet.cssClass = "bonus";
 				signeBonus = 1;
 			}
 			
 			if (isNull)
 			{
-				componentsRef.lb_jet.cssClass = "normal";
+				componentsRef.lbl_jet.cssClass = "normal";
 			}
 			
 			var isExotic:Boolean = true;
@@ -668,8 +668,8 @@ package ui
 					}
 					
 					// On affecte le jet max et min aux labels de la grid
-					componentsRef.lb_jetmin.text = jetMin;
-					componentsRef.lb_jetmax.text = jetMax;
+					componentsRef.lbl_jetMin.text = jetMin;
+					componentsRef.lbl_jetMax.text = jetMax;
 			
 					// On change l'état de la bulle si le jet est overmax
 					if (jetActuel > jetMax)
@@ -693,7 +693,7 @@ package ui
 			
 			if (isExotic)
 			{
-				componentsRef.lb_jet.cssClass = "exotic";
+				componentsRef.lbl_jet.cssClass = "exotic";
 				componentsRef.tx_bulle.uri = _bubbleBlueUri;
 			}
 			
@@ -779,7 +779,7 @@ package ui
 			{
 				lbl_rune_name.text = "";
 				lbl_rune_effect.text = "";
-				lbl_rune_poids.text = "";
+				lbl_rune_weight.text = "";
 				
 				return;
 			}
@@ -793,13 +793,13 @@ package ui
 			{
 				_runeWeight = SmithMagic.runesWeight[effect.effectId] * effect.value;
 				
-				lbl_rune_poids.text = "Poid : " + _runeWeight;
+				lbl_rune_weight.text = "Poid : " + _runeWeight;
 			}
 			else
 			{
 				_runeWeight = 0;
 				
-				lbl_rune_poids.text = "Poid : Inconnu";
+				lbl_rune_weight.text = "Poid : Inconnu";
 			}
 		}
 		
@@ -816,7 +816,7 @@ package ui
 				lbl_level.text = "";
 				lbl_name.text = "";
 				
-				maGrid.dataProvider = new Array();
+				effectsGrid.dataProvider = new Array();
 				
 				return;
 			}
@@ -846,7 +846,7 @@ package ui
 				}
 			}
 			
-			maGrid.dataProvider = forgeableEffectList;
+			effectsGrid.dataProvider = forgeableEffectList;
 		}
 		
 		/**
