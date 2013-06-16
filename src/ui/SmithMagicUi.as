@@ -15,6 +15,7 @@ package ui
 	import d2data.EffectInstanceInteger;
 	import d2data.Item;
 	import d2data.ItemWrapper;
+	import d2enums.ChatActivableChannelsEnum;
 	import d2enums.StatesEnum;
 	import d2hooks.DropEnd;
 	import d2hooks.DropStart;
@@ -50,7 +51,6 @@ package ui
 		public static const SKILL_TYPE_HAT:int = 166;
 		public static const SKILL_TYPE_CLOAK:int = 165;
 		public static const SKILL_TYPE_BAG:int = 167;
-		public static const INFORMATION_CHANNEL:int = 10;
 		
 		// Variables Les Globales
 		public var _skill:Object;
@@ -151,14 +151,14 @@ package ui
 			uiApi.addComponentHook(btn_open, "onRelease");
 			uiApi.addComponentHook(btn_wellInput, "onRelease");
 		}
-						
+		
 		//::///////////////////////////////////////////////////////////
 		//::// Evenements
 		//::///////////////////////////////////////////////////////////	
 		
 		public function onTextInformation(text:String, channelId:int):void
 		{
-			if (channelId != INFORMATION_CHANNEL)
+			if (channelId != ChatActivableChannelsEnum.PSEUDO_CHANNEL_INFO)
 			{
 				return;
 			}
