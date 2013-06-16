@@ -252,7 +252,7 @@
 					</Anchor>
 				</Anchors>
 				<Size>
-					<AbsDimension x="295"
+					<AbsDimension x="240"
 								  y="25" />
 				</Size>
 				<css>[local.localCss]styles.css</css>
