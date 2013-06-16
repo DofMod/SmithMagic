@@ -522,30 +522,37 @@ package ui
 			}
 		}
 		
+		/**
+		 * On mouse release.
+		 * 
+		 * @param	target
+		 */
 		public function onRelease(target:Object):void
 		{
 			switch (target)
 			{	
-				// Masquage de l'interface et affichage du bouton de réouverture
 				case btn_close:
 					ctr_concealable.visible = false;
 					
 					break;
 				
-				// Affichage de l'interface et masquage de ce bouton
 				case btn_open:
 					ctr_concealable.visible = true;
 					
 					break;
 				
-				// Quand on clique sur la texture de l'input on affiche un popup qui demande la valeur du puits
 				case btn_input:
 					modCommon.openInputPopup("Réglage manuel du puits", "Entrez la valeur souhaitée", onValidQuantity, null, SmithMagic.well, "0-9.", 5);
 					
 					break;
 			}
-		}					
-	   
+		}
+		
+		/**
+		 * On drag & drop start.
+		 * 
+		 * @param	target
+		 */
 		public function onDropStart(target:Object):void
 		{
 			for each (var slot:Slot in [slot_item, slot_rune, slot_signature])
@@ -557,6 +564,11 @@ package ui
 			}
 		}
 		
+		/**
+		 * On drag & drop end.
+		 * 
+		 * @param	target
+		 */
 		public function onDropEnd(target:Object):void
 		{
 			for each (var slot:Object in [slot_item, slot_rune, slot_signature])
@@ -565,6 +577,13 @@ package ui
 			}
 		}
 		
+		/**
+		 * Effects grid values manager.
+		 * 
+		 * @param	data
+		 * @param	componentsRef
+		 * @param	selected
+		 */
 		public function updateGrid(data:*, componentsRef:*, selected:Boolean):void
 		{
 			_dataOfEffectButtons[componentsRef.btn_jet] = data;
