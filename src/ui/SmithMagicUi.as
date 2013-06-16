@@ -56,7 +56,7 @@ package ui
 		public var _inCooperatingMode:Boolean;
 		public var _runeWeight:Number = 0;
 		public var _signeReliquat:int;
-		public var _waitingObject:Object;		
+		public var _waitingObject:ItemWrapper;
 		public var _btnRef:Dictionary = new Dictionary(false);
 		public var _runeRef:Dictionary = new Dictionary(false);
 		
@@ -528,7 +528,7 @@ package ui
 	   
 		public function onDropStart(target:Object):void
 		{
-			for each (var slot:Object in [slot_item, slot_rune, slot_signature])
+			for each (var slot:Slot in [slot_item, slot_rune, slot_signature])
 			{
 				if (isValidSlot(slot, target.data))
 				{
@@ -839,7 +839,7 @@ package ui
 			uiApi.addComponentHook(slot, "onDoubleClick");
 		}
 		
-		private function isValidSlot(slot:Object, itemWp:Object):Boolean
+		private function isValidSlot(slot:Slot, itemWp:ItemWrapper):Boolean
 		{
 			if (!_skill)
 			{
@@ -878,34 +878,43 @@ package ui
 		
 		private function dropValidator(target:Object, data:Object, source:Object):Boolean
 		{
-			return isValidSlot(target, data);
+			if (data is ItemWrapper && target is Slot)
+			{
+				return isValidSlot(target as Slot, data as ItemWrapper);
+			}
+			
+			return false;
 		}
 		
 		private function processDrop(target:Object, data:Object, source:Object):void
 		{
-			// Si le slot est valide
-			if (dropValidator(target, data, source))
+			if (!(data is ItemWrapper) || !(target is Slot))
 			{
-				switch (target)
-				{
-					case slot_item:
-					case slot_signature:
-						fillSlot(target, data, 1);
-						
-						break;
-					case slot_rune:
-						if (data.info1 > 1)
-						{
-							_waitingObject = data;
-							modCommon.openQuantityPopup(1, data.quantity, data.quantity, onValidQtyDropToSlot);
-						}
-						else
-						{
-							fillSlot(slot_rune, data, 1);
-						}
-						
-						break;
-				}
+				return;
+			}
+			
+			var item:ItemWrapper = data as ItemWrapper;
+			var slot:Slot = target as Slot;
+			
+			switch (slot)
+			{
+				case slot_item:
+				case slot_signature:
+					fillSlot(slot, item, 1);
+					
+					break;
+				case slot_rune:
+					if (int(item.info1) > 1)
+					{
+						_waitingObject = item;
+						modCommon.openQuantityPopup(1, item.quantity, item.quantity, onValidQtyDropToSlot);
+					}
+					else
+					{
+						fillSlot(slot_rune, item, 1);
+					}
+					
+					break;
 			}
 		}
 		
@@ -919,49 +928,48 @@ package ui
 			sysApi.sendAction(new ExchangeObjectMove(target.data.objectUID, -(qty)));
 		}
 		
-		private function fillDefaultSlot(data:Object, qty:int = -1):void
+		private function fillDefaultSlot(item:ItemWrapper, quantity:int = -1):void
 		{
-			var _local3:Object;
-			for each (_local3 in [slot_item, slot_rune, slot_signature])
+			for each (var slot:Slot in [slot_item, slot_rune, slot_signature])
 			{
-				if (dropValidator(_local3, data, null))
+				if (dropValidator(slot, item, null))
 				{
-					if (qty == -1)
+					if (quantity == -1)
 					{
-						switch (_local3)
+						switch (slot)
 						{
 							case slot_item:
 							case slot_signature:
-								qty = 1;
+								quantity = 1;
 								
 								break;
 							case slot_rune:
-								qty = data.quantity;
+								quantity = item.quantity;
 								
 								break;
 						}
 					}
 					
-					fillSlot(_local3, data, qty);
+					fillSlot(slot, item, quantity);
 					
 					return;
 				}
 			}
 		}
 		
-		private function fillSlot(target:Object, data:Object, qty:int):void
+		private function fillSlot(target:Slot, item:ItemWrapper, quantity:int):void
 		{
-			if ((!(target.data == null)) && ((((target == slot_item) || (target == slot_signature)) || ((target == slot_rune) && (!(target.data.objectGID == data.objectGID))))))
+			if ((target.data != null) && ((target == slot_item) || (target == slot_signature) || ((target == slot_rune) && (target.data.objectGID != item.objectGID))))
 			{
 				unfillSlot(target, -1);
 			}
 			
-			sysApi.sendAction(new ExchangeObjectMove(data.objectUID, qty));
+			sysApi.sendAction(new ExchangeObjectMove(item.objectUID, quantity));
 		}
 		
-		private function onValidQtyDropToSlot(qty:Number):void
+		private function onValidQtyDropToSlot(quantity:Number):void
 		{
-			fillDefaultSlot(_waitingObject, qty);
+			fillDefaultSlot(_waitingObject, quantity);
 		}
 		
 		private function getIdEffectMalusToBonus(id:uint):uint
