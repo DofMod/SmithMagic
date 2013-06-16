@@ -89,7 +89,7 @@ package ui
 		public var lbl_rune_name:Label;
 		public var lbl_rune_poids:Label;
 		public var lbl_resultat:Label;
-		public var lbl_puits:Label;
+		public var lbl_well:Label;
 		
 		// Les Container de l'interface
 		public var ctr_concealable:GraphicContainer;
@@ -130,7 +130,7 @@ package ui
 			setWell(SmithMagic.well);
 			
 			lbl_rune_name.colorText = 0x7F0000;
-			lbl_puits.colorText = 0x004A7F;
+			lbl_well.colorText = 0x004A7F;
 					
 			slot_item.dropValidator = dropValidator;
 			slot_rune.dropValidator = dropValidator;
@@ -818,13 +818,13 @@ package ui
 		/**
 		 * Update the well value and relative fields.
 		 * 
-		 * @param	puits	The new well value.
+		 * @param	well	The new well value.
 		 */
-		private function setWell(puits:Number):void
+		private function setWell(well:Number):void
 		{
-			SmithMagic.well = puits;
+			SmithMagic.well = well;
 			
-			lbl_puits.text = "Puit : " + puits;
+			lbl_well.text = "Puits : " + well;
 		}
 		
 		/**

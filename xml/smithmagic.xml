@@ -135,8 +135,8 @@
 				<uri>[local.assets]tx_inputBackground</uri>
 			</iconButton>
 
-			<!-- Label PUITS-->
-			<Label name="lbl_puits">
+			<!-- Label WELL -->
+			<Label name="lbl_well">
 				<Anchors>
 					<Anchor>
 						<AbsDimension x="353"
