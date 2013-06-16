@@ -542,7 +542,7 @@ package ui
 					break;
 				
 				case btn_input:
-					modCommon.openInputPopup("Réglage manuel du puits", "Entrez la valeur souhaitée", onValidQuantity, null, SmithMagic.well, "0-9.", 5);
+					modCommon.openInputPopup("Réglage manuel du puits", "Entrez la valeur souhaitée", onValidWellValue, null, SmithMagic.well, "0-9.", 5);
 					
 					break;
 			}
@@ -855,7 +855,7 @@ package ui
 		 * 
 		 * @param	string	The new well value.
 		 */
-		private function onValidQuantity(string:String):void
+		private function onValidWellValue(string:String):void
 		{
 			setWell(Number(string));
 		}
