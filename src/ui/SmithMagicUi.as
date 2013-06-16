@@ -470,13 +470,11 @@ package ui
 					
 					break;
 				default:
-					//sysApi.log(8, "target.name : " + target.name);
 					var data:Object;
 					var toolTip:Object;
 					var effectWeight:Number;
 					
-					// Le Cas du Rollover sur un jet, data de type EffectInstanceInteger
-					if (_dataOfEffectButtons[target] !== null && target.name.search("btn_jet") != -1 && _dataOfEffectButtons[target].effect is EffectInstanceInteger)
+					if (target.name.search("btn_jet") != -1 && _dataOfEffectButtons[target] !== null)
 					{
 						data = _dataOfEffectButtons[target].effect as EffectInstanceInteger;
 						effectWeight = data.value * SmithMagic.runesWeight[getIdEffectMalusToBonus(data.effectId)];
@@ -484,8 +482,7 @@ package ui
 						toolTip = uiApi.textTooltipInfo("Poids de l'effet : " + effectWeight);
 						uiApi.showTooltip(toolTip, target, false, "standard", 7, 1, 3);
 					}
-					// Si les infos existent on affiche la tooltip
-					else if (_dataOfAvailableRuneSlots[target] !== null && target.name.search("slot_") != -1)
+					else if (target.name.search("slot_") != -1 && _dataOfAvailableRuneSlots[target] !== null)
 					{
 						data = _dataOfAvailableRuneSlots[target] as ItemWrapper;
 						effectWeight = SmithMagic.runesWeight[data.effects[0].effectId] * data.effects[0].parameter0;
