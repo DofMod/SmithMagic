@@ -58,7 +58,7 @@ package ui
 		public var _signeReliquat:int;
 		public var _waitingObject:ItemWrapper;
 		public var _btnRef:Dictionary = new Dictionary(false);
-		public var _runeRef:Dictionary = new Dictionary(false);
+		public var _dataOfAvailableRuneSlots:Dictionary = new Dictionary(false);
 		
 		public var _bubbleGreyUri:Object;
 		public var _bubbleGreenUri:Object;
@@ -391,21 +391,25 @@ package ui
 			}
 		}
 		
+		/**
+		 * 
+		 * @param	target
+		 */
 		public function onMouseCtrlDoubleClick(target:Object):void
 		{
 			switch (target)
 			{
 				case slot_rune:
-					if (target.data)
+					if (slot_rune.data != null)
 					{
-						unfillSlot(target);
+						unfillSlot(slot_rune);
 					}
 					
 					break;
 				default:
-					if (_runeRef[target] != null)
+					if (_dataOfAvailableRuneSlots[target] != null)
 					{
-						fillSlot(slot_rune, _runeRef[target], _runeRef[target].quantity);
+						fillSlot(slot_rune, _dataOfAvailableRuneSlots[target], _dataOfAvailableRuneSlots[target].quantity);
 					}
 			}
 		}		
@@ -424,9 +428,9 @@ package ui
 					
 					break;
 				default:
-					if (_runeRef[target] != null)
+					if (_dataOfAvailableRuneSlots[target] != null)
 					{
-						fillSlot(slot_rune, _runeRef[target], 1);
+						fillSlot(slot_rune, _dataOfAvailableRuneSlots[target], 1);
 					}
 			}
 		}
@@ -465,9 +469,9 @@ package ui
 						uiApi.showTooltip(toolTip, target, false, "standard", 7, 1, 3);
 					}
 					// Si les infos existent on affiche la tooltip
-					else if (_runeRef[target] !== null && target.name.search("slot_") != -1)
+					else if (_dataOfAvailableRuneSlots[target] !== null && target.name.search("slot_") != -1)
 					{
-						data = _runeRef[target] as ItemWrapper;
+						data = _dataOfAvailableRuneSlots[target] as ItemWrapper;
 						effectWeight = SmithMagic.runesWeight[data.effects[0].effectId] * data.effects[0].parameter0;
 						
 						toolTip = uiApi.textTooltipInfo(data.name + ", +" + data.effects[0].description + "\nPoid de la rune : " + effectWeight + "\nProbabilité : " + 50 + "%");
@@ -551,9 +555,9 @@ package ui
 		public function updateGrid(data:*, componentsRef:*, selected:Boolean):void
 		{
 			_btnRef[componentsRef.btn_jet] = data;
-			_runeRef[componentsRef.slot_pa] = null;
-			_runeRef[componentsRef.slot_ra] = null;
-			_runeRef[componentsRef.slot_simple] = null;
+			_dataOfAvailableRuneSlots[componentsRef.slot_pa] = null;
+			_dataOfAvailableRuneSlots[componentsRef.slot_ra] = null;
+			_dataOfAvailableRuneSlots[componentsRef.slot_simple] = null;
 			
 			if (data !== null)
 			{
@@ -679,19 +683,19 @@ package ui
 								//sysApi.log(16, "effect.description : " + effet.description);
 								if (item.name.search("Rune Pa") != -1)
 								{
-									_runeRef[componentsRef.slot_pa] = item;
+									_dataOfAvailableRuneSlots[componentsRef.slot_pa] = item;
 									componentsRef.slot_pa.data = item;
 									componentsRef.slot_pa.visible = true;
 								}
 								else if (item.name.search("Rune Ra") != -1)
 								{
-									_runeRef[componentsRef.slot_ra] = item;
+									_dataOfAvailableRuneSlots[componentsRef.slot_ra] = item;
 									componentsRef.slot_ra.data = item;
 									componentsRef.slot_ra.visible = true;
 								}
 								else
 								{
-									_runeRef[componentsRef.slot_simple] = item;
+									_dataOfAvailableRuneSlots[componentsRef.slot_simple] = item;
 									componentsRef.slot_simple.data = item;
 									componentsRef.slot_simple.visible = true;										
 								}
