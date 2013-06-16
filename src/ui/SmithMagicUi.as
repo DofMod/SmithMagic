@@ -281,52 +281,78 @@ package ui
 			}
 		}
 		
+		/**
+		 * An object in the exchange has been modified (quantity ?).
+		 * 
+		 * @param	item
+		 */
 		public function onExchangeObjectModified(item:ItemWrapper):void
 		{
-			// Permet de mettre à jour la quantité des runes ou des potions présentent dans le slot de l'atelier
-			// Et également la quantité de runes dans la grid
-			if (item.typeId == SMITHMAGIC_RUNE_ID || item.typeId == SMITHMAGIC_POTION_ID)
+			// The number of runes in the exchange has been modified
+			if (slot_rune.data.objectUID == item.objectUID)
 			{
 				slot_rune.data = item;
+				
 				updateRune(slot_rune.data);
-				updateItem(slot_item.data);
+				updateItem(slot_item.data); // Update the list of runes
+			}
+			else
+			{
+				sysApi.log(2, "The exchange object modified is not the rune ? (" + item + ")");
 			}
 		}
 		
+		/**
+		 * An object has been modified.
+		 * 
+		 * @param	item
+		 */
 		public function onObjectModified(item:ItemWrapper):void
 		{
-			// Permet de mettre à jour l'objet dans notre atelier à chaque fois qu'un objet y est placé ou qu'une rune est passée
-			if (item.isEquipment)
+			// Forgeable item modified
+			if (slot_item.data.objectUID == item.objectUID)
 			{
 				slot_item.data = item;
+				
 				updateItem(slot_item.data);
 			}
 		}			
 		
+		/**
+		 * An object has been added in the exchange.
+		 * 
+		 * @param	item
+		 */
 		public function onExchangeObjectAdded(item:ItemWrapper):void
 		{
-			// Si l'item est dans la catégorie Runes de Forgemagie ou Potions de Forgemagie
 			if (item.typeId == SMITHMAGIC_RUNE_ID || item.typeId == SMITHMAGIC_POTION_ID)
 			{
 				slot_rune.data = item;
+				
 				updateRune(slot_rune.data);
-				updateItem(slot_item.data);
+				updateItem(slot_item.data); // Update the list of runes
 			}
-			// Si l'item est une rune de signature
 			else if (item.id == SIGNATURE_RUNE_ID)
 			{
 				slot_signature.data = item;
 			}
-			// Sinon si c'est autre chose (donc un objet)
+			else if(item.isEquipment)
+			{
+				slot_item.data = item;
+				
+				updateItem(slot_item.data);
+			}
 			else
 			{
-				lbl_level.text = String("Niv. " + item.level);
-				lbl_name.text = item.name;
-				slot_item.data = item;
-				updateItem(slot_item.data);
-			}	
+				sysApi.log(2, "Unknow exchange added item type : " + item);
+			}
 		}
 		
+		/**
+		 * An object has been removed in the exchange.
+		 * 
+		 * @param	itemUid
+		 */
 		public function onExchangeObjectRemoved(itemUid:uint):void
 		{
 			var item:Object;
