@@ -392,6 +392,7 @@ package ui
 		}
 		
 		/**
+		 * On double click with Ctrl key pressed.
 		 * 
 		 * @param	target
 		 */
@@ -414,6 +415,11 @@ package ui
 			}
 		}		
 		
+		/**
+		 * On double click.
+		 * 
+		 * @param	target
+		 */
 		public function onDoubleClick(target:Object):void
 		{
 			switch (target)
@@ -435,11 +441,21 @@ package ui
 			}
 		}
 		
+		/**
+		 * On mouse rollout.
+		 * 
+		 * @param	target
+		 */
 		public function onRollOut(target:Object):void
 		{
 			uiApi.hideTooltip();
 		}
 		
+		/**
+		 * On mouse rollover.
+		 * 
+		 * @param	target
+		 */
 		public function onRollOver(target:Object):void
 		{
 			switch (target)
