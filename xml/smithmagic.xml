@@ -230,7 +230,7 @@
 			<Label>
 				<Anchors>
 					<Anchor>
-						<AbsDimension x="360"
+						<AbsDimension x="300"
 									  y="150" />
 					</Anchor>
 				</Anchors>
