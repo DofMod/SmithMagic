@@ -156,7 +156,7 @@ package ui
 		//::// Evenements
 		//::///////////////////////////////////////////////////////////	
 		
-		public function onTextInformation(text:String, channelId:int):void
+		public function onTextInformation(text:String, channelId:int, param3:Number = 0, param4:Boolean = false):void
 		{
 			if (channelId != ChatActivableChannelsEnum.PSEUDO_CHANNEL_INFO)
 			{
