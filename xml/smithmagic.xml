@@ -129,7 +129,7 @@
 					</Anchor>
 				</Anchors>
 				<Size>
-					<AbsDimension x="66"
+					<AbsDimension x="70"
 								  y="28" />
 				</Size>
 				<uri>[local.assets]tx_inputBackground</uri>
@@ -139,7 +139,7 @@
 			<Label name="lbl_well">
 				<Anchors>
 					<Anchor>
-						<AbsDimension x="353"
+						<AbsDimension x="356"
 									  y="560" />
 					</Anchor>
 				</Anchors>
