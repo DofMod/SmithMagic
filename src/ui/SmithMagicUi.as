@@ -367,29 +367,16 @@ package ui
 			switch (target)
 			{
 				case slot_rune:
-					// Permet de vider toutes les runes de notre atelier
 					if (target.data)
 					{
-						sysApi.sendAction(new ExchangeObjectMove(target.data.objectUID, -(target.data.quantity)));
+						unfillSlot(target);
 					}
 					
 					break;
 				default:
 					if (_runeRef[target] != null)
 					{
-						var data:ItemWrapper = _runeRef[target];
-
-						// Permet de vider le slot si on souhaite ajouter un type de rune qui n'est pas déjà dans le slot
-						if (slot_rune.data != null && slot_rune.data.name != data.name)
-						{
-							sysApi.sendAction(new ExchangeObjectMove(slot_rune.data.objectUID, -(slot_rune.data.quantity)));
-						}
-						
-						// Si la rune cliqué n'est pas déjà celle dans le slot
-						if (slot_rune.data != data)
-						{
-							sysApi.sendAction(new ExchangeObjectMove(data.objectUID, data.quantity));
-						}
+						fillSlot(slot_rune, _runeRef[target], _runeRef[target].quantity);
 					}
 			}
 		}		
@@ -398,32 +385,19 @@ package ui
 		{
 			switch (target)
 			{
-				// Permet de retirer une seule rune d'un des 3 slots de notre atelier
 				case slot_item:
 				case slot_rune:
 				case slot_signature:
 					if (target.data)
 					{
-						sysApi.sendAction(new ExchangeObjectMove(target.data.objectUID, -1));
+						unfillSlot(target, 1);
 					}
 					
 					break;
 				default:
 					if (_runeRef[target] != null)
 					{
-						var data:ItemWrapper = _runeRef[target];
-
-						// Permet de vider le slot si on souhaite ajouter un type de rune qui n'est pas déjà dans le slot
-						if (slot_rune.data != null && slot_rune.data.name != data.name)
-						{
-							sysApi.sendAction(new ExchangeObjectMove(slot_rune.data.objectUID, -(slot_rune.data.quantity)));
-						}
-						
-						// Si la rune cliqué n'est pas déjà celle dans le slot
-						if (slot_rune.data != data)
-						{
-							sysApi.sendAction(new ExchangeObjectMove(data.objectUID, 1));
-						}
+						fillSlot(slot_rune, _runeRef[target], 1);
 					}
 			}
 		}
@@ -918,14 +892,14 @@ package ui
 			}
 		}
 		
-		private function unfillSlot(target:Object, qty:int = -1):void
+		private function unfillSlot(target:Object, quantity:int = -1):void
 		{
-			if (qty == -1)
+			if (quantity == -1)
 			{
-				qty = target.data.quantity;
+				quantity = target.data.quantity;
 			}
 			
-			sysApi.sendAction(new ExchangeObjectMove(target.data.objectUID, -(qty)));
+			sysApi.sendAction(new ExchangeObjectMove(target.data.objectUID, -(quantity)));
 		}
 		
 		private function fillDefaultSlot(item:ItemWrapper, quantity:int = -1):void
