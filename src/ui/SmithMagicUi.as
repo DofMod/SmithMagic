@@ -336,7 +336,7 @@ package ui
 			{
 				slot_signature.data = item;
 			}
-			else if(item.isEquipment)
+			else if (item.isEquipment)
 			{
 				slot_item.data = item;
 				
@@ -355,37 +355,40 @@ package ui
 		 */
 		public function onExchangeObjectRemoved(itemUid:uint):void
 		{
-			var item:Object;
+			var item:ItemWrapper;
 			
 			if (_inCooperatingMode)
 			{
-				item = dataApi.getItem(itemUid) as Item;
+				//item = dataApi.getItem(itemUid) as Item;
+				
+				return; // TODO Find why this conditional
 			}
 			else
 			{
 				item = dataApi.getItemFromUId(itemUid) as ItemWrapper;
 			}
 			
-			// Si l'item est dans la catégorie Runes de Forgemagie ou Potions de Forgemagie
 			if (item.typeId == SMITHMAGIC_RUNE_ID || item.typeId == SMITHMAGIC_POTION_ID)
 			{
 				slot_rune.data = null;
+				
 				updateRune(null);
-				updateItem(slot_item.data);
+				updateItem(slot_item.data); // Update the list of runes
 			}
-			// Si l'item est une rune de signature
 			else if (item.id == SIGNATURE_RUNE_ID)
 			{
 				slot_signature.data = null;
 			}
-			// Sinon si c'est autre chose (donc un objet)
+			else if (item.isEquipment)
+			{
+				slot_item.data = null;
+				
+				updateItem(null);
+			}
 			else
 			{
-				lbl_level.text = "";
-				lbl_name.text = "";
-				slot_item.data = null;
-				updateItem(null);
-			}		
+				sysApi.log(2, "Unknow exchange removed item type : " + item);
+			}
 		}
 		
 		public function onMouseCtrlDoubleClick(target:Object):void
