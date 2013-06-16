@@ -775,10 +775,16 @@ package ui
 		{
 			if (item == null)
 			{
+				lbl_level.text = "";
+				lbl_name.text = "";
+				
 				maGrid.dataProvider = new Array();
 				
 				return;
 			}
+			
+			lbl_level.text = String("Niv. " + item.level);
+			lbl_name.text = item.name;
 			
 			var effect:Object;
 			var forgeableEffectList:Array = new Array();
