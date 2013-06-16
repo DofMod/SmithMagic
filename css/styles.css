@@ -30,10 +30,10 @@ left {
 	color: #312D24;
 	text-align: left;
 }
-leftbold {
+well {
 	font-family: Eras;
 	font-size: 18px;
-	color: #312D24;
+	color: #004A7F;
 	text-align: left;
 }
 right {
@@ -61,11 +61,11 @@ bold {
 	color: #312D24;
 	font-weight: bold;
 }
-boldbig {
+runename {
 	font-family: Eras;
 	font-size: 20px;
-	color: #312D24;
 	font-weight: bold;
+	color: #7F0000;
 }
 malus {
 	font-family: Tahoma;

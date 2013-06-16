@@ -130,9 +130,6 @@ package ui
 			// On fixe la valeur du puits
 			setWell(SmithMagic.well);
 			
-			lbl_rune_name.colorText = 0x7F0000;
-			lbl_well.colorText = 0x004A7F;
-					
 			slot_item.dropValidator = dropValidator;
 			slot_rune.dropValidator = dropValidator;
 			slot_signature.dropValidator = dropValidator;

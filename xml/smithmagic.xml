@@ -67,7 +67,7 @@
 								  y="20" />
 				</Size>
 				<css>[local.localCss]styles.css</css>
-				<cssClass>boldbig</cssClass>
+				<cssClass>runename</cssClass>
 			</Label>
 
 			<!-- Label Poids Rune-->
@@ -148,7 +148,7 @@
 								  y="20" />
 				</Size>
 				<css>[local.localCss]styles.css</css>
-				<cssClass>leftbold</cssClass>
+				<cssClass>well</cssClass>
 			</Label>
 
 			<!-- LES 3 SLOTS -->
