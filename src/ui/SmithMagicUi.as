@@ -93,7 +93,7 @@ package ui
 		
 		// Les Container de l'interface
 		public var ctr_concealable:GraphicContainer;
-				
+		
 		// Les 3 Slots de l'interface
 		public var slot_item:Slot;
 		public var slot_rune:Slot;
@@ -104,13 +104,13 @@ package ui
 		
 		//::///////////////////////////////////////////////////////////
 		//::// Méthodes publiques
-		//::///////////////////////////////////////////////////////////		
+		//::///////////////////////////////////////////////////////////
 		
 		public function main(skillId:Object):void
 		{
 			_bubbleGreyUri = uiApi.createUri((uiApi.me().getConstant("assets") + "state_0"));
 			_bubbleGreenUri = uiApi.createUri((uiApi.me().getConstant("assets") + "state_3"));
-			_bubbleOrangeUri = uiApi.createUri((uiApi.me().getConstant("assets") + "state_2"));			
+			_bubbleOrangeUri = uiApi.createUri((uiApi.me().getConstant("assets") + "state_2"));		
 			_bubbleRedUri = uiApi.createUri((uiApi.me().getConstant("assets") + "state_6"));
 			_bubbleBlueUri = uiApi.createUri((uiApi.me().getConstant("assets") + "state_7"));
 			
