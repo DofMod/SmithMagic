@@ -50,6 +50,7 @@ package ui
 		public static const SKILL_TYPE_HAT:int = 166;
 		public static const SKILL_TYPE_CLOAK:int = 165;
 		public static const SKILL_TYPE_BAG:int = 167;
+		public static const INFORMATION_CHANNEL:int = 10;
 		
 		// Variables Les Globales
 		public var _skill:Object;
@@ -160,8 +161,7 @@ package ui
 		
 		public function onTextInformation(text:String, channelId:int):void
 		{
-			// Si le message ne vient pas du cannal information
-			if (channelId != 10)
+			if (channelId != INFORMATION_CHANNEL)
 			{
 				return;
 			}
