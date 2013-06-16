@@ -211,8 +211,8 @@ package ui
 				}
 			}
 			
-			var poidsGains:Number = 0;
-			var poidsPertes:Number = 0;
+			var weightGains:Number = 0;
+			var weightLosses:Number = 0;
 			
 			for each (var effect:Object in dicoEffect)
 			{
@@ -222,46 +222,46 @@ package ui
 				// Si l'effet à Diminué
 				if (effect.old > effect.neww)
 				{
-					poidsPertes += ((effect.old - effect.neww) * SmithMagic.runesWeight[effect.id])
+					weightLosses += ((effect.old - effect.neww) * SmithMagic.runesWeight[effect.id])
 				}
 				// Si l'effet à Augmenté
 				else if (effect.old < effect.neww)
 				{
-					poidsGains += ((effect.neww - effect.old) * SmithMagic.runesWeight[effect.id])
+					weightGains += ((effect.neww - effect.old) * SmithMagic.runesWeight[effect.id])
 				}
 				// Si l'effet vient d'être ajouté à l'objet
 				else if (effect.old == false && effect.neww != false)
 				{
-					poidsGains += (effect.neww * SmithMagic.runesWeight[effect.id])
+					weightGains += (effect.neww * SmithMagic.runesWeight[effect.id])
 				}
 				// Si l'effet vient d'être supprimé de l'objet
 				else if (effect.neww == false && effect.old != false)
 				{
-					poidsPertes += (effect.old * SmithMagic.runesWeight[effect.id])
+					weightLosses += (effect.old * SmithMagic.runesWeight[effect.id])
 				}
 			}
 			
-			var poidsRune:Number = _runeWeight;
+			var runeWeight:Number = _runeWeight;
 			
-			sysApi.log(16, "poidsRune : " +  poidsRune);
-			sysApi.log(16, "poidsPertes : " +  poidsPertes);
-			sysApi.log(16, "poidsGains : " +  poidsGains);
+			sysApi.log(16, "runeWeight : " +  runeWeight);
+			sysApi.log(16, "weightLosses : " +  weightLosses);
+			sysApi.log(16, "weightGains : " +  weightGains);
 						
-			if (poidsGains > 0 && poidsGains < poidsRune)
+			if (weightGains > 0 && weightGains < runeWeight)
 			{
-				poidsRune = poidsGains;
+				runeWeight = weightGains;
 			}
 			
 			// Si le reliquat varie
 			if (_signeReliquat != 0)
 			{
-				if (poidsRune > poidsPertes)
+				if (runeWeight > weightLosses)
 				{
 					// Ici on inverse les deux car sinon le résultat est négatif
-					if (SmithMagic.well >= (poidsRune - poidsPertes))
+					if (SmithMagic.well >= (runeWeight - weightLosses))
 					{
 						//sysApi.log(1, "On doit perdre du puits et il est suffisant");
-						setWell(SmithMagic.well + poidsPertes - poidsRune);
+						setWell(SmithMagic.well + weightLosses - runeWeight);
 					}
 					else
 					{
@@ -269,10 +269,10 @@ package ui
 						setWell(0);
 					}
 				}
-				else if (poidsRune < poidsPertes)
+				else if (runeWeight < weightLosses)
 				{
 					//sysApi.log(1, "On a trop perdu");
-					setWell(SmithMagic.well + poidsPertes - poidsRune);
+					setWell(SmithMagic.well + weightLosses - runeWeight);
 				}
 				else
 				{
@@ -487,7 +487,7 @@ package ui
 						data = _dataOfAvailableRuneSlots[target] as ItemWrapper;
 						effectWeight = SmithMagic.runesWeight[data.effects[0].effectId] * data.effects[0].parameter0;
 						
-						toolTip = uiApi.textTooltipInfo(data.name + ", +" + data.effects[0].description + "\nPoid de la rune : " + effectWeight + "\nProbabilité : " + 50 + "%");
+						toolTip = uiApi.textTooltipInfo(data.name + ", +" + data.effects[0].description + "\nPoids de la rune : " + effectWeight + "\nProbabilité : " + 50 + "%");
 						uiApi.showTooltip(toolTip, target, false, "standard", 7, 1, 3);
 					}
 					else if (target.name.search("tx_bulle") != -1)
@@ -793,13 +793,13 @@ package ui
 			{
 				_runeWeight = SmithMagic.runesWeight[effect.effectId] * effect.value;
 				
-				lbl_rune_weight.text = "Poid : " + _runeWeight;
+				lbl_rune_weight.text = "Poids : " + _runeWeight;
 			}
 			else
 			{
 				_runeWeight = 0;
 				
-				lbl_rune_weight.text = "Poid : Inconnu";
+				lbl_rune_weight.text = "Poids : Inconnu";
 			}
 		}
 		
