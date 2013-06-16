@@ -56,7 +56,7 @@ package ui
 		public var _skill:Object;
 		public var _inCooperatingMode:Boolean;
 		public var _runeWeight:Number = 0;
-		public var _signeReliquat:int;
+		public var _wellModification:Boolean = false;
 		public var _waitingObject:ItemWrapper;
 		public var _dataOfEffectButtons:Dictionary = new Dictionary(false);
 		public var _dataOfAvailableRuneSlots:Dictionary = new Dictionary(false);
@@ -163,32 +163,24 @@ package ui
 				return;
 			}
 			
-			// On définit le signe du reliquat
-			if (text.indexOf("-reliquat") != -1)
-				_signeReliquat = -1;
-			else if (text.indexOf("+reliquat") != -1)
-				_signeReliquat = 1;
-			else 
-				_signeReliquat = 0;
-
-			var resultat:String = "";
+			// Is the well value modified ?
+			_wellModification = (text.indexOf("reliquat") != -1);
 			
-			// Mise à jour du résultat
-			lbl_result.text = "Résultat : " + resultat;
-		}		
+			lbl_result.text = "Résultat : ";
+		}
 		
 		public function onExchangeCraftResult(resultId:int, item:ItemWrapper):void
 		{
 			
 			var oldItem:ItemWrapper = slot_item.data;
-			var dicoEffect:Dictionary = new Dictionary();
+			var effects:Dictionary = new Dictionary();
 			
 			// On parcours les jets de l'item avant le passage de la rune
 			for each (var oldEffect:Object in oldItem.effects)
 			{
 				if (oldEffect is EffectInstanceInteger)
 				{
-					dicoEffect[oldEffect.effectId] = ({name : oldEffect.description, old : (getSigneBonus(oldEffect) * oldEffect.value), neww : false, id : getIdEffectMalusToBonus(oldEffect.effectId) });
+					effects[oldEffect.effectId] = ({oldValue : (getSigneBonus(oldEffect) * oldEffect.value), newValue : false, id : getIdEffectMalusToBonus(oldEffect.effectId) });
 				}
 			}
 			
@@ -197,13 +189,13 @@ package ui
 			{
 				if (newEffect is EffectInstanceInteger)
 				{
-					if (dicoEffect[newEffect.effectId])
+					if (effects[newEffect.effectId])
 					{
-						dicoEffect[newEffect.effectId].neww = getSigneBonus(newEffect) * newEffect.value;
+						effects[newEffect.effectId].newValue = getSigneBonus(newEffect) * newEffect.value;
 					}
 					else
 					{
-						dicoEffect[newEffect.effectId] = ({name : newEffect.description, old : false, neww : (getSigneBonus(newEffect) * newEffect.value), id : getIdEffectMalusToBonus(newEffect.effectId)});
+						effects[newEffect.effectId] = ({oldValue : false, newValue : (getSigneBonus(newEffect) * newEffect.value), id : getIdEffectMalusToBonus(newEffect.effectId)});
 					}
 				}
 			}
@@ -211,70 +203,39 @@ package ui
 			var weightGains:Number = 0;
 			var weightLosses:Number = 0;
 			
-			for each (var effect:Object in dicoEffect)
+			for each (var effect:Object in effects)
 			{
-				//sysApi.log(2, " effect : " + effect.name);
-				//sysApi.log(8, "old : " + effect.old + " | new : " + effect.neww);
+				if (effect.oldValue != effect.newValue)
+				{
+					//sysApi.log(2, "Effect : " + effect.name);
+					//sysApi.log(2, "OldValue : " + effect.oldValue + " | newValue : " + effect.newValue);
+				}
 				
-				// Si l'effet à Diminué
-				if (effect.old > effect.neww)
+				if (effect.oldValue == false && effect.newValue != false)
 				{
-					weightLosses += ((effect.old - effect.neww) * SmithMagic.runesWeight[effect.id])
+					weightGains += (effect.newValue * SmithMagic.runesWeight[effect.id]);
 				}
-				// Si l'effet à Augmenté
-				else if (effect.old < effect.neww)
+				else if (effect.newValue == false && effect.oldValue != false)
 				{
-					weightGains += ((effect.neww - effect.old) * SmithMagic.runesWeight[effect.id])
+					weightLosses += (effect.oldValue * SmithMagic.runesWeight[effect.id]);
 				}
-				// Si l'effet vient d'être ajouté à l'objet
-				else if (effect.old == false && effect.neww != false)
+				else if (effect.oldValue < effect.newValue)
 				{
-					weightGains += (effect.neww * SmithMagic.runesWeight[effect.id])
+					weightGains += ((effect.newValue - effect.oldValue) * SmithMagic.runesWeight[effect.id]);
 				}
-				// Si l'effet vient d'être supprimé de l'objet
-				else if (effect.neww == false && effect.old != false)
+				else if (effect.oldValue > effect.newValue)
 				{
-					weightLosses += (effect.old * SmithMagic.runesWeight[effect.id])
+					weightLosses += ((effect.oldValue - effect.newValue) * SmithMagic.runesWeight[effect.id]);
 				}
 			}
 			
-			var runeWeight:Number = _runeWeight;
+			sysApi.log(2, "Rune weight : " +  _runeWeight);
+			sysApi.log(2, "Weight losses : " +  weightLosses);
+			sysApi.log(2, "Weight gains : " +  weightGains);
 			
-			sysApi.log(16, "runeWeight : " +  runeWeight);
-			sysApi.log(16, "weightLosses : " +  weightLosses);
-			sysApi.log(16, "weightGains : " +  weightGains);
-						
-			if (weightGains > 0 && weightGains < runeWeight)
+			if (_wellModification == true)
 			{
-				runeWeight = weightGains;
-			}
-			
-			// Si le reliquat varie
-			if (_signeReliquat != 0)
-			{
-				if (runeWeight > weightLosses)
-				{
-					// Ici on inverse les deux car sinon le résultat est négatif
-					if (SmithMagic.well >= (runeWeight - weightLosses))
-					{
-						//sysApi.log(1, "On doit perdre du puits et il est suffisant");
-						setWell(SmithMagic.well + weightLosses - runeWeight);
-					}
-					else
-					{
-						//sysApi.log(1, "On doit perdre du puits mais il est insuffisant");
-						setWell(0);
-					}
-				}
-				else if (runeWeight < weightLosses)
-				{
-					//sysApi.log(1, "On a trop perdu");
-					setWell(SmithMagic.well + weightLosses - runeWeight);
-				}
-				else
-				{
-					//sysApi.log(1, "On a perdu autant qu'on a gagné");
-				}
+				setWell(SmithMagic.well + weightLosses - _runeWeight);
 			}
 		}
 		
