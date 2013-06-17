@@ -4,6 +4,7 @@ package ui
 	import d2actions.ExchangeObjectUseInWorkshop;
 	import d2api.DataApi;
 	import d2api.JobsApi;
+	import d2api.PlayedCharacterApi;
 	import d2api.StorageApi;
 	import d2api.SystemApi;
 	import d2api.UiApi;
@@ -56,6 +57,7 @@ package ui
 		
 		// Variables Les Globales
 		public var _skill:Object;
+		public var _isCrafter:Boolean = false;
 		public var _inCooperatingMode:Boolean;
 		public var _runeWeight:Number = 0;
 		public var _wellModification:Boolean = false;
@@ -80,6 +82,7 @@ package ui
 		public var dataApi:DataApi;
 		public var jobsApi:JobsApi;
 		public var storageApi:StorageApi;
+		public var playerApi:PlayedCharacterApi;
 		
 		// Les boutons de fermeture et reouverture de l'interface
 		public var btn_close:ButtonContainer;
@@ -122,6 +125,7 @@ package ui
 			// On récupère l'id du métier de forgemagie argument du hook de la classe principale
 			_skill = jobsApi.getSkillFromId(parameterList.skillId as uint);
 			_inCooperatingMode = SmithMagic.inCooperatingMode;
+			_isCrafter = (parameterList.crafterInfos === undefined || parameterList.crafterInfos.id == playerApi.getPlayedCharacterInfo().id);
 			
 			// On enregistre les 3 slots de l'atelier
 			addHooksToSlot(slot_item);
