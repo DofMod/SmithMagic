@@ -1,6 +1,7 @@
 package ui 
 {
 	import d2actions.ExchangeObjectMove;
+	import d2actions.ExchangeObjectUseInWorkshop;
 	import d2api.DataApi;
 	import d2api.JobsApi;
 	import d2api.StorageApi;
@@ -17,6 +18,7 @@ package ui
 	import d2data.ItemWrapper;
 	import d2enums.ChatActivableChannelsEnum;
 	import d2enums.StatesEnum;
+	import d2hooks.BagListUpdate;
 	import d2hooks.DropEnd;
 	import d2hooks.DropStart;
 	import d2hooks.ExchangeCraftResult;
@@ -60,6 +62,7 @@ package ui
 		public var _waitingObject:ItemWrapper;
 		public var _dataOfEffectButtons:Dictionary = new Dictionary(false);
 		public var _dataOfAvailableRuneSlots:Dictionary = new Dictionary(false);
+		public var _bagItems:Array = null;
 		
 		public var _bubbleGreyUri:Object;
 		public var _bubbleGreenUri:Object;
@@ -147,6 +150,7 @@ package ui
 			sysApi.addHook(DropEnd, onDropEnd);
 			sysApi.addHook(ExchangeCraftResult, onExchangeCraftResult);
 			sysApi.addHook(TextInformation, onTextInformation);
+			sysApi.addHook(BagListUpdate, onBagListUpdate);
 			
 			uiApi.addComponentHook(btn_close, "onRelease");
 			uiApi.addComponentHook(btn_open, "onRelease");
@@ -337,6 +341,26 @@ package ui
 			else
 			{
 				sysApi.log(2, "Unknow exchange item removed: " + itemUid);
+			}
+		}
+		
+		/**
+		 * Track the bag item list.
+		 * 
+		 * @param	items	The list of items in the bag.
+		 * @param	modifiedByOwner	Is this update due to the owner ? (TODO : cofirmation ?)
+		 */
+		public function onBagListUpdate(items:Object, modifiedByOwner:Boolean):void
+		{
+			// Here we only want le item list send by the owned, not the actual bag item list.
+			if (modifiedByOwner)
+			{
+				_bagItems = new Array();
+				
+				for each (var item:ItemWrapper in items)
+				{
+					_bagItems.push(item);
+				}
 			}
 		}
 		
@@ -925,7 +949,14 @@ package ui
 				quantity = target.data.quantity;
 			}
 			
-			sysApi.sendAction(new ExchangeObjectMove(target.data.objectUID, -(quantity)));
+			if (isItemFromBag(target.data))
+			{
+				sysApi.sendAction(new ExchangeObjectUseInWorkshop(target.data.objectUID, -(quantity)));
+			}
+			else
+			{
+				sysApi.sendAction(new ExchangeObjectMove(target.data.objectUID, -(quantity)));
+			}
 		}
 		
 		private function fillDefaultSlot(item:ItemWrapper, quantity:int = -1):void
@@ -965,6 +996,29 @@ package ui
 			}
 			
 			sysApi.sendAction(new ExchangeObjectMove(item.objectUID, quantity));
+		}
+		
+		/**
+		 * Test if the item belong to the cooperative smithMagic bag.
+		 * 
+		 * @param	itemSought	The sought item
+		 * 
+		 * @return True if the item belong to the bag, else False.
+		 */
+		private function isItemFromBag(itemSought:ItemWrapper):Boolean
+		{
+			if (_bagItems)
+			{
+				for each (var item:ItemWrapper in _bagItems)
+				{
+					if (item.objectUID == itemSought.objectUID)
+					{
+						return true;
+					}
+				}
+			}
+			
+			return false;
 		}
 		
 		private function onValidQtyDropToSlot(quantity:Number):void
