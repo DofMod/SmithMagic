@@ -317,31 +317,18 @@ package ui
 		 */
 		public function onExchangeObjectRemoved(itemUid:uint):void
 		{
-			var item:ItemWrapper;
-			
-			if (_inCooperatingMode)
-			{
-				//item = dataApi.getItem(itemUid) as Item;
-				
-				return; // TODO Find why this conditional
-			}
-			else
-			{
-				item = dataApi.getItemFromUId(itemUid) as ItemWrapper;
-			}
-			
-			if (item.typeId == SMITHMAGIC_RUNE_ID || item.typeId == SMITHMAGIC_POTION_ID)
+			if (slot_rune.data && slot_rune.data.objectUID == itemUid)
 			{
 				slot_rune.data = null;
 				
 				updateRune(null);
 				updateItem(slot_item.data); // Update the list of runes
 			}
-			else if (item.id == SIGNATURE_RUNE_ID)
+			else if (slot_signature.data && slot_signature.data.objectUID == itemUid)
 			{
 				slot_signature.data = null;
 			}
-			else if (item.isEquipment)
+			else if (slot_item.data && slot_item.data.objectUID == itemUid)
 			{
 				slot_item.data = null;
 				
@@ -349,7 +336,7 @@ package ui
 			}
 			else
 			{
-				sysApi.log(2, "Unknow exchange removed item type : " + item);
+				sysApi.log(2, "Unknow exchange item removed: " + itemUid);
 			}
 		}
 		
