@@ -111,16 +111,16 @@ package
 		//::// Evenements
 		//:://////////////////////////////////////////////////////////
 		
-		private function onExchangeStartOkCraft(recettes:Object, skillId:uint, nbCases:uint):void
+		private function onExchangeStartOkCraft(recipes:Object, skillId:uint, nbCases:uint):void
 		{
 			inCooperatingMode = false;
-			uiApi.loadUi(uiName, uiInstanceName, skillId);
+			uiApi.loadUi(uiName, uiInstanceName, {skillId:skillId, recipes:recipes, nbCase:nbCases});
 		}
 		
-		private function onExchangeStartOkMultiCraft(skillId:int, recettes:Object, arg2:int, arg3:Object, arg4:Object):void
+		private function onExchangeStartOkMultiCraft(skillId:int, recipes:Object, nbCase:uint, crafterInfos:Object, curtomerInfos:Object):void
 		{
 			inCooperatingMode = true;
-			uiApi.loadUi(uiName, uiInstanceName, skillId);
+			uiApi.loadUi(uiName, uiInstanceName, {skillId:skillId, recipes:recipes, nbCase:nbCase, crafterInfos:crafterInfos, customerInfos:curtomerInfos});
 		}
 		
 		private function onExchangeLeave(param1:Boolean):void

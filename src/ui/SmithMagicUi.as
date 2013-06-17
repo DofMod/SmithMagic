@@ -111,7 +111,7 @@ package ui
 		//::// Méthodes publiques
 		//::///////////////////////////////////////////////////////////
 		
-		public function main(skillId:Object):void
+		public function main(parameterList:Object):void
 		{
 			_bubbleGreyUri = uiApi.createUri((uiApi.me().getConstant("assets") + "state_0"));
 			_bubbleGreenUri = uiApi.createUri((uiApi.me().getConstant("assets") + "state_3"));
@@ -120,7 +120,7 @@ package ui
 			_bubbleBlueUri = uiApi.createUri((uiApi.me().getConstant("assets") + "state_7"));
 			
 			// On récupère l'id du métier de forgemagie argument du hook de la classe principale
-			_skill = jobsApi.getSkillFromId(skillId as uint);
+			_skill = jobsApi.getSkillFromId(parameterList.skillId as uint);
 			_inCooperatingMode = SmithMagic.inCooperatingMode;
 			
 			// On enregistre les 3 slots de l'atelier
