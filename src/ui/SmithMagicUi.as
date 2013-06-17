@@ -251,7 +251,7 @@ package ui
 		public function onExchangeObjectModified(item:ItemWrapper):void
 		{
 			// The number of runes in the exchange has been modified
-			if (slot_rune.data.objectUID == item.objectUID)
+			if (slot_rune.data && slot_rune.data.objectUID == item.objectUID)
 			{
 				slot_rune.data = item;
 				
@@ -272,7 +272,7 @@ package ui
 		public function onObjectModified(item:ItemWrapper):void
 		{
 			// Forgeable item modified
-			if (slot_item.data.objectUID == item.objectUID)
+			if (slot_item.data && slot_item.data.objectUID == item.objectUID)
 			{
 				slot_item.data = item;
 				
