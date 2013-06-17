@@ -248,7 +248,7 @@ package ui
 		}
 		
 		/**
-		 * An object in the exchange has been modified (quantity ?).
+		 * An object in the exchange has been modified.
 		 * 
 		 * @param	item
 		 */
@@ -262,9 +262,15 @@ package ui
 				updateRune(slot_rune.data);
 				updateItem(slot_item.data); // Update the list of runes
 			}
+			else if (slot_item.data && slot_item.data.objectUID == item.objectUID)
+			{
+				slot_item.data = item;
+				
+				updateItem(slot_item.data);
+			}
 			else
 			{
-				sysApi.log(2, "The exchange object modified is not the rune ? (" + item + ")");
+				sysApi.log(2, "Unknow modified item ? (" + item + ")");
 			}
 		}
 		
