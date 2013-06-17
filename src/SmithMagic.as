@@ -102,7 +102,6 @@ package
 			runesWeight[effectIdEnum.AP] = 100;
 			
 			// Durant la session de jeu, à chaque fois que l'un d'eux sera envoyé par dofus,
-			//sysApi.addHook(StorageModChanged, onStorageModChanged);
 			sysApi.addHook(ExchangeStartOkCraft, onExchangeStartOkCraft);
 			sysApi.addHook(ExchangeStartOkMultiCraft, onExchangeStartOkMultiCraft);
 			sysApi.addHook(ExchangeLeave, onExchangeLeave);
@@ -111,14 +110,6 @@ package
 		//::///////////////////////////////////////////////////////////
 		//::// Evenements
 		//:://////////////////////////////////////////////////////////
-		
-		private function onStorageModChanged(mode:int):void
-		{
-			if (mode == 0)
-			{
-				uiApi.unloadUi(uiInstanceName);
-			}
-		}
 		
 		private function onExchangeStartOkCraft(recettes:Object, skillId:uint, nbCases:uint):void
 		{
