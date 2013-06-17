@@ -122,28 +122,33 @@ package ui
 			_bubbleRedUri = uiApi.createUri((uiApi.me().getConstant("assets") + "state_6"));
 			_bubbleBlueUri = uiApi.createUri((uiApi.me().getConstant("assets") + "state_7"));
 			
-			// On récupère l'id du métier de forgemagie argument du hook de la classe principale
 			_skill = jobsApi.getSkillFromId(parameterList.skillId as uint);
 			_inCooperatingMode = SmithMagic.inCooperatingMode;
 			_isCrafter = (parameterList.crafterInfos === undefined || parameterList.crafterInfos.id == playerApi.getPlayedCharacterInfo().id);
 			
-			// On enregistre les 3 slots de l'atelier
-			addHooksToSlot(slot_item);
-			addHooksToSlot(slot_rune);
-			addHooksToSlot(slot_signature);
+			for each (var slot:Slot in [slot_item, slot_rune, slot_signature])
+			{
+				addHooksToSlot(slot);
+				
+				if (_isCrafter)
+				{
+					slot_item.dropValidator = dropValidator;
+					slot_item.processDrop = processDrop;
+				}
+				else
+				{
+					slot.allowDrag = false;
+					slot.softDisabled = true;
+					slot.highlightTexture = null;
+					slot.selectedTexture = null;
+					slot.acceptDragTexture = null;
+					slot.refuseDragTexture = null;
+				}
+			}
 			
-			// On vide la Grid
 			updateItem(null);
 			
-			// On fixe la valeur du puits
 			setWell(SmithMagic.well);
-			
-			slot_item.dropValidator = dropValidator;
-			slot_rune.dropValidator = dropValidator;
-			slot_signature.dropValidator = dropValidator;
-			slot_item.processDrop = processDrop;
-			slot_rune.processDrop = processDrop;
-			slot_signature.processDrop = processDrop;
 			
 			sysApi.addHook(ObjectModified, onObjectModified);
 			sysApi.addHook(ExchangeObjectAdded, onExchangeObjectAdded);
