@@ -81,6 +81,7 @@ package ui
 		// Les boutons de fermeture et reouverture de l'interface
 		public var btn_close:ButtonContainer;
 		public var btn_open:ButtonContainer;
+		public var btn_open_cooperative:ButtonContainer;
 		public var btn_wellInput:ButtonContainer;
 		
 		// Les Labels de l'interface
@@ -149,7 +150,10 @@ package ui
 			
 			uiApi.addComponentHook(btn_close, "onRelease");
 			uiApi.addComponentHook(btn_open, "onRelease");
+			uiApi.addComponentHook(btn_open_cooperative, "onRelease");
 			uiApi.addComponentHook(btn_wellInput, "onRelease");
+			
+			displayOpenButton(_inCooperatingMode);
 		}
 		
 		//::///////////////////////////////////////////////////////////
@@ -495,6 +499,7 @@ package ui
 					break;
 				
 				case btn_open:
+				case btn_open_cooperative:
 					ctr_concealable.visible = true;
 					
 					break;
@@ -711,6 +716,12 @@ package ui
 		//::///////////////////////////////////////////////////////////
 		//::// Méthodes Privées
 		//::///////////////////////////////////////////////////////////
+		
+		private function displayOpenButton(inCooperativeMode:Boolean):void
+		{
+			btn_open.visible = !inCooperativeMode;
+			btn_open_cooperative.visible = inCooperativeMode;
+		}
 		
 		private function getSigneBonus(effect:Object):int
 		{

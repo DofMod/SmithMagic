@@ -39,6 +39,21 @@
 			<uri>[local.assets]btn_PlusMinus</uri>
 			<selected>true</selected>
 		</iconButton>
+		
+		<iconButton name="btn_open_cooperative">
+			<Anchors>
+				<Anchor>
+					<AbsDimension x="443"
+								  y="-29" />
+				</Anchor>
+			</Anchors>
+			<Size>
+				<AbsDimension x="49"
+							  y="36" />
+			</Size>
+			<uri>[local.assets]btn_PlusMinus</uri>
+			<selected>true</selected>
+		</iconButton>
 
 		<Container name="ctr_concealable">
 			<mouseEnabled>true</mouseEnabled>
