@@ -20,7 +20,7 @@
 		<Anchors>
 			<Anchor>
 				<AbsDimension x="419"
-							  y="114" />
+							  y="84" />
 			</Anchor>
 		</Anchors>
 
@@ -29,7 +29,7 @@
 			<Anchors>
 				<Anchor>
 					<AbsDimension x="443"
-								  y="51" />
+								  y="81" />
 				</Anchor>
 			</Anchors>
 			<Size>
@@ -44,7 +44,7 @@
 			<Anchors>
 				<Anchor>
 					<AbsDimension x="443"
-								  y="-29" />
+								  y="0" />
 				</Anchor>
 			</Anchors>
 			<Size>
@@ -63,7 +63,7 @@
 			<Texture name="tx_bg">
 				<Size>
 					<AbsDimension x="529"
-								  y="605" />
+								  y="635" />
 				</Size>
 				<uri>[local.assets]tx_generalBackgroundWithTitle</uri>
 				<autoGrid>true</autoGrid>
@@ -124,7 +124,7 @@
 				<Anchors>
 					<Anchor>
 						<AbsDimension x="40"
-									  y="560" />
+									  y="590" />
 					</Anchor>
 				</Anchors>
 				<Size>
@@ -140,7 +140,7 @@
 				<Anchors>
 					<Anchor>
 						<AbsDimension x="415"
-									  y="560" />
+									  y="588" />
 					</Anchor>
 				</Anchors>
 				<Size>
@@ -155,7 +155,7 @@
 				<Anchors>
 					<Anchor>
 						<AbsDimension x="356"
-									  y="560" />
+									  y="590" />
 					</Anchor>
 				</Anchors>
 				<Size>
@@ -284,7 +284,7 @@
 				</Anchors>
 				<Size>
 					<AbsDimension x="495"
-								  y="377" />
+								  y="406" />
 				</Size>
 				<rendererName>InlineXmlGridRender</rendererName>
 				<verticalScrollbarCss>[local.css]scrollBar.css</verticalScrollbarCss>
@@ -447,7 +447,7 @@
 				</Anchors>
 				<Size>
 					<AbsDimension x="1"
-								  y="377" />
+								  y="406" />
 				</Size>
 				<bgColor>0x808080</bgColor>
 			</Container>
@@ -462,7 +462,7 @@
 				</Anchors>
 				<Size>
 					<AbsDimension x="1"
-								  y="377" />
+								  y="406" />
 				</Size>
 				<bgColor>0x808080</bgColor>
 			</Container>
@@ -477,7 +477,7 @@
 				</Anchors>
 				<Size>
 					<AbsDimension x="1"
-								  y="377" />
+								  y="406" />
 				</Size>
 				<bgColor>0x808080</bgColor>
 			</Container>
@@ -492,7 +492,7 @@
 				</Anchors>
 				<Size>
 					<AbsDimension x="1"
-								  y="377" />
+								  y="406" />
 				</Size>
 				<bgColor>0x808080</bgColor>
 			</Container>
@@ -507,7 +507,7 @@
 				</Anchors>
 				<Size>
 					<AbsDimension x="1"
-								  y="377" />
+								  y="406" />
 				</Size>
 				<bgColor>0x808080</bgColor>
 			</Container>
@@ -522,7 +522,7 @@
 				</Anchors>
 				<Size>
 					<AbsDimension x="1"
-								  y="377" />
+								  y="406" />
 				</Size>
 				<bgColor>0x808080</bgColor>
 			</Container>
