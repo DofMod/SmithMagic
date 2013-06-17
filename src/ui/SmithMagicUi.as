@@ -402,7 +402,7 @@ package ui
 				case slot_signature:
 					if (target.data)
 					{
-						unfillSlot(target, 1);
+						unfillSlot(target as Slot, 1);
 					}
 					
 					break;
@@ -942,23 +942,38 @@ package ui
 			}
 		}
 		
-		private function unfillSlot(target:Object, quantity:int = -1):void
+		/**
+		 * Return the slot's item in the right inventory.
+		 * 
+		 * @param	slot	The slot to empty.
+		 * @param	quantity	The quantity to return. If  -1, empty the slot.
+		 */
+		private function unfillSlot(slot:Slot, quantity:int = -1):void
 		{
 			if (quantity == -1)
 			{
-				quantity = target.data.quantity;
+				quantity = slot.data.quantity;
 			}
 			
-			if (isItemFromBag(target.data))
+			if (isItemFromBag(slot.data))
 			{
-				sysApi.sendAction(new ExchangeObjectUseInWorkshop(target.data.objectUID, -(quantity)));
+				sysApi.sendAction(new ExchangeObjectUseInWorkshop(slot.data.objectUID, -(quantity)));
 			}
 			else
 			{
-				sysApi.sendAction(new ExchangeObjectMove(target.data.objectUID, -(quantity)));
+				sysApi.sendAction(new ExchangeObjectMove(slot.data.objectUID, -(quantity)));
 			}
 		}
 		
+		/**
+		 * Find the the right slot associed with the item to exchange, then add
+		 * this item to the exchange.
+		 * 
+		 * @param	item	The item to exchange.
+		 * @param	quantity	The quantity to exchange. If -1, select the
+		 * 				maxium quantity. (1 for the equipment and the signature
+		 * 				rune, all for the others runes).
+		 */
 		private function fillDefaultSlot(item:ItemWrapper, quantity:int = -1):void
 		{
 			for each (var slot:Slot in [slot_item, slot_rune, slot_signature])
@@ -988,11 +1003,18 @@ package ui
 			}
 		}
 		
-		private function fillSlot(target:Slot, item:ItemWrapper, quantity:int):void
+		/**
+		 * Tell the client to add the item to the exchange.
+		 * 
+		 * @param	slot	The destination slot of the item.
+		 * @param	item	The item to exchange.
+		 * @param	quantity	The quantity to exchange.
+		 */
+		private function fillSlot(slot:Slot, item:ItemWrapper, quantity:int):void
 		{
-			if ((target.data != null) && ((target == slot_item) || (target == slot_signature) || ((target == slot_rune) && (target.data.objectGID != item.objectGID))))
+			if ((slot.data != null) && ((slot == slot_item) || (slot == slot_signature) || ((slot == slot_rune) && (slot.data.objectGID != item.objectGID))))
 			{
-				unfillSlot(target, -1);
+				unfillSlot(slot, -1);
 			}
 			
 			sysApi.sendAction(new ExchangeObjectMove(item.objectUID, quantity));
