@@ -363,12 +363,12 @@ package ui
 		 * Track the bag item list.
 		 * 
 		 * @param	items	The list of items in the bag.
-		 * @param	modifiedByOwner	Is this update due to the owner ? (TODO : cofirmation ?)
+		 * @param	modifiedByRemotePlayer	Is this update due to the remove player ?
 		 */
-		public function onBagListUpdate(items:Object, modifiedByOwner:Boolean):void
+		public function onBagListUpdate(items:Object, modifiedByRemotePlayer:Boolean):void
 		{
-			// Here we only want le item list send by the owned, not the actual bag item list.
-			if (modifiedByOwner)
+			// Here we only want le item list send by the remote player, not the actual bag item list.
+			if (modifiedByRemotePlayer)
 			{
 				_bagItems = new Array();
 				
