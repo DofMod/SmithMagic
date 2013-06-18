@@ -30,6 +30,7 @@ package ui
 	import d2hooks.MouseCtrlDoubleClick;
 	import d2hooks.ObjectModified;
 	import d2hooks.TextInformation;
+	import enum.effectIdEnum;
 	import flash.geom.Rectangle;
 	import flash.utils.Dictionary;
 	
@@ -222,7 +223,7 @@ package ui
 			{
 				if (oldEffect is EffectInstanceInteger)
 				{
-					effects[oldEffect.effectId] = ({oldValue : (getSigneBonus(oldEffect) * oldEffect.value), newValue : false, id : getIdEffectMalusToBonus(oldEffect.effectId) });
+					effects[oldEffect.effectId] = ({oldValue : (getSigneBonus(oldEffect) * oldEffect.value), newValue : false, id : effectIdEnum.getEffectIdFromMalusToBonus(oldEffect.effectId) });
 				}
 			}
 			
@@ -237,7 +238,7 @@ package ui
 					}
 					else
 					{
-						effects[newEffect.effectId] = ({oldValue : false, newValue : (getSigneBonus(newEffect) * newEffect.value), id : getIdEffectMalusToBonus(newEffect.effectId)});
+						effects[newEffect.effectId] = ({oldValue : false, newValue : (getSigneBonus(newEffect) * newEffect.value), id : effectIdEnum.getEffectIdFromMalusToBonus(newEffect.effectId)});
 					}
 				}
 			}
@@ -490,7 +491,7 @@ package ui
 					if (target.name.search("btn_jet") != -1 && _dataOfEffectButtons[target] !== null)
 					{
 						data = _dataOfEffectButtons[target].effect as EffectInstanceInteger;
-						effectWeight = data.value * SmithMagic.runesWeight[getIdEffectMalusToBonus(data.effectId)];
+						effectWeight = data.value * SmithMagic.runesWeight[effectIdEnum.getEffectIdFromMalusToBonus(data.effectId)];
 						
 						toolTip = uiApi.textTooltipInfo("Poids de l'effet : " + effectWeight);
 						uiApi.showTooltip(toolTip, target, false, "standard", 7, 1, 3);
@@ -750,7 +751,7 @@ package ui
 				{
 					for each (var effet:EffectInstanceInteger in item.effects)
 					{
-						if (effet.effectId == getIdEffectMalusToBonus(effect.effectId))
+						if (effet.effectId == effect.effectId)
 						{
 							//sysApi.log(16, "effect.description : " + effet.description);
 							if (item.name.search("Rune Pa") != -1)
@@ -1197,151 +1198,6 @@ package ui
 					break;
 				}
 			}
-		}
-		
-		/**
-		 * Converte malus effect id to the coesponding bonus effect id.
-		 * 
-		 * @param	id	Identifier of the malus effect.
-		 * 
-		 * @return	The identifier of the bonus effect.
-		 */
-		private function getIdEffectMalusToBonus(id:uint):uint
-		{
-			switch (id)
-			{
-				case 145: // + Dommage
-					id = 112;
-					break;
-				case 423: // + Dommage Terre
-					id = 422;
-					break;
-				case 431: // + Dommage Neutre
-					id = 430;
-					break;
-				case 425: // + Dommage Feu
-					id = 424;
-					break;
-				case 429: // + Dommage Air
-					id = 428;
-					break;
-				case 427: // + Dommage Eau
-					id = 426;
-					break;
-				case 157: // Force
-					id = 118;
-					break;
-				case 155: // Intelligence
-					id = 126;
-					break;
-				case 152: // Chance
-					id = 123;
-					break;
-				case 154: // Agilité
-					id = 119;
-					break;
-				case 153: // Vitalité
-					id = 125;
-					break;
-				case 156: // Sagesse
-					id = 124;
-					break;
-				case 175: // Initiative
-					id = 174;
-					break;
-				case 245: // Résistance (fixe) Terre
-					id = 240;
-					break;
-				case 248: // Résistance (fixe) Feu
-					id = 243;
-					break;
-				case 249: // Résistance (fixe) Neutre
-					id = 244;
-					break;
-				case 247: // Résistance (fixe) Air
-					id = 242;
-					break;
-				case 246: // Résistance (fixe) Eau
-					id = 241;
-					break;
-				case 215: // Résistance (%) Terre
-					id = 210;
-					break;
-				case 218: // Résistance (%) Feu
-					id = 213;
-					break;
-				case 219: // Résistance (%) Neutre
-					id = 214;
-					break;
-				case 217: // Résistance (%) Air
-					id = 212;
-					break;
-				case 216: // Résistance (%) Eau
-					id = 211;
-					break;
-				case 421: // Résitance Critiques
-					id = 420;
-					break;
-				case 417: // Résistance Poussée
-					id = 416;
-					break;
-				case 162: // Esquive PA
-					id = 160;
-					break;
-				case 163: // Esquive PM
-					id = 161;
-					break;
-				case 159: // Pods
-					id = 158;
-					break;
-				case 177: // Prospection
-					id = 176;
-					break;
-				case 186: // % Dommages
-					id = 138;
-					break;
-				//case 226: // % Dommages Piège
-					//id = 226;
-					//break;
-				//case 225: // + Dommages Pièges
-					//id = 225;
-					//break;
-				case 755: // Tacle
-					id = 753;
-					break;
-				case 754: // Fuite
-					id = 752;
-					break;
-				case 411: // Retrait PA
-					id = 410;
-					break;
-				case 413: // Retrait PM
-					id = 412;
-					break;
-				case 179: // Soin
-					id = 178;
-					break;
-				case 171: // CC
-					id = 115;
-					break;
-				//case 182: // Créature invocable
-					//id = 182;
-					//break;
-				//case 220: // Renvois de dommage
-					//id = 220;
-					//break;
-				case 116: // Portée
-					id = 117;
-					break;
-				case 168: // PA
-					id = 111;
-					break;
-				case 169: // PM
-					id = 128;
-					break;
-			}
-			
-			return id;
 		}
 	}	
 }
