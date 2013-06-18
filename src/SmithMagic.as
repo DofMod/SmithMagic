@@ -13,7 +13,8 @@ package
 	import ui.SmithMagicUi;
 	
 	/**
-	 * ...
+	 * Main module class (Entry point).
+	 * 
 	 * @author ExiTeD, Relena
 	 */
 	
@@ -23,24 +24,26 @@ package
 		//::// Variables
 		//::///////////////////////////////////////////////////////////
 		
+		// Include ui source files
 		private var includes:Array = [SmithMagicUi];
 		
+		// Some constants
 		private static const uiName:String = "smithmagic";
 		private static const uiInstanceName:String = "exited_smithmagic";
 		
-		// Déclaration des API dont on veut se servir dans cette classe.
+		// APIs
 		public var sysApi:SystemApi;
 		public var uiApi:UiApi;
 		public var jobsApi:JobsApi;
 		
-		// Déclaration des variables
+		// Some globals
 		public static var well:Number = 0;
 		public static var skill:Skill = null;
 		public static var runesWeight:Dictionary = new Dictionary();
 		public static var inCooperatingMode:Boolean;
 		
 		//::///////////////////////////////////////////////////////////
-		//::// Méthodes publiques
+		//::// Public methods
 		//::///////////////////////////////////////////////////////////
 		
 		public function main():void
@@ -105,7 +108,6 @@ package
 			runesWeight[effectIdEnum.MP] = 90;
 			runesWeight[effectIdEnum.AP] = 100;
 			
-			// Durant la session de jeu, à chaque fois que l'un d'eux sera envoyé par dofus,
 			sysApi.addHook(ExchangeStartOkCraft, onExchangeStartOkCraft);
 			sysApi.addHook(ExchangeStartOkMultiCraft, onExchangeStartOkMultiCraft);
 			sysApi.addHook(ExchangeLeave, onExchangeLeave);
@@ -115,6 +117,13 @@ package
 		//::// Evenements
 		//:://////////////////////////////////////////////////////////
 		
+		/**
+		 * Callback called when a craft start.
+		 * 
+		 * @param	recipes	The recipes list.
+		 * @param	skillId	The skill identifier.
+		 * @param	nbCases	The maximum number of case that may be used.
+		 */
 		private function onExchangeStartOkCraft(recipes:Object, skillId:uint, nbCases:uint):void
 		{
 			skill = jobsApi.getSkillFromId(skillId as uint) as Skill;
@@ -127,7 +136,16 @@ package
 			uiApi.loadUi(uiName, uiInstanceName, {skillId:skillId, recipes:recipes, nbCase:nbCases});
 		}
 		
-		private function onExchangeStartOkMultiCraft(skillId:int, recipes:Object, nbCase:uint, crafterInfos:Object, curtomerInfos:Object):void
+		/**
+		 * Callback called when a cooperative craft start.
+		 * 
+		 * @param	skillId	The skill identifier.
+		 * @param	recipes	The recipes list.
+		 * @param	nbCase	The maximum number of case that amy by used.
+		 * @param	crafterInfos	The crafter informations.
+		 * @param	curtomerInfos	The customer informations.
+		 */
+		private function onExchangeStartOkMultiCraft(skillId:int, recipes:Object, nbCase:uint, crafterInfos:Object, customerInfos:Object):void
 		{
 			skill = jobsApi.getSkillFromId(skillId as uint) as Skill;
 			if (!skill || !skill.isForgemagus)
@@ -136,10 +154,15 @@ package
 			}
 			
 			inCooperatingMode = true;
-			uiApi.loadUi(uiName, uiInstanceName, {skillId:skillId, recipes:recipes, nbCase:nbCase, crafterInfos:crafterInfos, customerInfos:curtomerInfos});
+			uiApi.loadUi(uiName, uiInstanceName, {skillId:skillId, recipes:recipes, nbCase:nbCase, crafterInfos:crafterInfos, customerInfos:customerInfos});
 		}
 		
-		private function onExchangeLeave(param1:Boolean):void
+		/**
+		 * Callback called when a we leave an exchange.
+		 * 
+		 * @param	success	Is the exchange successful.
+		 */
+		private function onExchangeLeave(success:Boolean):void
 		{
 			if (uiApi.getUi(uiInstanceName))
 			{
