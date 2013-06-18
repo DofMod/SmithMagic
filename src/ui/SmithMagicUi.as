@@ -209,6 +209,10 @@ package ui
 		 */
 		public function onExchangeCraftResult(resultId:int, item:ItemWrapper):void
 		{
+			if (item == null)
+			{
+				return;
+			}
 			
 			var oldItem:ItemWrapper = slot_item.data;
 			var effects:Dictionary = new Dictionary();
