@@ -1,7 +1,9 @@
 package
 {
+	import d2api.JobsApi;
 	import d2api.SystemApi;
 	import d2api.UiApi;
+	import d2data.Skill;
 	import d2hooks.ExchangeLeave;
 	import d2hooks.ExchangeStartOkCraft;
 	import d2hooks.ExchangeStartOkMultiCraft;
@@ -29,9 +31,11 @@ package
 		// Déclaration des API dont on veut se servir dans cette classe.
 		public var sysApi:SystemApi;
 		public var uiApi:UiApi;
+		public var jobsApi:JobsApi;
 		
 		// Déclaration des variables
 		public static var well:Number = 0;
+		public static var skill:Skill = null;
 		public static var runesWeight:Dictionary = new Dictionary();
 		public static var inCooperatingMode:Boolean;
 		
@@ -113,12 +117,24 @@ package
 		
 		private function onExchangeStartOkCraft(recipes:Object, skillId:uint, nbCases:uint):void
 		{
+			skill = jobsApi.getSkillFromId(skillId as uint) as Skill;
+			if (!skill || !skill.isForgemagus)
+			{
+				return;
+			}
+			
 			inCooperatingMode = false;
 			uiApi.loadUi(uiName, uiInstanceName, {skillId:skillId, recipes:recipes, nbCase:nbCases});
 		}
 		
 		private function onExchangeStartOkMultiCraft(skillId:int, recipes:Object, nbCase:uint, crafterInfos:Object, curtomerInfos:Object):void
 		{
+			skill = jobsApi.getSkillFromId(skillId as uint) as Skill;
+			if (!skill || !skill.isForgemagus)
+			{
+				return;
+			}
+			
 			inCooperatingMode = true;
 			uiApi.loadUi(uiName, uiInstanceName, {skillId:skillId, recipes:recipes, nbCase:nbCase, crafterInfos:crafterInfos, customerInfos:curtomerInfos});
 		}

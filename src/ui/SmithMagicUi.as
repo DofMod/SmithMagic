@@ -3,7 +3,6 @@ package ui
 	import d2actions.ExchangeObjectMove;
 	import d2actions.ExchangeObjectUseInWorkshop;
 	import d2api.DataApi;
-	import d2api.JobsApi;
 	import d2api.PlayedCharacterApi;
 	import d2api.StorageApi;
 	import d2api.SystemApi;
@@ -56,7 +55,6 @@ package ui
 		public static const SKILL_TYPE_BAG:int = 167;
 		
 		// Variables Les Globales
-		public var _skill:Object;
 		public var _isCrafter:Boolean = false;
 		public var _inCooperatingMode:Boolean;
 		public var _runeWeight:Number = 0;
@@ -80,7 +78,6 @@ package ui
 		public var sysApi:SystemApi;
 		public var uiApi:UiApi;
 		public var dataApi:DataApi;
-		public var jobsApi:JobsApi;
 		public var storageApi:StorageApi;
 		public var playerApi:PlayedCharacterApi;
 		
@@ -122,7 +119,6 @@ package ui
 			_bubbleRedUri = uiApi.createUri((uiApi.me().getConstant("assets") + "state_6"));
 			_bubbleBlueUri = uiApi.createUri((uiApi.me().getConstant("assets") + "state_7"));
 			
-			_skill = jobsApi.getSkillFromId(parameterList.skillId as uint);
 			_inCooperatingMode = SmithMagic.inCooperatingMode;
 			_isCrafter = (parameterList.crafterInfos === undefined || parameterList.crafterInfos.id == playerApi.getPlayedCharacterInfo().id);
 			
@@ -888,7 +884,7 @@ package ui
 		 */
 		private function isValidSlot(slot:Slot, item:ItemWrapper):Boolean
 		{
-			if (!_skill)
+			if (!SmithMagic.skill)
 			{
 				return false;
 			}
@@ -896,7 +892,7 @@ package ui
 			switch (slot)
 			{
 				case slot_item:
-					if (_skill.modifiableItemType != item.typeId)
+					if (SmithMagic.skill.modifiableItemType != item.typeId)
 					{
 						return false;
 					}
