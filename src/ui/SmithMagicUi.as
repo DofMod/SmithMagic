@@ -34,7 +34,8 @@ package ui
 	import flash.utils.Dictionary;
 	
 	/**
-	 * ...
+	 * Main ui class.
+	 * 
 	 * @author ExiTeD, Relena
 	 */
 	
@@ -44,7 +45,7 @@ package ui
 		//::// Variables
 		//::///////////////////////////////////////////////////////////
 		
-		// Variables Constantes
+		// Les constantes
 		private static const SIGNATURE_RUNE_ID:int = 7508;
 		private static const SMITHMAGIC_RUNE_ID:int = 78;
 		private static const SMITHMAGIC_POTION_ID:int = 26;
@@ -56,7 +57,7 @@ package ui
 		private static const SKILL_TYPE_CLOAK:int = 165;
 		private static const SKILL_TYPE_BAG:int = 167;
 		
-		// Variables Les Globales
+		// Les variables globales
 		private var _isCrafter:Boolean = false;
 		private var _inCooperatingMode:Boolean;
 		private var _runeWeight:Number = 0;
@@ -76,6 +77,7 @@ package ui
 		[Module(name="Ankama_Common")]
 		public var modCommon:Object;
 		
+		// Utilisation du modContextMenu pour les menus contextuel
 		[Module (name="Ankama_ContextMenu")]
 		public var modContextMenu : Object;
 		
@@ -175,10 +177,18 @@ package ui
 		}
 		
 		//::///////////////////////////////////////////////////////////
-		//::// Evenements
+		//::// Events
 		//::///////////////////////////////////////////////////////////	
 		
-		public function onTextInformation(text:String, channelId:int, param3:Number = 0, param4:Boolean = false):void
+		/**
+		 * Callback called we recieve chat message.
+		 * 
+		 * @param	text	Content of the message.
+		 * @param	channelId	Id of this message's channel.
+		 * @param	timestamp	The message reception date.
+		 * @param	saveMessage	Do we need to save the message now ? (false = already done).
+		 */
+		public function onTextInformation(text:String, channelId:int, timestamp:Number = 0, saveMessage:Boolean = false):void
 		{
 			if (channelId != ChatActivableChannelsEnum.PSEUDO_CHANNEL_INFO)
 			{
@@ -191,6 +201,12 @@ package ui
 			lbl_result.text = "Résultat : ";
 		}
 		
+		/**
+		 * Callback called when we get the result of a craft.
+		 * 
+		 * @param	resultId	Is the craft successful ?
+		 * @param	item	The result item.
+		 */
 		public function onExchangeCraftResult(resultId:int, item:ItemWrapper):void
 		{
 			
@@ -762,18 +778,29 @@ package ui
 		}
 				
 		//::///////////////////////////////////////////////////////////
-		//::// Méthodes Privées
+		//::// Private methods
 		//::///////////////////////////////////////////////////////////
 		
+		/**
+		 * Display the right open button.
+		 * 
+		 * @param	inCooperativeMode	Are we in cooperative mode ?
+		 */
 		private function displayOpenButton(inCooperativeMode:Boolean):void
 		{
 			btn_open.visible = !inCooperativeMode;
 			btn_open_cooperative.visible = inCooperativeMode;
 		}
 		
+		/**
+		 * Get the sign of the effect.
+		 * 
+		 * @param	effect	The effect.
+		 * 
+		 * @return	1 if bonus, -1 if malus.
+		 */
 		private function getSigneBonus(effect:Object):int
 		{
-			// On affecte le style css en fonction du type de jet (malus, bonus ou pas de signe)
 			if (effect.description.charAt(0) == "-")
 			{
 				return -1;
@@ -1110,6 +1137,11 @@ package ui
 			return false;
 		}
 		
+		/**
+		 * Callback called when we valid the quantity selector popup.
+		 * 
+		 * @param	quantity	The nex quantity of item so add.
+		 */
 		private function onValidQtyDropToSlot(quantity:Number):void
 		{
 			fillDefaultSlot(_waitingObject, quantity);
@@ -1159,6 +1191,13 @@ package ui
 			}
 		}
 		
+		/**
+		 * Converte malus effect id to the coesponding bonus effect id.
+		 * 
+		 * @param	id	Identifier of the malus effect.
+		 * 
+		 * @return	The identifier of the bonus effect.
+		 */
 		private function getIdEffectMalusToBonus(id:uint):uint
 		{
 			switch (id)
