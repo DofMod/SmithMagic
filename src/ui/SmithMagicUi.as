@@ -499,7 +499,7 @@ package ui
 					
 					if (target.name.search("btn_jet") != -1 && _dataOfEffectButtons[target] !== null)
 					{
-						data = _dataOfEffectButtons[target].effect as EffectInstanceInteger;
+						data = _dataOfEffectButtons[target] as EffectInstanceInteger;
 						effectWeight = data.value * SmithMagic.runesWeight[EffectIdEnum.getEffectIdFromMalusToBonus(data.effectId)];
 						
 						toolTip = uiApi.textTooltipInfo("Poids de l'effet : " + effectWeight);
@@ -621,23 +621,159 @@ package ui
 		/**
 		 * Effects grid values manager.
 		 * 
-		 * @param	data
+		 * @param	effect
 		 * @param	componentsRef
 		 * @param	selected
 		 */
-		public function updateGrid(data:*, componentsRef:*, selected:Boolean):void
+		public function updateGrid(effect:EffectInstanceInteger, componentsRef:*, selected:Boolean):void
 		{
-			_dataOfEffectButtons[componentsRef.btn_jet] = data;
+			// Reset globals data tracker
+			_dataOfEffectButtons[componentsRef.btn_jet] = effect;
 			_dataOfAvailableRuneSlots[componentsRef.slot_pa] = null;
 			_dataOfAvailableRuneSlots[componentsRef.slot_ra] = null;
 			_dataOfAvailableRuneSlots[componentsRef.slot_simple] = null;
 			
-			if (data == null)
+			// If empty line
+			if (effect == null)
 			{
 				componentsRef.ctr_jet.visible = false;
 				
 				return;
 			}
+			
+			// Find the associated effect dice (jet min, jet max)
+			var effectDice:EffectInstanceDice = null;
+			var effectIsExotique:Boolean = true;
+			
+			var bonusEffectId:int = EffectIdEnum.getEffectIdFromMalusToBonus(effect.effectId);
+			for each (effectDice in slot_item.data.possibleEffects)
+			{
+				if (EffectIdEnum.getEffectIdFromMalusToBonus(effectDice.effectId) == bonusEffectId)
+				{
+					effectIsExotique = false;
+					
+					break;
+				}
+			}
+			
+			if (effectIsExotique)
+			{
+				componentsRef.lbl_jetMin.text = "";
+				componentsRef.lbl_jetMax.text = "";
+				componentsRef.lbl_jet.text = effect.description;
+				
+				componentsRef.lbl_jet.cssClass = "exotic";
+				
+				componentsRef.tx_bulle.uri = _bubbleBlueUri;
+			}
+			else
+			{
+				var jetMin:int;
+				var jetMax:int;
+				var jetValue:int;
+				
+				var isEffectNegative:Boolean = EffectIdEnum.isEffectNegative(effect.effectId);
+				var isEffectDiceNegative:Boolean = EffectIdEnum.isEffectNegative(effectDice.effectId);
+				
+				// Get and set jet min & jet max & description.
+				if (isEffectDiceNegative)
+				{
+					jetMax = -(effectDice.diceNum);
+					jetMin = (effectDice.diceSide) ? -(effectDice.diceSide) : jetMax;
+				}
+				else
+				{
+					jetMin = effectDice.diceNum;
+					jetMax = (effectDice.diceSide) ? effectDice.diceSide : jetMin;
+				}
+				
+				componentsRef.lbl_jetMin.text = jetMin;
+				componentsRef.lbl_jetMax.text = jetMax;
+				componentsRef.lbl_jet.text = effect.description;
+				
+				// Get actual jet + Set the effect style
+				if (effect.value == 0)
+				{
+					componentsRef.lbl_jet.cssClass = "normal";
+					
+					jetValue = 0;
+				}
+				else if (isEffectNegative != isEffectDiceNegative)
+				{
+					componentsRef.lbl_jet.cssClass = "overmax";
+					
+					jetValue = effect.value;
+				}
+				else if (isEffectNegative)
+				{
+					componentsRef.lbl_jet.cssClass = "malus";
+					
+					jetValue = -(effect.value);
+				}
+				else
+				{
+					componentsRef.lbl_jet.cssClass = "bonus";
+					
+					jetValue = effect.value;
+				}
+				
+				// Select the right bubble color
+				if (jetValue < jetMin || jetValue == 0)
+				{
+					componentsRef.tx_bulle.uri = _bubbleGreyUri;
+				}
+				else if (jetValue > jetMax)
+				{
+					componentsRef.tx_bulle.uri = _bubbleRedUri;
+				}
+				else if ((jetValue == jetMax) || (((jetValue - jetMin) / (jetMax - jetMin))  >= 0.8))
+				{
+					componentsRef.tx_bulle.uri = _bubbleOrangeUri;
+				}
+				else
+				{
+					componentsRef.tx_bulle.uri = _bubbleGreenUri;
+				}
+			}
+			
+			// Find the runes associated to the effect
+			componentsRef.slot_simple.visible = false;
+			componentsRef.slot_pa.visible = false;
+			componentsRef.slot_ra.visible = false;
+			
+			for each (var item:ItemWrapper in storageApi.getViewContent("storageResources"))
+			{
+				if (item.typeId != SMITHMAGIC_RUNE_ID || item.effects[0].effectId != effect.effectId)
+				{
+					continue;
+				}
+				
+				if (item.name.search("Rune Pa") != -1)
+				{
+					_dataOfAvailableRuneSlots[componentsRef.slot_pa] = item;
+					
+					componentsRef.slot_pa.data = item;
+					componentsRef.slot_pa.visible = true;
+				}
+				else if (item.name.search("Rune Ra") != -1)
+				{
+					_dataOfAvailableRuneSlots[componentsRef.slot_ra] = item;
+					
+					componentsRef.slot_ra.data = item;
+					componentsRef.slot_ra.visible = true;
+				}
+				else
+				{
+					_dataOfAvailableRuneSlots[componentsRef.slot_simple] = item;
+					
+					componentsRef.slot_simple.data = item;
+					componentsRef.slot_simple.visible = true;										
+				}
+			}
+			
+			addHooksToSlot(componentsRef.slot_simple);
+			addHooksToSlot(componentsRef.slot_pa);
+			addHooksToSlot(componentsRef.slot_ra);
 			
 			uiApi.addComponentHook(componentsRef.btn_jet, "onRollOver");
 			uiApi.addComponentHook(componentsRef.btn_jet, "onRollOut");
@@ -645,152 +781,11 @@ package ui
 			uiApi.addComponentHook(componentsRef.tx_bulle, "onRollOver");
 			uiApi.addComponentHook(componentsRef.tx_bulle, "onRollOut");
 			
-			var effect:EffectInstanceInteger = data as EffectInstanceInteger;
-			var effectSign:int = 0;
-			
-			// On initialise l'état sur la bulle verte (entre le jet min et 80% du jet)
-			componentsRef.tx_bulle.uri = _bubbleGreenUri;
-			
-			// On initialise les labels min et max et actuel
-			componentsRef.lbl_jetMin.text = "";
-			componentsRef.lbl_jetMax.text = "";
-			componentsRef.lbl_jet.text = effect.description;
-			
-			// On affecte le style css en fonction du type de jet (malus, bonus ou pas de signe)
-			if (EffectIdEnum.isEffectNegative(effect.effectId))
-			{
-				componentsRef.lbl_jet.cssClass = "malus";
-				effectSign = -1;
-			}
-			else
-			{
-				componentsRef.lbl_jet.cssClass = "bonus";
-				effectSign = 1;
-			}
-			
-			if (effect.value == 0)
-			{
-				componentsRef.lbl_jet.cssClass = "normal";
-			}
-			
-			var isExotic:Boolean = true;
-			
-			// On parcours les effets possible de l'objet
-			for each (var effectDice:EffectInstanceDice in slot_item.data.possibleEffects)
-			{
-				if (effectDice.effectId == effect.effectId)
-				{
-					isExotic = false;
-					
-					var jetMin:int;
-					var jetMax:int;
-					var jetActuel:int = effectSign * effect.value;
-					
-					if (effectSign == 1)
-					{
-						jetMin = effectSign * effectDice.diceNum;
-						jetMax = effectSign * effectDice.diceSide;
-						
-						if (effectDice.diceSide == 0)
-						{
-							jetMax = jetMin;
-						}
-					}
-					else
-					{
-						jetMin = effectSign * effectDice.diceSide;
-						jetMax = effectSign * effectDice.diceNum;
-						
-						if (effectDice.diceSide == 0)
-						{
-							jetMin = jetMax;
-						}
-					}
-					
-					// On affecte le jet max et min aux labels de la grid
-					componentsRef.lbl_jetMin.text = jetMin;
-					componentsRef.lbl_jetMax.text = jetMax;
-					
-					if (jetActuel == 0)
-					{
-						componentsRef.tx_bulle.uri = _bubbleGreyUri;
-					}
-					// On change l'état de la bulle si le jet est overmax
-					else if (jetActuel > jetMax)
-					{
-						componentsRef.tx_bulle.uri = _bubbleRedUri;
-					}
-					// On change l'état de la bulle si le jet est sous le jet max
-					else if (jetActuel < jetMin)
-					{
-						componentsRef.tx_bulle.uri = _bubbleGreyUri;
-					}
-					// On change l'état de la bulle entre 80 et 100% de la fourchette du jet
-					else if ((jetActuel == jetMax) || (((jetActuel - jetMin) / (jetMax - jetMin))  >= 0.8))
-					{
-						componentsRef.tx_bulle.uri = _bubbleOrangeUri;
-					}
-					
-					break;
-				}
-			}
-			
-			if (isExotic)
-			{
-				componentsRef.lbl_jet.cssClass = "exotic";
-				componentsRef.tx_bulle.uri = _bubbleBlueUri;
-			}
-			
-			// On enregistre les slots rune simple/pa/ra
-			addHooksToSlot(componentsRef.slot_simple);
-			addHooksToSlot(componentsRef.slot_pa);
-			addHooksToSlot(componentsRef.slot_ra);
-			
-			// Par défaut les slots de runes sont invisibles
-			componentsRef.slot_simple.visible = false;
-			componentsRef.slot_pa.visible = false;
-			componentsRef.slot_ra.visible = false;
-			
-			//var t0:int = getTimer();
-			for each (var item:ItemWrapper in storageApi.getViewContent("storageResources"))
-			{
-				//sysApi.log(16, "item.name : " + item.name);
-				if (item.typeId == SMITHMAGIC_RUNE_ID)
-				{
-					for each (var effet:EffectInstanceInteger in item.effects)
-					{
-						if (effet.effectId == effect.effectId)
-						{
-							//sysApi.log(16, "effect.description : " + effet.description);
-							if (item.name.search("Rune Pa") != -1)
-							{
-								_dataOfAvailableRuneSlots[componentsRef.slot_pa] = item;
-								componentsRef.slot_pa.data = item;
-								componentsRef.slot_pa.visible = true;
-							}
-							else if (item.name.search("Rune Ra") != -1)
-							{
-								_dataOfAvailableRuneSlots[componentsRef.slot_ra] = item;
-								componentsRef.slot_ra.data = item;
-								componentsRef.slot_ra.visible = true;
-							}
-							else
-							{
-								_dataOfAvailableRuneSlots[componentsRef.slot_simple] = item;
-								componentsRef.slot_simple.data = item;
-								componentsRef.slot_simple.visible = true;										
-							}
-						}
-					}
-				}
-			}
-			//sysApi.log(16, "temps :" +  (getTimer() - t0) + "ms");
-			
-			// Gestion de la selection de la ligne
+			// Gestion of the selection
 			componentsRef.btn_jet.selected	= selected;
-			componentsRef.btn_jet.state = selected ? StatesEnum.STATE_SELECTED:StatesEnum.STATE_NORMAL;
+			componentsRef.btn_jet.state = selected ? StatesEnum.STATE_SELECTED : StatesEnum.STATE_NORMAL;
 			
-			// On affiche la ligne du jet
+			// Display line
 			componentsRef.ctr_jet.visible = true;
 		}
 				
@@ -866,7 +861,7 @@ package ui
 			lbl_level.text = String("Niv. " + item.level);
 			lbl_name.text = item.name;
 			
-			var effect:Object;
+			var effect:EffectInstanceInteger;
 			var forgeableEffectList:Array = new Array();
 			var presentEffectList:Dictionary = new Dictionary();
 			
@@ -876,13 +871,13 @@ package ui
 				if (effect is EffectInstanceInteger)
 				{
 					forgeableEffectList.push(effect);
-					presentEffectList[effect.effectId] = true;
+					presentEffectList[EffectIdEnum.getEffectIdFromMalusToBonus(effect.effectId)] = true;
 				}
 			}
 			
 			for each (effect in item.possibleEffects)
 			{
-				if (effect is EffectInstanceInteger && !(presentEffectList[effect.effectId]))
+				if (effect is EffectInstanceInteger && !(presentEffectList[EffectIdEnum.getEffectIdFromMalusToBonus(effect.effectId)]))
 				{
 					forgeableEffectList.push(effect);
 				}
