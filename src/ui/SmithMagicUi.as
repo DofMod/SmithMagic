@@ -14,6 +14,7 @@ package ui
 	import d2components.Label;
 	import d2components.Slot;
 	import d2data.ContextMenuData;
+	import d2data.EffectInstance;
 	import d2data.EffectInstanceDice;
 	import d2data.EffectInstanceInteger;
 	import d2data.Item;
@@ -861,7 +862,7 @@ package ui
 			lbl_level.text = String("Niv. " + item.level);
 			lbl_name.text = item.name;
 			
-			var effect:EffectInstanceInteger;
+			var effect:EffectInstance;
 			var forgeableEffectList:Array = new Array();
 			var presentEffectList:Dictionary = new Dictionary();
 			
