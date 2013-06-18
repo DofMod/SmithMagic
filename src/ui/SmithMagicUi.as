@@ -878,14 +878,20 @@ package ui
 			uiApi.addComponentHook(slot, "onDoubleClick");
 		}
 		
-		private function isValidSlot(slot:Slot, itemWp:ItemWrapper):Boolean
+		/**
+		 * Test if the item is valid for the slot.
+		 * 
+		 * @param	slot	The destination slot to test.
+		 * @param	itemWp	The item to put in the slot.
+		 * 
+		 * @return	True of False.
+		 */
+		private function isValidSlot(slot:Slot, item:ItemWrapper):Boolean
 		{
 			if (!_skill)
 			{
 				return false;
 			}
-			
-			var item:Item = dataApi.getItem(itemWp.objectGID);
 			
 			switch (slot)
 			{
@@ -897,14 +903,14 @@ package ui
 					
 					return true;
 				case slot_rune:
-					if ((((!(_skill.isForgemagus)) || (!(item.typeId == SMITHMAGIC_RUNE_ID)))) && (!(item.typeId == SMITHMAGIC_POTION_ID)))
+					if (item.typeId != SMITHMAGIC_RUNE_ID && item.typeId != SMITHMAGIC_POTION_ID)
 					{
 						return false;
 					}
 					
 					return true;
 				case slot_signature:
-					if (!(item.id == SIGNATURE_RUNE_ID))
+					if (item.id != SIGNATURE_RUNE_ID)
 					{
 						return false;
 					}
@@ -915,6 +921,15 @@ package ui
 			return false;
 		}
 		
+		/**
+		 * Slot drop validator callback. Test if item is valid for the slot.
+		 * 
+		 * @param	target	The target slot.
+		 * @param	data	The item to drop on the slot.
+		 * @param	source	?
+		 * 
+		 * @return	True of False.
+		 */
 		private function dropValidator(target:Object, data:Object, source:Object):Boolean
 		{
 			if (data is ItemWrapper && target is Slot)
@@ -925,6 +940,13 @@ package ui
 			return false;
 		}
 		
+		/**
+		 * Slot drop process callback. Fill the slot with the item.
+		 * 
+		 * @param	target	The target slot.
+		 * @param	data	The item to drop on the slot.
+		 * @param	source	?
+		 */
 		private function processDrop(target:Object, data:Object, source:Object):void
 		{
 			if (!(data is ItemWrapper) || !(target is Slot))
@@ -943,7 +965,7 @@ package ui
 					
 					break;
 				case slot_rune:
-					if (int(item.info1) > 1)
+					if (item.quantity > 1)
 					{
 						_waitingObject = item;
 						modCommon.openQuantityPopup(1, item.quantity, item.quantity, onValidQtyDropToSlot);
