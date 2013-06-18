@@ -217,13 +217,19 @@ package ui
 			
 			var oldItem:ItemWrapper = slot_item.data;
 			var effects:Dictionary = new Dictionary();
+			var oldValue:int;
+			var newValue:int;
+			var effectIdBonus:int;
 			
 			// On parcours les jets de l'item avant le passage de la rune
 			for each (var oldEffect:Object in oldItem.effects)
 			{
 				if (oldEffect is EffectInstanceInteger)
 				{
-					effects[oldEffect.effectId] = ({oldValue : ((EffectIdEnum.isEffectNegative(oldEffect.effectId) ? -1 : 1) * oldEffect.value), newValue : false, id : EffectIdEnum.getEffectIdFromMalusToBonus(oldEffect.effectId) });
+					oldValue = (EffectIdEnum.isEffectNegative(oldEffect.effectId) ? -1 : 1) * oldEffect.value;
+					effectIdBonus =  EffectIdEnum.getEffectIdFromMalusToBonus(oldEffect.effectId);
+					
+					effects[oldEffect.effectId] = ({oldValue : oldValue, newValue : false, id : effectIdBonus});
 				}
 			}
 			
@@ -238,7 +244,10 @@ package ui
 					}
 					else
 					{
-						effects[newEffect.effectId] = ({oldValue : false, newValue : ((EffectIdEnum.isEffectNegative(newEffect.effectId) ? -1 : 1) * newEffect.value), id : EffectIdEnum.getEffectIdFromMalusToBonus(newEffect.effectId)});
+						newValue = (EffectIdEnum.isEffectNegative(newEffect.effectId) ? -1 : 1) * newEffect.value;
+						effectIdBonus = EffectIdEnum.getEffectIdFromMalusToBonus(newEffect.effectId);
+						
+						effects[newEffect.effectId] = ({oldValue : false, newValue : newValue, id : effectIdBonus});
 					}
 				}
 			}
