@@ -45,32 +45,32 @@ package ui
 		//::///////////////////////////////////////////////////////////
 		
 		// Variables Constantes
-		public static const SIGNATURE_RUNE_ID:int = 7508;
-		public static const SMITHMAGIC_RUNE_ID:int = 78;
-		public static const SMITHMAGIC_POTION_ID:int = 26;
-		public static const SKILL_TYPE_AMULET:int = 169;
-		public static const SKILL_TYPE_RING:int = 168;
-		public static const SKILL_TYPE_BELT:int = 164;
-		public static const SKILL_TYPE_BOOTS:int = 163;
-		public static const SKILL_TYPE_HAT:int = 166;
-		public static const SKILL_TYPE_CLOAK:int = 165;
-		public static const SKILL_TYPE_BAG:int = 167;
+		private static const SIGNATURE_RUNE_ID:int = 7508;
+		private static const SMITHMAGIC_RUNE_ID:int = 78;
+		private static const SMITHMAGIC_POTION_ID:int = 26;
+		private static const SKILL_TYPE_AMULET:int = 169;
+		private static const SKILL_TYPE_RING:int = 168;
+		private static const SKILL_TYPE_BELT:int = 164;
+		private static const SKILL_TYPE_BOOTS:int = 163;
+		private static const SKILL_TYPE_HAT:int = 166;
+		private static const SKILL_TYPE_CLOAK:int = 165;
+		private static const SKILL_TYPE_BAG:int = 167;
 		
 		// Variables Les Globales
-		public var _isCrafter:Boolean = false;
-		public var _inCooperatingMode:Boolean;
-		public var _runeWeight:Number = 0;
-		public var _wellModification:Boolean = false;
-		public var _waitingObject:ItemWrapper;
-		public var _dataOfEffectButtons:Dictionary = new Dictionary(false);
-		public var _dataOfAvailableRuneSlots:Dictionary = new Dictionary(false);
-		public var _bagItems:Array = null;
+		private var _isCrafter:Boolean = false;
+		private var _inCooperatingMode:Boolean;
+		private var _runeWeight:Number = 0;
+		private var _wellModification:Boolean = false;
+		private var _waitingObject:ItemWrapper;
+		private var _dataOfEffectButtons:Dictionary = new Dictionary(false);
+		private var _dataOfAvailableRuneSlots:Dictionary = new Dictionary(false);
+		private var _bagItems:Array = null;
 		
-		public var _bubbleGreyUri:Object;
-		public var _bubbleGreenUri:Object;
-		public var _bubbleOrangeUri:Object;
-		public var _bubbleRedUri:Object;
-		public var _bubbleBlueUri:Object;
+		private var _bubbleGreyUri:Object;
+		private var _bubbleGreenUri:Object;
+		private var _bubbleOrangeUri:Object;
+		private var _bubbleRedUri:Object;
+		private var _bubbleBlueUri:Object;
 		
 		// Utilisation du modCommon pour l'inputBox du puits
 		[Module(name="Ankama_Common")]
