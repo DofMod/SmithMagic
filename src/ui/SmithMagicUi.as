@@ -1050,7 +1050,14 @@ package ui
 				unfillSlot(slot, -1);
 			}
 			
-			sysApi.sendAction(new ExchangeObjectMove(item.objectUID, quantity));
+			if (isItemFromBag(item))
+			{
+				sysApi.sendAction(new ExchangeObjectUseInWorkshop(item.objectUID, quantity));
+			}
+			else
+			{
+				sysApi.sendAction(new ExchangeObjectMove(item.objectUID, quantity));
+			}
 		}
 		
 		/**
