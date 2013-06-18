@@ -24,23 +24,11 @@ titleright {
 	color: #e0eeff;
 	text-align: right;
 }
-left {
-	font-family: Tahoma;
-	font-size: 18px;
-	color: #312D24;
-	text-align: left;
-}
 well {
 	font-family: Eras;
 	font-size: 18px;
 	color: #004A7F;
 	text-align: left;
-}
-right {
-	font-family: Tahoma;
-	font-size: 18px;
-	color: #312D24;
-	text-align: right;
 }
 center {
 	font-family: Tahoma;
