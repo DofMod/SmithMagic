@@ -2,6 +2,7 @@ package ui
 {
 	import d2actions.ExchangeObjectMove;
 	import d2actions.ExchangeObjectUseInWorkshop;
+	import d2api.ContextMenuApi;
 	import d2api.DataApi;
 	import d2api.PlayedCharacterApi;
 	import d2api.StorageApi;
@@ -12,6 +13,7 @@ package ui
 	import d2components.Grid;
 	import d2components.Label;
 	import d2components.Slot;
+	import d2data.ContextMenuData;
 	import d2data.EffectInstanceDice;
 	import d2data.EffectInstanceInteger;
 	import d2data.Item;
@@ -74,12 +76,16 @@ package ui
 		[Module(name="Ankama_Common")]
 		public var modCommon:Object;
 		
+		[Module (name="Ankama_ContextMenu")]
+		public var modContextMenu : Object;
+		
 		// Déclaration des API dont on veut se servir dans cette classe
 		public var sysApi:SystemApi;
 		public var uiApi:UiApi;
 		public var dataApi:DataApi;
 		public var storageApi:StorageApi;
 		public var playerApi:PlayedCharacterApi;
+		public var menuApi:ContextMenuApi;
 		
 		// Les boutons de fermeture et reouverture de l'interface
 		public var btn_close:ButtonContainer;
@@ -534,6 +540,23 @@ package ui
 		}
 		
 		/**
+		 * On mouse right click.
+		 * 
+		 * @param	target
+		 */
+		public function onRightClick(target:Object):void
+		{
+			if (target.data)
+			{
+				var menu:ContextMenuData = menuApi.create(target.data);
+				if (menu.content.length > 0)
+				{
+					modContextMenu.createContextMenu(menu);
+				}
+			}
+		}
+		
+		/**
 		 * On drag & drop start.
 		 * 
 		 * @param	target
@@ -872,6 +895,7 @@ package ui
 			uiApi.addComponentHook(slot, "onRollOver");
 			uiApi.addComponentHook(slot, "onRollOut");
 			uiApi.addComponentHook(slot, "onDoubleClick");
+			uiApi.addComponentHook(slot, "onRightClick");
 		}
 		
 		/**
