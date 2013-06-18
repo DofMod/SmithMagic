@@ -271,9 +271,9 @@ package ui
 				}
 			}
 			
-			sysApi.log(2, "Rune weight : " +  _runeWeight);
-			sysApi.log(2, "Weight losses : " +  weightLosses);
-			sysApi.log(2, "Weight gains : " +  weightGains);
+			//sysApi.log(2, "Rune weight : " +  _runeWeight);
+			//sysApi.log(2, "Weight losses : " +  weightLosses);
+			//sysApi.log(2, "Weight gains : " +  weightGains);
 			
 			if (_wellModification == true)
 			{
