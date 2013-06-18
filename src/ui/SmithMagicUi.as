@@ -647,7 +647,7 @@ package ui
 			
 			var effect:EffectInstanceInteger = data.effect as EffectInstanceInteger;
 			var isNull:Boolean = data.isNull as Boolean;
-			var signeBonus:int = 0;
+			var effectSign:int = 0;
 			
 			// On initialise l'état sur la bulle verte (entre le jet min et 80% du jet)
 			componentsRef.tx_bulle.uri = _bubbleGreenUri;
@@ -661,12 +661,12 @@ package ui
 			if (EffectIdEnum.isEffectNegative(effect.effectId))
 			{
 				componentsRef.lbl_jet.cssClass = "malus";
-				signeBonus = -1;
+				effectSign = -1;
 			}
 			else
 			{
 				componentsRef.lbl_jet.cssClass = "bonus";
-				signeBonus = 1;
+				effectSign = 1;
 			}
 			
 			if (isNull)
@@ -685,12 +685,12 @@ package ui
 					
 					var jetMin:int;
 					var jetMax:int;
-					var jetActuel:int = signeBonus * effect.value;
+					var jetActuel:int = effectSign * effect.value;
 					
-					if (signeBonus == 1)
+					if (effectSign == 1)
 					{
-						jetMin = signeBonus * effectDice.diceNum;
-						jetMax = signeBonus * effectDice.diceSide;
+						jetMin = effectSign * effectDice.diceNum;
+						jetMax = effectSign * effectDice.diceSide;
 						
 						if (effectDice.diceSide == 0)
 						{
@@ -699,8 +699,8 @@ package ui
 					}
 					else
 					{
-						jetMin = signeBonus * effectDice.diceSide;
-						jetMax = signeBonus * effectDice.diceNum;
+						jetMin = effectSign * effectDice.diceSide;
+						jetMax = effectSign * effectDice.diceNum;
 						
 						if (effectDice.diceSide == 0)
 						{
