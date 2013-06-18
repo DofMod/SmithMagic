@@ -5,7 +5,7 @@ package enum
 	 * ...
 	 * @author Relena
 	 */
-	public class effectIdEnum
+	public class EffectIdEnum
 	{
 		public static const LIFE:int = 110; // Old effect
 		
@@ -109,91 +109,147 @@ package enum
 		 * 
 		 * @return	The identifier of the bonus effect.
 		 */
-		public static function getEffectIdFromMalusToBonus(id:int):int
+		public static function getEffectIdFromMalusToBonus(effectId:int):int
 		{
-			switch (id)
+			switch (effectId)
 			{
-				case effectIdEnum.NEGATIVE_DAMAGE:
-					return effectIdEnum.DAMAGE;
-				case effectIdEnum.NEGATIVE_DAMAGE_EARTH:
-					return effectIdEnum.DAMAGE_EARTH;
-				case effectIdEnum.NEGATIVE_DAMAGE_NEUTRAL:
-					return effectIdEnum.DAMAGE_NEUTRAL;
-				case effectIdEnum.NEGATIVE_DAMAGE_FIRE:
-					return effectIdEnum.DAMAGE_FIRE;
-				case effectIdEnum.NEGATIVE_DAMAGE_AIR:
-					return effectIdEnum.DAMAGE_AIR;
-				case effectIdEnum.NEGATIVE_DAMAGE_WATER:
-					return effectIdEnum.DAMAGE_WATER;
-				case effectIdEnum.NEGATIVE_STRENGTH:
-					return effectIdEnum.STRENGTH;
-				case effectIdEnum.NEGATIVE_INTELLIGENCE:
-					return effectIdEnum.INTELLIGENCE;
-				case effectIdEnum.NEGATIVE_LUCK:
-					return effectIdEnum.LUCK;
-				case effectIdEnum.NEGATIVE_AGILITY:
-					return effectIdEnum.AGILITY;
-				case effectIdEnum.NEGATIVE_VITALITY:
-					return effectIdEnum.VITALITY;
-				case effectIdEnum.NEGATIVE_WISDOM:
-					return effectIdEnum.WISDOM;
-				case effectIdEnum.NEGATIVE_INITIATIVE:
-					return effectIdEnum.INITIATIVE;
-				case effectIdEnum.NEGATIVE_RESISTANCE_EARTH:
-					return effectIdEnum.RESISTANCE_EARTH;
-				case effectIdEnum.NEGATIVE_RESISTANCE_FIRE:
-					return effectIdEnum.RESISTANCE_FIRE;
-				case effectIdEnum.NEGATIVE_RESISTANCE_NEUTRAL:
-					return effectIdEnum.RESISTANCE_NEUTRAL;
-				case effectIdEnum.NEGATIVE_RESISTANCE_AIR:
-					return effectIdEnum.RESISTANCE_AIR;
-				case effectIdEnum.NEGATIVE_RESISTANCE_WATER:
-					return effectIdEnum.RESISTANCE_WATER;
-				case effectIdEnum.NEGATIVE_RESISTANCE_PERCENT_EARTH:
-					return effectIdEnum.RESISTANCE_PERCENT_EARTH;
-				case effectIdEnum.NEGATIVE_RESISTANCE_PERCENT_FIRE:
-					return effectIdEnum.RESISTANCE_PERCENT_FIRE;
-				case effectIdEnum.NEGATIVE_RESISTANCE_PERCENT_NEUTRAL:
-					return effectIdEnum.RESISTANCE_PERCENT_NEUTRAL;
-				case effectIdEnum.NEGATIVE_RESISTANCE_PERCENT_AIR:
-					return effectIdEnum.RESISTANCE_PERCENT_AIR;
-				case effectIdEnum.NEGATIVE_RESISTANCE_PERCENT_WATER:
-					return effectIdEnum.RESISTANCE_PERCENT_WATER;
-				case effectIdEnum.NEGATIVE_RESISTANCE_CRITICAL:
-					return effectIdEnum.RESISTANCE_CRITICAL;
-				case effectIdEnum.NEGATIVE_RESISTANCE_PUSH:
-					return effectIdEnum.RESISTANCE_PUSH;
-				case effectIdEnum.NEGATIVE_DODGE_AP:
-					return effectIdEnum.DODGE_AP;
-				case effectIdEnum.NEGATIVE_DODGE_MP:
-					return effectIdEnum.DODGE_MP;
-				case effectIdEnum.NEGATIVE_PODS:
-					return effectIdEnum.PODS;
-				case effectIdEnum.NEGATIVE_PROSPECTION:
-					return effectIdEnum.PROSPECTION;
-				case effectIdEnum.NEGATIVE_DAMAGE_PERCENT:
-					return effectIdEnum.DAMAGE_PERCENT;
-				case effectIdEnum.NEGATIVE_TACKLE:
-					return effectIdEnum.TACKLE;
-				case effectIdEnum.NEGATIVE_ESCAPE:
-					return effectIdEnum.ESCAPE;
-				case effectIdEnum.NEGATIVE_WITHDRAW_AP:
-					return effectIdEnum.WITHDRAW_AP;
-				case effectIdEnum.NEGATIVE_WITHDRAW_MP:
-					return effectIdEnum.WITHDRAW_MP;
-				case effectIdEnum.NEGATIVE_CARE:
-					return effectIdEnum.CARE;
-				case effectIdEnum.NEGATIVE_CRITICAL:
-					return effectIdEnum.CRITICAL;
-				case effectIdEnum.NEGATIVE_PO:
-					return effectIdEnum.PO;
-				case effectIdEnum.NEGATIVE_AP:
-					return effectIdEnum.AP;
-				case effectIdEnum.NEGATIVE_MP:
-					return effectIdEnum.MP;
+				case EffectIdEnum.NEGATIVE_DAMAGE:
+					return EffectIdEnum.DAMAGE;
+				case EffectIdEnum.NEGATIVE_DAMAGE_EARTH:
+					return EffectIdEnum.DAMAGE_EARTH;
+				case EffectIdEnum.NEGATIVE_DAMAGE_NEUTRAL:
+					return EffectIdEnum.DAMAGE_NEUTRAL;
+				case EffectIdEnum.NEGATIVE_DAMAGE_FIRE:
+					return EffectIdEnum.DAMAGE_FIRE;
+				case EffectIdEnum.NEGATIVE_DAMAGE_AIR:
+					return EffectIdEnum.DAMAGE_AIR;
+				case EffectIdEnum.NEGATIVE_DAMAGE_WATER:
+					return EffectIdEnum.DAMAGE_WATER;
+				case EffectIdEnum.NEGATIVE_STRENGTH:
+					return EffectIdEnum.STRENGTH;
+				case EffectIdEnum.NEGATIVE_INTELLIGENCE:
+					return EffectIdEnum.INTELLIGENCE;
+				case EffectIdEnum.NEGATIVE_LUCK:
+					return EffectIdEnum.LUCK;
+				case EffectIdEnum.NEGATIVE_AGILITY:
+					return EffectIdEnum.AGILITY;
+				case EffectIdEnum.NEGATIVE_VITALITY:
+					return EffectIdEnum.VITALITY;
+				case EffectIdEnum.NEGATIVE_WISDOM:
+					return EffectIdEnum.WISDOM;
+				case EffectIdEnum.NEGATIVE_INITIATIVE:
+					return EffectIdEnum.INITIATIVE;
+				case EffectIdEnum.NEGATIVE_RESISTANCE_EARTH:
+					return EffectIdEnum.RESISTANCE_EARTH;
+				case EffectIdEnum.NEGATIVE_RESISTANCE_FIRE:
+					return EffectIdEnum.RESISTANCE_FIRE;
+				case EffectIdEnum.NEGATIVE_RESISTANCE_NEUTRAL:
+					return EffectIdEnum.RESISTANCE_NEUTRAL;
+				case EffectIdEnum.NEGATIVE_RESISTANCE_AIR:
+					return EffectIdEnum.RESISTANCE_AIR;
+				case EffectIdEnum.NEGATIVE_RESISTANCE_WATER:
+					return EffectIdEnum.RESISTANCE_WATER;
+				case EffectIdEnum.NEGATIVE_RESISTANCE_PERCENT_EARTH:
+					return EffectIdEnum.RESISTANCE_PERCENT_EARTH;
+				case EffectIdEnum.NEGATIVE_RESISTANCE_PERCENT_FIRE:
+					return EffectIdEnum.RESISTANCE_PERCENT_FIRE;
+				case EffectIdEnum.NEGATIVE_RESISTANCE_PERCENT_NEUTRAL:
+					return EffectIdEnum.RESISTANCE_PERCENT_NEUTRAL;
+				case EffectIdEnum.NEGATIVE_RESISTANCE_PERCENT_AIR:
+					return EffectIdEnum.RESISTANCE_PERCENT_AIR;
+				case EffectIdEnum.NEGATIVE_RESISTANCE_PERCENT_WATER:
+					return EffectIdEnum.RESISTANCE_PERCENT_WATER;
+				case EffectIdEnum.NEGATIVE_RESISTANCE_CRITICAL:
+					return EffectIdEnum.RESISTANCE_CRITICAL;
+				case EffectIdEnum.NEGATIVE_RESISTANCE_PUSH:
+					return EffectIdEnum.RESISTANCE_PUSH;
+				case EffectIdEnum.NEGATIVE_DODGE_AP:
+					return EffectIdEnum.DODGE_AP;
+				case EffectIdEnum.NEGATIVE_DODGE_MP:
+					return EffectIdEnum.DODGE_MP;
+				case EffectIdEnum.NEGATIVE_PODS:
+					return EffectIdEnum.PODS;
+				case EffectIdEnum.NEGATIVE_PROSPECTION:
+					return EffectIdEnum.PROSPECTION;
+				case EffectIdEnum.NEGATIVE_DAMAGE_PERCENT:
+					return EffectIdEnum.DAMAGE_PERCENT;
+				case EffectIdEnum.NEGATIVE_TACKLE:
+					return EffectIdEnum.TACKLE;
+				case EffectIdEnum.NEGATIVE_ESCAPE:
+					return EffectIdEnum.ESCAPE;
+				case EffectIdEnum.NEGATIVE_WITHDRAW_AP:
+					return EffectIdEnum.WITHDRAW_AP;
+				case EffectIdEnum.NEGATIVE_WITHDRAW_MP:
+					return EffectIdEnum.WITHDRAW_MP;
+				case EffectIdEnum.NEGATIVE_CARE:
+					return EffectIdEnum.CARE;
+				case EffectIdEnum.NEGATIVE_CRITICAL:
+					return EffectIdEnum.CRITICAL;
+				case EffectIdEnum.NEGATIVE_PO:
+					return EffectIdEnum.PO;
+				case EffectIdEnum.NEGATIVE_AP:
+					return EffectIdEnum.AP;
+				case EffectIdEnum.NEGATIVE_MP:
+					return EffectIdEnum.MP;
 			}
 			
-			return id;
+			return effectId;
+		}
+		
+		/**
+		 * Converte malus effect id to the coesponding bonus effect id.
+		 * 
+		 * @param	id	Identifier of the effect.
+		 * 
+		 * @return	True or False.
+		 */
+		public static function isEffectNegative(effectId:int):Boolean
+		{
+			switch (effectId)
+			{
+				case EffectIdEnum.NEGATIVE_DAMAGE:
+				case EffectIdEnum.NEGATIVE_DAMAGE_EARTH:
+				case EffectIdEnum.NEGATIVE_DAMAGE_NEUTRAL:
+				case EffectIdEnum.NEGATIVE_DAMAGE_FIRE:
+				case EffectIdEnum.NEGATIVE_DAMAGE_AIR:
+				case EffectIdEnum.NEGATIVE_DAMAGE_WATER:
+				case EffectIdEnum.NEGATIVE_STRENGTH:
+				case EffectIdEnum.NEGATIVE_INTELLIGENCE:
+				case EffectIdEnum.NEGATIVE_LUCK:
+				case EffectIdEnum.NEGATIVE_AGILITY:
+				case EffectIdEnum.NEGATIVE_VITALITY:
+				case EffectIdEnum.NEGATIVE_WISDOM:
+				case EffectIdEnum.NEGATIVE_INITIATIVE:
+				case EffectIdEnum.NEGATIVE_RESISTANCE_EARTH:
+				case EffectIdEnum.NEGATIVE_RESISTANCE_FIRE:
+				case EffectIdEnum.NEGATIVE_RESISTANCE_NEUTRAL:
+				case EffectIdEnum.NEGATIVE_RESISTANCE_AIR:
+				case EffectIdEnum.NEGATIVE_RESISTANCE_WATER:
+				case EffectIdEnum.NEGATIVE_RESISTANCE_PERCENT_EARTH:
+				case EffectIdEnum.NEGATIVE_RESISTANCE_PERCENT_FIRE:
+				case EffectIdEnum.NEGATIVE_RESISTANCE_PERCENT_NEUTRAL:
+				case EffectIdEnum.NEGATIVE_RESISTANCE_PERCENT_AIR:
+				case EffectIdEnum.NEGATIVE_RESISTANCE_PERCENT_WATER:
+				case EffectIdEnum.NEGATIVE_RESISTANCE_CRITICAL:
+				case EffectIdEnum.NEGATIVE_RESISTANCE_PUSH:
+				case EffectIdEnum.NEGATIVE_DODGE_AP:
+				case EffectIdEnum.NEGATIVE_DODGE_MP:
+				case EffectIdEnum.NEGATIVE_PODS:
+				case EffectIdEnum.NEGATIVE_PROSPECTION:
+				case EffectIdEnum.NEGATIVE_DAMAGE_PERCENT:
+				case EffectIdEnum.NEGATIVE_TACKLE:
+				case EffectIdEnum.NEGATIVE_ESCAPE:
+				case EffectIdEnum.NEGATIVE_WITHDRAW_AP:
+				case EffectIdEnum.NEGATIVE_WITHDRAW_MP:
+				case EffectIdEnum.NEGATIVE_CARE:
+				case EffectIdEnum.NEGATIVE_CRITICAL:
+				case EffectIdEnum.NEGATIVE_PO:
+				case EffectIdEnum.NEGATIVE_AP:
+				case EffectIdEnum.NEGATIVE_MP:
+					return true;
+			}
+			
+			return false;
 		}
 	}
 }

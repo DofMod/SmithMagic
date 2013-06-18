@@ -7,7 +7,7 @@ package
 	import d2hooks.ExchangeLeave;
 	import d2hooks.ExchangeStartOkCraft;
 	import d2hooks.ExchangeStartOkMultiCraft;
-	import enum.effectIdEnum;
+	import enum.EffectIdEnum;
 	import flash.display.Sprite;
 	import flash.utils.Dictionary;
 	import ui.SmithMagicUi;
@@ -48,65 +48,65 @@ package
 		
 		public function main():void
 		{
-			runesWeight[effectIdEnum.INITIATIVE] = 0.1;
+			runesWeight[EffectIdEnum.INITIATIVE] = 0.1;
 			
-			runesWeight[effectIdEnum.LIFE] = 0.25;
-			runesWeight[effectIdEnum.VITALITY] = 0.25;
-			runesWeight[effectIdEnum.PODS] = 0.25;
+			runesWeight[EffectIdEnum.LIFE] = 0.25;
+			runesWeight[EffectIdEnum.VITALITY] = 0.25;
+			runesWeight[EffectIdEnum.PODS] = 0.25;
 
-			runesWeight[effectIdEnum.STRENGTH] = 1;
-			runesWeight[effectIdEnum.INTELLIGENCE] = 1;
-			runesWeight[effectIdEnum.LUCK] = 1;
-			runesWeight[effectIdEnum.AGILITY] = 1;
+			runesWeight[EffectIdEnum.STRENGTH] = 1;
+			runesWeight[EffectIdEnum.INTELLIGENCE] = 1;
+			runesWeight[EffectIdEnum.LUCK] = 1;
+			runesWeight[EffectIdEnum.AGILITY] = 1;
 			
-			runesWeight[effectIdEnum.DAMAGE_PERCENT] = 2;
-			runesWeight[effectIdEnum.DAMAGE_PERCENT_TRAP] = 2;
-			runesWeight[effectIdEnum.RESISTANCE_AIR] = 2;
-			runesWeight[effectIdEnum.RESISTANCE_WATER] = 2;
-			runesWeight[effectIdEnum.RESISTANCE_FIRE] = 2;
-			runesWeight[effectIdEnum.RESISTANCE_NEUTRAL] = 2;
-			runesWeight[effectIdEnum.RESISTANCE_EARTH] = 2;
-			runesWeight[effectIdEnum.RESISTANCE_PUSH] = 2;
-			runesWeight[effectIdEnum.RESISTANCE_CRITICAL] = 2;
+			runesWeight[EffectIdEnum.DAMAGE_PERCENT] = 2;
+			runesWeight[EffectIdEnum.DAMAGE_PERCENT_TRAP] = 2;
+			runesWeight[EffectIdEnum.RESISTANCE_AIR] = 2;
+			runesWeight[EffectIdEnum.RESISTANCE_WATER] = 2;
+			runesWeight[EffectIdEnum.RESISTANCE_FIRE] = 2;
+			runesWeight[EffectIdEnum.RESISTANCE_NEUTRAL] = 2;
+			runesWeight[EffectIdEnum.RESISTANCE_EARTH] = 2;
+			runesWeight[EffectIdEnum.RESISTANCE_PUSH] = 2;
+			runesWeight[EffectIdEnum.RESISTANCE_CRITICAL] = 2;
 			
-			runesWeight[effectIdEnum.WISDOM] = 3;
-			runesWeight[effectIdEnum.PROSPECTION] = 3;
+			runesWeight[EffectIdEnum.WISDOM] = 3;
+			runesWeight[EffectIdEnum.PROSPECTION] = 3;
 			
-			runesWeight[effectIdEnum.TACKLE] = 4;
-			runesWeight[effectIdEnum.ESCAPE] = 4;
+			runesWeight[EffectIdEnum.TACKLE] = 4;
+			runesWeight[EffectIdEnum.ESCAPE] = 4;
 			
-			runesWeight[effectIdEnum.DAMAGE_NEUTRAL] = 5;
-			runesWeight[effectIdEnum.DAMAGE_FIRE] = 5;
-			runesWeight[effectIdEnum.DAMAGE_AIR] = 5;
-			runesWeight[effectIdEnum.DAMAGE_EARTH] = 5;
-			runesWeight[effectIdEnum.DAMAGE_WATER] = 5;
-			runesWeight[effectIdEnum.DAMAGE_PUSH] = 5;
-			runesWeight[effectIdEnum.HUNTER] = 5;
+			runesWeight[EffectIdEnum.DAMAGE_NEUTRAL] = 5;
+			runesWeight[EffectIdEnum.DAMAGE_FIRE] = 5;
+			runesWeight[EffectIdEnum.DAMAGE_AIR] = 5;
+			runesWeight[EffectIdEnum.DAMAGE_EARTH] = 5;
+			runesWeight[EffectIdEnum.DAMAGE_WATER] = 5;
+			runesWeight[EffectIdEnum.DAMAGE_PUSH] = 5;
+			runesWeight[EffectIdEnum.HUNTER] = 5;
 
-			runesWeight[effectIdEnum.RESISTANCE_PERCENT_AIR] = 6;
-			runesWeight[effectIdEnum.RESISTANCE_PERCENT_WATER] = 6;
-			runesWeight[effectIdEnum.RESISTANCE_PERCENT_FIRE] = 6;
-			runesWeight[effectIdEnum.RESISTANCE_PERCENT_NEUTRAL] = 6;
-			runesWeight[effectIdEnum.RESISTANCE_PERCENT_EARTH] = 6;
+			runesWeight[EffectIdEnum.RESISTANCE_PERCENT_AIR] = 6;
+			runesWeight[EffectIdEnum.RESISTANCE_PERCENT_WATER] = 6;
+			runesWeight[EffectIdEnum.RESISTANCE_PERCENT_FIRE] = 6;
+			runesWeight[EffectIdEnum.RESISTANCE_PERCENT_NEUTRAL] = 6;
+			runesWeight[EffectIdEnum.RESISTANCE_PERCENT_EARTH] = 6;
 			
-			runesWeight[effectIdEnum.DODGE_AP] = 7;
-			runesWeight[effectIdEnum.DODGE_MP] = 7;
+			runesWeight[EffectIdEnum.DODGE_AP] = 7;
+			runesWeight[EffectIdEnum.DODGE_MP] = 7;
 			
-			runesWeight[effectIdEnum.WITHDRAW_AP] = 7;
-			runesWeight[effectIdEnum.WITHDRAW_MP] = 7;
+			runesWeight[EffectIdEnum.WITHDRAW_AP] = 7;
+			runesWeight[EffectIdEnum.WITHDRAW_MP] = 7;
 			
-			runesWeight[effectIdEnum.DAMAGE_TRAP] = 15;
+			runesWeight[EffectIdEnum.DAMAGE_TRAP] = 15;
 			
-			runesWeight[effectIdEnum.CARE] = 20;
-			runesWeight[effectIdEnum.DAMAGE] = 20;
+			runesWeight[EffectIdEnum.CARE] = 20;
+			runesWeight[EffectIdEnum.DAMAGE] = 20;
 			
-			runesWeight[effectIdEnum.CRITICAL] = 30;
-			runesWeight[effectIdEnum.INVOCATION] = 30;
-			runesWeight[effectIdEnum.RETURN_DAMAGE] = 30;
+			runesWeight[EffectIdEnum.CRITICAL] = 30;
+			runesWeight[EffectIdEnum.INVOCATION] = 30;
+			runesWeight[EffectIdEnum.RETURN_DAMAGE] = 30;
 			
-			runesWeight[effectIdEnum.PO] = 51;
-			runesWeight[effectIdEnum.MP] = 90;
-			runesWeight[effectIdEnum.AP] = 100;
+			runesWeight[EffectIdEnum.PO] = 51;
+			runesWeight[EffectIdEnum.MP] = 90;
+			runesWeight[EffectIdEnum.AP] = 100;
 			
 			sysApi.addHook(ExchangeStartOkCraft, onExchangeStartOkCraft);
 			sysApi.addHook(ExchangeStartOkMultiCraft, onExchangeStartOkMultiCraft);

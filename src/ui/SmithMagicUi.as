@@ -30,7 +30,7 @@ package ui
 	import d2hooks.MouseCtrlDoubleClick;
 	import d2hooks.ObjectModified;
 	import d2hooks.TextInformation;
-	import enum.effectIdEnum;
+	import enum.EffectIdEnum;
 	import flash.geom.Rectangle;
 	import flash.utils.Dictionary;
 	
@@ -223,7 +223,7 @@ package ui
 			{
 				if (oldEffect is EffectInstanceInteger)
 				{
-					effects[oldEffect.effectId] = ({oldValue : (getSigneBonus(oldEffect) * oldEffect.value), newValue : false, id : effectIdEnum.getEffectIdFromMalusToBonus(oldEffect.effectId) });
+					effects[oldEffect.effectId] = ({oldValue : (getSigneBonus(oldEffect) * oldEffect.value), newValue : false, id : EffectIdEnum.getEffectIdFromMalusToBonus(oldEffect.effectId) });
 				}
 			}
 			
@@ -238,7 +238,7 @@ package ui
 					}
 					else
 					{
-						effects[newEffect.effectId] = ({oldValue : false, newValue : (getSigneBonus(newEffect) * newEffect.value), id : effectIdEnum.getEffectIdFromMalusToBonus(newEffect.effectId)});
+						effects[newEffect.effectId] = ({oldValue : false, newValue : (getSigneBonus(newEffect) * newEffect.value), id : EffectIdEnum.getEffectIdFromMalusToBonus(newEffect.effectId)});
 					}
 				}
 			}
@@ -491,7 +491,7 @@ package ui
 					if (target.name.search("btn_jet") != -1 && _dataOfEffectButtons[target] !== null)
 					{
 						data = _dataOfEffectButtons[target].effect as EffectInstanceInteger;
-						effectWeight = data.value * SmithMagic.runesWeight[effectIdEnum.getEffectIdFromMalusToBonus(data.effectId)];
+						effectWeight = data.value * SmithMagic.runesWeight[EffectIdEnum.getEffectIdFromMalusToBonus(data.effectId)];
 						
 						toolTip = uiApi.textTooltipInfo("Poids de l'effet : " + effectWeight);
 						uiApi.showTooltip(toolTip, target, false, "standard", 7, 1, 3);
