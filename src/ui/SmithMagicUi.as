@@ -148,6 +148,9 @@ package ui
 				}
 			}
 			
+			slot_item.emptyTexture = uiApi.createUri(uiApi.me().getConstant("assets") + pictoNameFromSkillId(SmithMagic.skill.id));
+			slot_item.refresh();
+			
 			updateItem(null);
 			
 			setWell(SmithMagic.well);
@@ -1110,6 +1113,50 @@ package ui
 		private function onValidQtyDropToSlot(quantity:Number):void
 		{
 			fillDefaultSlot(_waitingObject, quantity);
+		}
+		
+		/**
+		 * Return the skill pictorgram URI  string.
+		 * 
+		 * @param	skillId	Index of the skill.
+		 * 
+		 * @return	The skill pictogram URI string
+		 */
+		private function pictoNameFromSkillId(skillId:int):String
+		{
+			switch(skillId)
+			{
+				case SKILL_TYPE_AMULET:
+				{
+					return "tx_slotItem0";
+				}
+				case SKILL_TYPE_RING:
+				{
+					return "tx_slotItem2";
+				}
+				case SKILL_TYPE_BELT:
+				{
+					return "tx_slotItem3";
+				}
+				case SKILL_TYPE_BOOTS:
+				{
+					return "tx_slotItem5";
+				}
+				case SKILL_TYPE_HAT:
+				{
+					return "tx_slotItem6";
+				}
+				case SKILL_TYPE_CLOAK:
+				case SKILL_TYPE_BAG:
+				{
+					return "tx_slotItem7";
+				}
+				default:
+				{
+					return "tx_slotItem1";
+					break;
+				}
+			}
 		}
 		
 		private function getIdEffectMalusToBonus(id:uint):uint
