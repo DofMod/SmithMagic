@@ -701,9 +701,13 @@ package ui
 					// On affecte le jet max et min aux labels de la grid
 					componentsRef.lbl_jetMin.text = jetMin;
 					componentsRef.lbl_jetMax.text = jetMax;
-			
+					
+					if (jetActuel == 0)
+					{
+						componentsRef.tx_bulle.uri = _bubbleGreyUri;
+					}
 					// On change l'état de la bulle si le jet est overmax
-					if (jetActuel > jetMax)
+					else if (jetActuel > jetMax)
 					{
 						componentsRef.tx_bulle.uri = _bubbleRedUri;
 					}
