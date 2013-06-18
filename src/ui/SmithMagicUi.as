@@ -645,8 +645,7 @@ package ui
 			uiApi.addComponentHook(componentsRef.tx_bulle, "onRollOver");
 			uiApi.addComponentHook(componentsRef.tx_bulle, "onRollOut");
 			
-			var effect:EffectInstanceInteger = data.effect as EffectInstanceInteger;
-			var isNull:Boolean = data.isNull as Boolean;
+			var effect:EffectInstanceInteger = data as EffectInstanceInteger;
 			var effectSign:int = 0;
 			
 			// On initialise l'état sur la bulle verte (entre le jet min et 80% du jet)
@@ -669,7 +668,7 @@ package ui
 				effectSign = 1;
 			}
 			
-			if (isNull)
+			if (effect.value == 0)
 			{
 				componentsRef.lbl_jet.cssClass = "normal";
 			}
@@ -876,7 +875,7 @@ package ui
 				// Exclude damages effects (EffectInstanceMinMax) and Signature/Hunter mark/follower bonus (EffectInstanceString)
 				if (effect is EffectInstanceInteger)
 				{
-					forgeableEffectList.push({effect : effect, isNull : false});
+					forgeableEffectList.push(effect);
 					presentEffectList[effect.effectId] = true;
 				}
 			}
@@ -885,7 +884,7 @@ package ui
 			{
 				if (effect is EffectInstanceInteger && !(presentEffectList[effect.effectId]))
 				{
-					forgeableEffectList.push({effect : effect, isNull : true});
+					forgeableEffectList.push(effect);
 				}
 			}
 			
