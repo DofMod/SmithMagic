@@ -132,8 +132,8 @@ package ui
 				
 				if (_isCrafter)
 				{
-					slot_item.dropValidator = dropValidator;
-					slot_item.processDrop = processDrop;
+					slot.dropValidator = dropValidator;
+					slot.processDrop = processDrop;
 				}
 				else
 				{
