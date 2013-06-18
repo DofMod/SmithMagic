@@ -223,7 +223,7 @@ package ui
 			{
 				if (oldEffect is EffectInstanceInteger)
 				{
-					effects[oldEffect.effectId] = ({oldValue : (getSigneBonus(oldEffect) * oldEffect.value), newValue : false, id : EffectIdEnum.getEffectIdFromMalusToBonus(oldEffect.effectId) });
+					effects[oldEffect.effectId] = ({oldValue : ((EffectIdEnum.isEffectNegative(oldEffect.effectId) ? -1 : 1) * oldEffect.value), newValue : false, id : EffectIdEnum.getEffectIdFromMalusToBonus(oldEffect.effectId) });
 				}
 			}
 			
@@ -234,11 +234,11 @@ package ui
 				{
 					if (effects[newEffect.effectId])
 					{
-						effects[newEffect.effectId].newValue = getSigneBonus(newEffect) * newEffect.value;
+						effects[newEffect.effectId].newValue = (EffectIdEnum.isEffectNegative(newEffect.effectId) ? -1 : 1) * newEffect.value;
 					}
 					else
 					{
-						effects[newEffect.effectId] = ({oldValue : false, newValue : (getSigneBonus(newEffect) * newEffect.value), id : EffectIdEnum.getEffectIdFromMalusToBonus(newEffect.effectId)});
+						effects[newEffect.effectId] = ({oldValue : false, newValue : ((EffectIdEnum.isEffectNegative(newEffect.effectId) ? -1 : 1) * newEffect.value), id : EffectIdEnum.getEffectIdFromMalusToBonus(newEffect.effectId)});
 					}
 				}
 			}
@@ -649,7 +649,7 @@ package ui
 			componentsRef.lbl_jet.text = effect.description;
 			
 			// On affecte le style css en fonction du type de jet (malus, bonus ou pas de signe)
-			if (effect.description.charAt(0) == "-")
+			if (EffectIdEnum.isEffectNegative(effect.effectId))
 			{
 				componentsRef.lbl_jet.cssClass = "malus";
 				signeBonus = -1;
@@ -799,25 +799,6 @@ package ui
 		{
 			btn_open.visible = !inCooperativeMode;
 			btn_open_cooperative.visible = inCooperativeMode;
-		}
-		
-		/**
-		 * Get the sign of the effect.
-		 * 
-		 * @param	effect	The effect.
-		 * 
-		 * @return	1 if bonus, -1 if malus.
-		 */
-		private function getSigneBonus(effect:Object):int
-		{
-			if (effect.description.charAt(0) == "-")
-			{
-				return -1;
-			}
-			else
-			{
-				return 1;
-			}
 		}
 		
 		/**
