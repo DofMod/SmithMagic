@@ -541,7 +541,7 @@ package ui
 						effectWeight = data.value * SmithMagic.runesWeight[EffectIdEnum.getEffectIdFromMalusToBonus(data.effectId)];
 						
 						toolTip = uiApi.textTooltipInfo("Poids de l'effet : " + effectWeight);
-						uiApi.showTooltip(toolTip, target, false, "standard", 7, 1, 3);
+						uiApi.showTooltip(toolTip, target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3);
 					}
 					else if (target.name.search("slot_") != -1 && _dataOfAvailableRuneSlots[target] !== null)
 					{
@@ -549,7 +549,7 @@ package ui
 						effectWeight = SmithMagic.runesWeight[data.effects[0].effectId] * data.effects[0].parameter0;
 						
 						toolTip = uiApi.textTooltipInfo(data.name + ", +" + data.effects[0].description + "\nPoids de la rune : " + effectWeight + "\nProbabilité : " + 50 + "%");
-						uiApi.showTooltip(toolTip, target, false, "standard", 7, 1, 3);
+						uiApi.showTooltip(toolTip, target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3);
 					}
 					else if (target.name.search("tx_bulle") != -1)
 					{
@@ -578,7 +578,7 @@ package ui
 							break;
 						}
 						
-						uiApi.showTooltip(toolTip, target, false, "standard", 7, 1, 3);
+						uiApi.showTooltip(toolTip, target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3);
 					}
 			}
 		}
