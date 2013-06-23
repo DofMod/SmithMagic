@@ -95,6 +95,7 @@ package ui
 		
 		// Les boutons de fermeture et reouverture de l'interface
 		public var btn_close:ButtonContainer;
+		public var btn_option:ButtonContainer;
 		public var btn_open:ButtonContainer;
 		public var btn_open_cooperative:ButtonContainer;
 		public var btn_wellInput:ButtonContainer;

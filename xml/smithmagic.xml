@@ -587,7 +587,7 @@
 					</Anchor>
 				</Anchors>
 				<Size>
-					<AbsDimension x="340"
+					<AbsDimension x="310"
 								  y="25" />
 				</Size>
 				<css>[local.localCss]styles.css</css>
@@ -598,7 +598,7 @@
 			<Label name="lbl_level">
 				<Anchors>
 					<Anchor>
-						<AbsDimension x="380"
+						<AbsDimension x="350"
 									  y="22" />
 					</Anchor>
 				</Anchors>
@@ -624,7 +624,21 @@
 				</Size>
 				<uri>[local.assets]btn_cornerCross</uri>
 			</Texture>
-
+			
+			<Texture>
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="443"
+									  y="0" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="49"
+								  y="36" />
+				</Size>
+				<uri>[local.assets]btn_PlusMinus</uri>
+			</Texture>
+			
 			<iconButton name="btn_close">
 				<Anchors>
 					<Anchor>
@@ -638,6 +652,20 @@
 				</Size>
 				<uri>[local.assets]Effets_btn_PlusMoins</uri>
 				<selected>true</selected>
+			</iconButton>
+			
+			<iconButton name="btn_option">
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="459"
+									  y="7" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="25"
+								  y="25" />
+				</Size>
+				<uri>[local.assets]btn_option_square</uri>
 			</iconButton>
 		</Container>
 	</Container>
