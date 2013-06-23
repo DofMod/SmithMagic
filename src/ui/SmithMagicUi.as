@@ -20,6 +20,7 @@ package ui
 	import d2data.Item;
 	import d2data.ItemWrapper;
 	import d2enums.ChatActivableChannelsEnum;
+	import d2enums.ComponentHookList;
 	import d2enums.LocationEnum;
 	import d2enums.StatesEnum;
 	import d2hooks.BagListUpdate;
@@ -177,28 +178,28 @@ package ui
 			sysApi.addHook(TextInformation, onTextInformation);
 			sysApi.addHook(BagListUpdate, onBagListUpdate);
 			
-			uiApi.addComponentHook(btn_close, "onRelease");
-			uiApi.addComponentHook(btn_open, "onRelease");
-			uiApi.addComponentHook(btn_open_cooperative, "onRelease");
-			uiApi.addComponentHook(btn_wellInput, "onRelease");
+			uiApi.addComponentHook(btn_close, ComponentHookList.ON_RELEASE);
+			uiApi.addComponentHook(btn_open, ComponentHookList.ON_RELEASE);
+			uiApi.addComponentHook(btn_open_cooperative, ComponentHookList.ON_RELEASE);
+			uiApi.addComponentHook(btn_wellInput, ComponentHookList.ON_RELEASE);
 			
-			uiApi.addComponentHook(btn_open, "onRollOver");
-			uiApi.addComponentHook(btn_open, "onRollOut");
-			uiApi.addComponentHook(btn_open_cooperative, "onRollOver");
-			uiApi.addComponentHook(btn_open_cooperative, "onRollOut");
+			uiApi.addComponentHook(btn_open, ComponentHookList.ON_ROLL_OVER);
+			uiApi.addComponentHook(btn_open, ComponentHookList.ON_ROLL_OUT);
+			uiApi.addComponentHook(btn_open_cooperative, ComponentHookList.ON_ROLL_OVER);
+			uiApi.addComponentHook(btn_open_cooperative, ComponentHookList.ON_ROLL_OUT);
 			
-			uiApi.addComponentHook(lbl_min, "onRollOver");
-			uiApi.addComponentHook(lbl_min, "onRollOut");
-			uiApi.addComponentHook(lbl_max, "onRollOver");
-			uiApi.addComponentHook(lbl_max, "onRollOut");
-			uiApi.addComponentHook(lbl_effect, "onRollOver");
-			uiApi.addComponentHook(lbl_effect, "onRollOut");
-			uiApi.addComponentHook(lbl_rune_ba, "onRollOver");
-			uiApi.addComponentHook(lbl_rune_ba, "onRollOut");
-			uiApi.addComponentHook(lbl_rune_pa, "onRollOver");
-			uiApi.addComponentHook(lbl_rune_pa, "onRollOut");
-			uiApi.addComponentHook(lbl_rune_ra, "onRollOver");
-			uiApi.addComponentHook(lbl_rune_ra, "onRollOut");
+			uiApi.addComponentHook(lbl_min, ComponentHookList.ON_ROLL_OVER);
+			uiApi.addComponentHook(lbl_min, ComponentHookList.ON_ROLL_OUT);
+			uiApi.addComponentHook(lbl_max, ComponentHookList.ON_ROLL_OVER);
+			uiApi.addComponentHook(lbl_max, ComponentHookList.ON_ROLL_OUT);
+			uiApi.addComponentHook(lbl_effect, ComponentHookList.ON_ROLL_OVER);
+			uiApi.addComponentHook(lbl_effect, ComponentHookList.ON_ROLL_OUT);
+			uiApi.addComponentHook(lbl_rune_ba, ComponentHookList.ON_ROLL_OVER);
+			uiApi.addComponentHook(lbl_rune_ba, ComponentHookList.ON_ROLL_OUT);
+			uiApi.addComponentHook(lbl_rune_pa, ComponentHookList.ON_ROLL_OVER);
+			uiApi.addComponentHook(lbl_rune_pa, ComponentHookList.ON_ROLL_OUT);
+			uiApi.addComponentHook(lbl_rune_ra, ComponentHookList.ON_ROLL_OVER);
+			uiApi.addComponentHook(lbl_rune_ra, ComponentHookList.ON_ROLL_OUT);
 			
 			displayOpenButton(_inCooperatingMode);
 		}
@@ -830,11 +831,11 @@ package ui
 			addHooksToSlot(componentsRef.slot_pa);
 			addHooksToSlot(componentsRef.slot_ra);
 			
-			uiApi.addComponentHook(componentsRef.btn_jet, "onRollOver");
-			uiApi.addComponentHook(componentsRef.btn_jet, "onRollOut");
+			uiApi.addComponentHook(componentsRef.btn_jet, ComponentHookList.ON_ROLL_OVER);
+			uiApi.addComponentHook(componentsRef.btn_jet, ComponentHookList.ON_ROLL_OUT);
 			
-			uiApi.addComponentHook(componentsRef.tx_bulle, "onRollOver");
-			uiApi.addComponentHook(componentsRef.tx_bulle, "onRollOut");
+			uiApi.addComponentHook(componentsRef.tx_bulle, ComponentHookList.ON_ROLL_OVER);
+			uiApi.addComponentHook(componentsRef.tx_bulle, ComponentHookList.ON_ROLL_OUT);
 			
 			// Gestion of the selection
 			componentsRef.btn_jet.selected	= selected;
@@ -970,9 +971,9 @@ package ui
 		 */
 		private function addHooksToSlot(slot:Slot):void
 		{
-			uiApi.addComponentHook(slot, "onRollOver");
-			uiApi.addComponentHook(slot, "onRollOut");
-			uiApi.addComponentHook(slot, "onDoubleClick");
+			uiApi.addComponentHook(slot, ComponentHookList.ON_ROLL_OVER);
+			uiApi.addComponentHook(slot, ComponentHookList.ON_ROLL_OUT);
+			uiApi.addComponentHook(slot, ComponentHookList.ON_DOUBLE_CLICK);
 			uiApi.addComponentHook(slot, "onRightClick");
 		}
 		
