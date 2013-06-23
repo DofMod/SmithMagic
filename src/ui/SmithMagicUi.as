@@ -179,13 +179,16 @@ package ui
 			sysApi.addHook(TextInformation, onTextInformation);
 			sysApi.addHook(BagListUpdate, onBagListUpdate);
 			
-			uiApi.addComponentHook(btn_close, ComponentHookList.ON_RELEASE);
-			uiApi.addComponentHook(btn_open, ComponentHookList.ON_RELEASE);
-			uiApi.addComponentHook(btn_open_cooperative, ComponentHookList.ON_RELEASE);
 			uiApi.addComponentHook(btn_wellInput, ComponentHookList.ON_RELEASE);
-			
+			uiApi.addComponentHook(btn_option, ComponentHookList.ON_ROLL_OVER);
+			uiApi.addComponentHook(btn_option, ComponentHookList.ON_ROLL_OUT);
+			uiApi.addComponentHook(btn_close, ComponentHookList.ON_RELEASE);
+			uiApi.addComponentHook(btn_close, ComponentHookList.ON_ROLL_OVER);
+			uiApi.addComponentHook(btn_close, ComponentHookList.ON_ROLL_OUT);			
+			uiApi.addComponentHook(btn_open, ComponentHookList.ON_RELEASE);
 			uiApi.addComponentHook(btn_open, ComponentHookList.ON_ROLL_OVER);
 			uiApi.addComponentHook(btn_open, ComponentHookList.ON_ROLL_OUT);
+			uiApi.addComponentHook(btn_open_cooperative, ComponentHookList.ON_RELEASE);
 			uiApi.addComponentHook(btn_open_cooperative, ComponentHookList.ON_ROLL_OVER);
 			uiApi.addComponentHook(btn_open_cooperative, ComponentHookList.ON_ROLL_OUT);
 			
@@ -546,7 +549,15 @@ package ui
 					break;
 				case btn_open:
 				case btn_open_cooperative:
-					uiApi.showTooltip("Mode avancé", target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3);
+					uiApi.showTooltip("Basculer en mode avancé", target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3);
+					
+					break;
+				case btn_close:
+					uiApi.showTooltip("Basculer en mode basique", target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3);
+					
+					break;
+				case btn_option:
+					uiApi.showTooltip("Options", target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3);
 					
 					break;
 				default:
