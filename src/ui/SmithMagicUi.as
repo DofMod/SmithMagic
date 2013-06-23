@@ -183,14 +183,22 @@ package ui
 			uiApi.addComponentHook(btn_wellInput, "onRelease");
 			
 			uiApi.addComponentHook(btn_open, "onRollOver");
+			uiApi.addComponentHook(btn_open, "onRollOut");
 			uiApi.addComponentHook(btn_open_cooperative, "onRollOver");
+			uiApi.addComponentHook(btn_open_cooperative, "onRollOut");
 			
 			uiApi.addComponentHook(lbl_min, "onRollOver");
+			uiApi.addComponentHook(lbl_min, "onRollOut");
 			uiApi.addComponentHook(lbl_max, "onRollOver");
+			uiApi.addComponentHook(lbl_max, "onRollOut");
 			uiApi.addComponentHook(lbl_effect, "onRollOver");
+			uiApi.addComponentHook(lbl_effect, "onRollOut");
 			uiApi.addComponentHook(lbl_rune_ba, "onRollOver");
+			uiApi.addComponentHook(lbl_rune_ba, "onRollOut");
 			uiApi.addComponentHook(lbl_rune_pa, "onRollOver");
+			uiApi.addComponentHook(lbl_rune_pa, "onRollOut");
 			uiApi.addComponentHook(lbl_rune_ra, "onRollOver");
+			uiApi.addComponentHook(lbl_rune_ra, "onRollOut");
 			
 			displayOpenButton(_inCooperatingMode);
 		}
