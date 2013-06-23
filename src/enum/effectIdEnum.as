@@ -197,7 +197,7 @@ package enum
 		}
 		
 		/**
-		 * Converte malus effect id to the coesponding bonus effect id.
+		 * Test if an effect is negative.
 		 * 
 		 * @param	id	Identifier of the effect.
 		 * 
@@ -250,6 +250,81 @@ package enum
 			}
 			
 			return false;
+		}
+		
+		/**
+		 * Test if an effect is positive.
+		 * 
+		 * @param	effectId	Identifier of the effect.
+		 * 
+		 * @return	True of False.
+		 */
+		public static function isEffectPositive(effectId:int):Boolean
+		{
+			switch (effectId)
+			{
+				case EffectIdEnum.LIFE:
+				case EffectIdEnum.AP:
+				case EffectIdEnum.DAMAGE:
+				case EffectIdEnum.CRITICAL:
+				case EffectIdEnum.PO:
+				case EffectIdEnum.STRENGTH:
+				case EffectIdEnum.AGILITY:
+				case EffectIdEnum.LUCK:
+				case EffectIdEnum.WISDOM:
+				case EffectIdEnum.VITALITY:
+				case EffectIdEnum.INTELLIGENCE:
+				case EffectIdEnum.MP:
+				case EffectIdEnum.DAMAGE_PERCENT:
+				case EffectIdEnum.PODS:
+				case EffectIdEnum.DODGE_AP:
+				case EffectIdEnum.DODGE_MP:
+				case EffectIdEnum.INITIATIVE:
+				case EffectIdEnum.PROSPECTION:
+				case EffectIdEnum.CARE:
+				case EffectIdEnum.INVOCATION:
+				case EffectIdEnum.RESISTANCE_PERCENT_EARTH:
+				case EffectIdEnum.RESISTANCE_PERCENT_WATER:
+				case EffectIdEnum.RESISTANCE_PERCENT_AIR:
+				case EffectIdEnum.RESISTANCE_PERCENT_FIRE:
+				case EffectIdEnum.RESISTANCE_PERCENT_NEUTRAL:
+				case EffectIdEnum.RETURN_DAMAGE:
+				case EffectIdEnum.DAMAGE_TRAP:
+				case EffectIdEnum.DAMAGE_PERCENT_TRAP:
+				case EffectIdEnum.RESISTANCE_EARTH:
+				case EffectIdEnum.RESISTANCE_WATER:
+				case EffectIdEnum.RESISTANCE_AIR:
+				case EffectIdEnum.RESISTANCE_FIRE:
+				case EffectIdEnum.RESISTANCE_NEUTRAL:
+				case EffectIdEnum.WITHDRAW_AP:
+				case EffectIdEnum.WITHDRAW_MP:
+				case EffectIdEnum.DAMAGE_PUSH:
+				case EffectIdEnum.RESISTANCE_PUSH:
+				case EffectIdEnum.RESISTANCE_CRITICAL:
+				case EffectIdEnum.DAMAGE_EARTH:
+				case EffectIdEnum.DAMAGE_FIRE:
+				case EffectIdEnum.DAMAGE_WATER:
+				case EffectIdEnum.DAMAGE_AIR:
+				case EffectIdEnum.DAMAGE_NEUTRAL:
+				case EffectIdEnum.ESCAPE:
+				case EffectIdEnum.TACKLE:
+				case EffectIdEnum.HUNTER:
+					return true;
+			}
+			
+			return false;
+		}
+		
+		/**
+		 * Test if the effect is forgeable.
+		 * 
+		 * @param	effectId	Identifier of the effect.
+		 * 
+		 * @return	True or False.
+		 */
+		public static function isForgeableEffect(effectId:int):Boolean
+		{
+			return isEffectPositive(effectId) || isEffectNegative(effectId);
 		}
 	}
 }

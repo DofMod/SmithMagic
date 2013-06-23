@@ -923,9 +923,10 @@ package ui
 			
 			for each (effect in item.effects)
 			{
-				// Exclude damages effects (EffectInstanceMinMax) and Signature/Hunter mark/follower bonus (EffectInstanceString)
-				if (effect is EffectInstanceInteger)
+				if (EffectIdEnum.isForgeableEffect(effect.effectId))
 				{
+					sysApi.log(2, "effect id:" + effect.effectId);
+					
 					forgeableEffectList.push(effect);
 					presentEffectList[EffectIdEnum.getEffectIdFromMalusToBonus(effect.effectId)] = true;
 				}
@@ -933,7 +934,7 @@ package ui
 			
 			for each (effect in item.possibleEffects)
 			{
-				if (effect is EffectInstanceInteger && !(presentEffectList[EffectIdEnum.getEffectIdFromMalusToBonus(effect.effectId)]))
+				if (EffectIdEnum.isForgeableEffect(effect.effectId) && !(presentEffectList[EffectIdEnum.getEffectIdFromMalusToBonus(effect.effectId)]))
 				{
 					forgeableEffectList.push(effect);
 				}
