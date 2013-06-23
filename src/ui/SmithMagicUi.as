@@ -945,8 +945,6 @@ package ui
 			{
 				if (EffectIdEnum.isForgeableEffect(effect.effectId))
 				{
-					sysApi.log(2, "effect id:" + effect.effectId);
-					
 					forgeableEffectList.push(effect);
 					presentEffectList[EffectIdEnum.getEffectIdFromMalusToBonus(effect.effectId)] = true;
 				}
