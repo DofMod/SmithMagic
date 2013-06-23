@@ -20,6 +20,7 @@ package ui
 	import d2data.Item;
 	import d2data.ItemWrapper;
 	import d2enums.ChatActivableChannelsEnum;
+	import d2enums.LocationEnum;
 	import d2enums.StatesEnum;
 	import d2hooks.BagListUpdate;
 	import d2hooks.DropEnd;
@@ -105,6 +106,12 @@ package ui
 		public var lbl_rune_weight:Label;
 		public var lbl_result:Label;
 		public var lbl_well:Label;
+		public var lbl_min:Label;
+		public var lbl_max:Label;
+		public var lbl_effect:Label;
+		public var lbl_rune_ba:Label;
+		public var lbl_rune_pa:Label;
+		public var lbl_rune_ra:Label;
 		
 		// Les Container de l'interface
 		public var ctr_concealable:GraphicContainer;
@@ -174,6 +181,12 @@ package ui
 			uiApi.addComponentHook(btn_open, "onRelease");
 			uiApi.addComponentHook(btn_open_cooperative, "onRelease");
 			uiApi.addComponentHook(btn_wellInput, "onRelease");
+			uiApi.addComponentHook(lbl_min, "onRollOver");
+			uiApi.addComponentHook(lbl_max, "onRollOver");
+			uiApi.addComponentHook(lbl_effect, "onRollOver");
+			uiApi.addComponentHook(lbl_rune_ba, "onRollOver");
+			uiApi.addComponentHook(lbl_rune_pa, "onRollOver");
+			uiApi.addComponentHook(lbl_rune_ra, "onRollOver");
 			
 			displayOpenButton(_inCooperatingMode);
 		}
@@ -491,6 +504,30 @@ package ui
 					{
 						uiApi.showTooltip(target.data.name, target);
 					}
+					
+					break;
+				case lbl_min:
+					uiApi.showTooltip("Effets minimums", target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3);
+					
+					break;
+				case lbl_max:
+					uiApi.showTooltip("Effets maximum", target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3);
+					
+					break;
+				case lbl_effect:
+					uiApi.showTooltip("Effets actuels", target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3);
+					
+					break;
+				case lbl_rune_ba:
+					uiApi.showTooltip("Runes de base", target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3);
+					
+					break;
+				case lbl_rune_pa:
+					uiApi.showTooltip("Runes PA", target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3);
+					
+					break;
+				case lbl_rune_ra:
+					uiApi.showTooltip("Runes RA", target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3);
 					
 					break;
 				default:

@@ -225,7 +225,7 @@
 			</Slot>
 
 			<!-- Label Min-->
-			<Label>
+			<Label name="lbl_min">
 				<Anchors>
 					<Anchor>
 						<AbsDimension x="10"
@@ -242,7 +242,7 @@
 			</Label>
 
 			<!-- Label Max-->
-			<Label>
+			<Label name="lbl_max">
 				<Anchors>
 					<Anchor>
 						<AbsDimension x="300"
@@ -259,7 +259,7 @@
 			</Label>
 
 			<!-- Label Caractéristiques-->
-			<Label>
+			<Label name="lbl_effect">
 				<Anchors>
 					<Anchor>
 						<AbsDimension x="60"
@@ -273,6 +273,57 @@
 				<css>[local.localCss]styles.css</css>
 				<cssClass>centerbold</cssClass>
 				<text>Caractéristiques</text>
+			</Label>
+			
+			<!-- Label rune simple-->
+			<Label name="lbl_rune_ba">
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="385"
+									  y="150" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="30"
+								  y="25" />
+				</Size>
+				<css>[local.localCss]styles.css</css>
+				<cssClass>centerbold</cssClass>
+				<text>BA</text>
+			</Label>
+			
+			<!-- Label rune PA-->
+			<Label name="lbl_rune_pa">
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="420"
+									  y="150" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="30"
+								  y="25" />
+				</Size>
+				<css>[local.localCss]styles.css</css>
+				<cssClass>centerbold</cssClass>
+				<text>PA</text>
+			</Label>
+			
+			<!-- Label rune RA-->
+			<Label name="lbl_rune_ra">
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="455"
+									  y="150" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="30"
+								  y="25" />
+				</Size>
+				<css>[local.localCss]styles.css</css>
+				<cssClass>centerbold</cssClass>
+				<text>RA</text>
 			</Label>
 
 			<Grid name="effectsGrid">
