@@ -838,33 +838,36 @@ package ui
 			componentsRef.slot_pa.visible = false;
 			componentsRef.slot_ra.visible = false;
 			
-			for each (var item:ItemWrapper in storageApi.getViewContent("storageResources"))
+			for each (var items:Object in [(_inCooperatingMode && (!_isCrafter || !_crafterCanUseHisRessources)) ? null : storageApi.getViewContent("storageResources"), _itemsInBag])
 			{
-				if (item.typeId != SMITHMAGIC_RUNE_ID || item.effects[0].effectId != effect.effectId)
+				for each (var item:ItemWrapper in items)
 				{
-					continue;
-				}
-				
-				if (item.name.search("Rune Pa") != -1)
-				{
-					_dataOfAvailableRuneSlots[componentsRef.slot_pa] = item;
+					if (item.typeId != SMITHMAGIC_RUNE_ID || item.effects[0].effectId != effect.effectId)
+					{
+						continue;
+					}
 					
-					componentsRef.slot_pa.data = item;
-					componentsRef.slot_pa.visible = true;
-				}
-				else if (item.name.search("Rune Ra") != -1)
-				{
-					_dataOfAvailableRuneSlots[componentsRef.slot_ra] = item;
-					
-					componentsRef.slot_ra.data = item;
-					componentsRef.slot_ra.visible = true;
-				}
-				else
-				{
-					_dataOfAvailableRuneSlots[componentsRef.slot_simple] = item;
-					
-					componentsRef.slot_simple.data = item;
-					componentsRef.slot_simple.visible = true;										
+					if (item.name.search("Rune Pa") != -1)
+					{
+						_dataOfAvailableRuneSlots[componentsRef.slot_pa] = item;
+						
+						componentsRef.slot_pa.data = item;
+						componentsRef.slot_pa.visible = true;
+					}
+					else if (item.name.search("Rune Ra") != -1)
+					{
+						_dataOfAvailableRuneSlots[componentsRef.slot_ra] = item;
+						
+						componentsRef.slot_ra.data = item;
+						componentsRef.slot_ra.visible = true;
+					}
+					else
+					{
+						_dataOfAvailableRuneSlots[componentsRef.slot_simple] = item;
+						
+						componentsRef.slot_simple.data = item;
+						componentsRef.slot_simple.visible = true;										
+					}
 				}
 			}
 			
