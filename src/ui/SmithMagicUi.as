@@ -464,6 +464,8 @@ package ui
 			{
 				_itemsFromBag = _itemsInBag;
 			}
+			
+			updateItem(slot_item.data); // Update runes list
 		}
 		
 		/**
