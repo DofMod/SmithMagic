@@ -27,6 +27,7 @@ package ui
 	import d2hooks.DropEnd;
 	import d2hooks.DropStart;
 	import d2hooks.ExchangeCraftResult;
+	import d2hooks.ExchangeMultiCraftCrafterCanUseHisRessources;
 	import d2hooks.ExchangeObjectAdded;
 	import d2hooks.ExchangeObjectModified;
 	import d2hooks.ExchangeObjectRemoved;
@@ -69,6 +70,7 @@ package ui
 		private var _waitingObject:ItemWrapper;
 		private var _dataOfEffectButtons:Dictionary = new Dictionary(false);
 		private var _dataOfAvailableRuneSlots:Dictionary = new Dictionary(false);
+		private var _crafterCanUseHisRessources:Boolean = false;
 		private var _bagItems:Array = null;
 		
 		private var _bubbleGreyUri:Object;
@@ -178,6 +180,11 @@ package ui
 			sysApi.addHook(ExchangeCraftResult, onExchangeCraftResult);
 			sysApi.addHook(TextInformation, onTextInformation);
 			sysApi.addHook(BagListUpdate, onBagListUpdate);
+			
+			if (_inCooperatingMode)
+			{
+				sysApi.addHook(ExchangeMultiCraftCrafterCanUseHisRessources, onExchangeMultiCraftCrafterCanUseHisRessources);
+			}
 			
 			uiApi.addComponentHook(btn_wellInput, ComponentHookList.ON_RELEASE);
 			uiApi.addComponentHook(btn_option, ComponentHookList.ON_ROLL_OVER);
@@ -320,6 +327,17 @@ package ui
 			{
 				//setWell(SmithMagic.well + weightLosses - _runeWeight);
 			}
+		}
+		
+		/**
+		 * This callback is called when the client allow/disallow the craft to
+		 * use his ressources.
+		 * 
+		 * @param	allowed	Is the crafter is allowed to use his own ressources.
+		 */
+		public function onExchangeMultiCraftCrafterCanUseHisRessources(allowed:Boolean):void
+		{
+			_crafterCanUseHisRessources = allowed;
 		}
 		
 		/**
