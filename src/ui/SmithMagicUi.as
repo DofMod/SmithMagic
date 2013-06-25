@@ -71,7 +71,8 @@ package ui
 		private var _dataOfEffectButtons:Dictionary = new Dictionary(false);
 		private var _dataOfAvailableRuneSlots:Dictionary = new Dictionary(false);
 		private var _crafterCanUseHisRessources:Boolean = false;
-		private var _bagItems:Array = null;
+		private var _itemsFromBag:Array = null;
+		private var _itemsInBag:Array = null;
 		
 		private var _bubbleGreyUri:Object;
 		private var _bubbleGreenUri:Object;
@@ -451,15 +452,17 @@ package ui
 		 */
 		public function onBagListUpdate(items:Object, modifiedByRemotePlayer:Boolean):void
 		{
+			_itemsInBag = new Array();
+			
+			for each (var item:ItemWrapper in items)
+			{
+				_itemsInBag.push(item);
+			}
+			
 			// Here we only want le item list send by the remote player, not the actual bag item list.
 			if (modifiedByRemotePlayer)
 			{
-				_bagItems = new Array();
-				
-				for each (var item:ItemWrapper in items)
-				{
-					_bagItems.push(item);
-				}
+				_itemsFromBag = _itemsInBag;
 			}
 		}
 		
@@ -1209,9 +1212,9 @@ package ui
 		 */
 		private function isItemFromBag(itemSought:ItemWrapper):Boolean
 		{
-			if (_bagItems)
+			if (_itemsFromBag)
 			{
-				for each (var item:ItemWrapper in _bagItems)
+				for each (var item:ItemWrapper in _itemsFromBag)
 				{
 					if (item.objectUID == itemSought.objectUID)
 					{
