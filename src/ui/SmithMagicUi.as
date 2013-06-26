@@ -542,45 +542,45 @@ package ui
 				case slot_item:
 					if (target.data)
 					{
-						uiApi.showTooltip(target.data.name, target);
+						uiApi.showTooltip(uiApi.textTooltipInfo(target.data.name), target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3, null, null, null, "TextInfo");
 					}
 					
 					break;
 				case lbl_min:
-					uiApi.showTooltip("Effets minimums", target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3);
+					uiApi.showTooltip(uiApi.textTooltipInfo("Effets minimums"), target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3, null, null, null, "TextInfo");
 					
 					break;
 				case lbl_max:
-					uiApi.showTooltip("Effets maximum", target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3);
+					uiApi.showTooltip(uiApi.textTooltipInfo("Effets maximum"), target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3, null, null, null, "TextInfo");
 					
 					break;
 				case lbl_effect:
-					uiApi.showTooltip("Effets actuels", target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3);
+					uiApi.showTooltip(uiApi.textTooltipInfo("Effets actuels"), target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3, null, null, null, "TextInfo");
 					
 					break;
 				case lbl_rune_ba:
-					uiApi.showTooltip("Runes de base", target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3);
+					uiApi.showTooltip(uiApi.textTooltipInfo("Runes de base"), target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3, null, null, null, "TextInfo");
 					
 					break;
 				case lbl_rune_pa:
-					uiApi.showTooltip("Runes PA", target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3);
+					uiApi.showTooltip(uiApi.textTooltipInfo("Runes PA"), target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3, null, null, null, "TextInfo");
 					
 					break;
 				case lbl_rune_ra:
-					uiApi.showTooltip("Runes RA", target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3);
+					uiApi.showTooltip(uiApi.textTooltipInfo("Runes RA"), target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3, null, null, null, "TextInfo");
 					
 					break;
 				case btn_open:
 				case btn_open_cooperative:
-					uiApi.showTooltip("Basculer en mode avancé", target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3);
+					uiApi.showTooltip(uiApi.textTooltipInfo("Basculer en mode avancé"), target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3, null, null, null, "TextInfo");
 					
 					break;
 				case btn_close:
-					uiApi.showTooltip("Basculer en mode basique", target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3);
+					uiApi.showTooltip(uiApi.textTooltipInfo("Basculer en mode basique"), target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3, null, null, null, "TextInfo");
 					
 					break;
 				case btn_option:
-					uiApi.showTooltip("Options", target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3);
+					uiApi.showTooltip(uiApi.textTooltipInfo("Options"), target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3, null, null, null, "TextInfo");
 					
 					break;
 				default:
@@ -602,7 +602,7 @@ package ui
 						}
 						
 						toolTip = uiApi.textTooltipInfo("Poids de l'effet : " + effectWeight);
-						uiApi.showTooltip(toolTip, target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3);
+						uiApi.showTooltip(toolTip, target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3, null, null, null, "TextInfo");
 					}
 					else if (target.name.search("slot_") != -1 && _dataOfAvailableRuneSlots[target] !== null)
 					{
@@ -610,7 +610,7 @@ package ui
 						effectWeight = SmithMagic.runesWeight[data.effects[0].effectId] * data.effects[0].parameter0;
 						
 						toolTip = uiApi.textTooltipInfo(data.name + ", +" + data.effects[0].description + "\nPoids de la rune : " + effectWeight + "\nProbabilité : " + 50 + "%");
-						uiApi.showTooltip(toolTip, target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3);
+						uiApi.showTooltip(toolTip, target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3, null, null, null, "TextInfo");
 					}
 					else if (target.name.search("tx_bulle") != -1)
 					{
@@ -639,7 +639,7 @@ package ui
 							break;
 						}
 						
-						uiApi.showTooltip(toolTip, target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3);
+						uiApi.showTooltip(toolTip, target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3, null, null, null, "TextInfo");
 					}
 			}
 		}
