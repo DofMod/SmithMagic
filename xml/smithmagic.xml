@@ -225,6 +225,67 @@
 				<refuseDragTexture>[local.refuseDrop_uri]</refuseDragTexture>
 			</Slot>
 
+			<!-- Success and Failure textures -->
+			<Texture name="tx_success_bg">
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="60"
+									  y="90" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="50"
+								  y="50" />
+				</Size>
+				
+				<uri>[local.assets]etoile1</uri>
+			</Texture>
+
+			<Texture name="tx_success_fg">
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="75"
+									  y="107" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="20"
+								  y="20" />
+				</Size>
+				
+				<uri>[local.assets]levelUp_tx_pictoCarac</uri>
+			</Texture>
+
+			<Texture name="tx_failure_bg">
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="60"
+									  y="90" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="50"
+								  y="50" />
+				</Size>
+				
+				<uri>[local.assets]etoile2</uri>
+			</Texture>
+
+			<Texture name="tx_failure_fg">
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="75"
+									  y="110" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="20"
+								  y="20" />
+				</Size>
+				
+				<uri>[local.assets]Craft_tx_croixNoir</uri>
+			</Texture>
+
 			<!-- Label Min-->
 			<Label name="lbl_min">
 				<Anchors>

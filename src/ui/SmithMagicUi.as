@@ -13,6 +13,7 @@ package ui
 	import d2components.Grid;
 	import d2components.Label;
 	import d2components.Slot;
+	import d2components.Texture;
 	import d2data.ContextMenuData;
 	import d2data.EffectInstance;
 	import d2data.EffectInstanceDice;
@@ -21,6 +22,7 @@ package ui
 	import d2data.ItemWrapper;
 	import d2enums.ChatActivableChannelsEnum;
 	import d2enums.ComponentHookList;
+	import d2enums.CraftResultEnum;
 	import d2enums.LocationEnum;
 	import d2enums.StatesEnum;
 	import d2hooks.BagListUpdate;
@@ -128,6 +130,12 @@ package ui
 		public var slot_rune:Slot;
 		public var slot_signature:Slot;
 		
+		// The textures of the interface
+		public var tx_failure_fg:Texture;
+		public var tx_failure_bg:Texture;
+		public var tx_success_fg:Texture;
+		public var tx_success_bg:Texture;
+		
 		// La Grid de l'interface
 		public var effectsGrid:Grid;
 		
@@ -170,6 +178,8 @@ package ui
 			
 			slot_item.emptyTexture = uiApi.createUri(uiApi.me().getConstant("assets") + pictoNameFromSkillId(SmithMagic.skill.id));
 			slot_item.refresh();
+			
+			displayResultIcon();
 			
 			updateItem(null);
 			
@@ -257,6 +267,8 @@ package ui
 			{
 				return;
 			}
+			
+			displayResultIcon(resultId);
 			
 			var oldItem:ItemWrapper = slot_item.data;
 			var effects:Dictionary = new Dictionary();
@@ -904,6 +916,44 @@ package ui
 		//::///////////////////////////////////////////////////////////
 		//::// Private methods
 		//::///////////////////////////////////////////////////////////
+		
+		/**
+		 * Display the right texture according to the craft result.
+		 * 
+		 * @param	result
+		 */
+		private function displayResultIcon(result:int = -1):void
+		{
+			switch (result)
+			{
+				case CraftResultEnum.CRAFT_SUCCESS:
+					tx_failure_bg.visible = false;
+					tx_failure_fg.visible = false;
+					tx_success_bg.visible = true;
+					tx_success_fg.visible = true;
+					
+					break;
+				case CraftResultEnum.CRAFT_NEUTRAL:
+					tx_failure_bg.visible = false;
+					tx_failure_fg.visible = false;
+					tx_success_bg.visible = true;
+					tx_success_fg.visible = false;
+					
+					break;
+				case CraftResultEnum.CRAFT_FAILED:
+					tx_failure_bg.visible = true;
+					tx_failure_fg.visible = true;
+					tx_success_bg.visible = false;
+					tx_success_fg.visible = false;
+					
+					break;
+				default:
+					tx_failure_bg.visible = false;
+					tx_failure_fg.visible = false;
+					tx_success_bg.visible = false;
+					tx_success_fg.visible = false;
+			}
+		}
 		
 		/**
 		 * Display the right open button.
