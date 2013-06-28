@@ -258,7 +258,7 @@ package ui
 		/**
 		 * Callback called when we get the result of a craft.
 		 * 
-		 * @param	resultId	Is the craft successful ?
+		 * @param	resultId	Identifier of the craft result (d2enum.CraftResultEnum).
 		 * @param	item	The result item.
 		 */
 		public function onExchangeCraftResult(resultId:int, item:ItemWrapper):void
