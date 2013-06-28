@@ -68,7 +68,6 @@ package ui
 		private var _isCrafter:Boolean = false;
 		private var _inCooperatingMode:Boolean;
 		private var _runeWeight:Number = 0;
-		private var _wellModification:Boolean = false;
 		private var _waitingObject:ItemWrapper;
 		private var _dataOfEffectButtons:Dictionary = new Dictionary(false);
 		private var _dataOfAvailableRuneSlots:Dictionary = new Dictionary(false);
@@ -249,9 +248,6 @@ package ui
 				return;
 			}
 			
-			// Is the well value modified ?
-			_wellModification = (text.indexOf("reliquat") != -1);
-			
 			lbl_result.text = "Résultat : ";
 		}
 		
@@ -340,7 +336,7 @@ package ui
 			//sysApi.log(2, "Weight losses : " +  weightLosses);
 			//sysApi.log(2, "Weight gains : " +  weightGains);
 			
-			if (_wellModification == true)
+			if (resultId == CraftResultEnum.CRAFT_FAILED || resultId == CraftResultEnum.CRAFT_NEUTRAL)
 			{
 				//setWell(SmithMagic.well + weightLosses - _runeWeight);
 			}
