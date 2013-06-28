@@ -458,8 +458,6 @@
 												  y="22" />
 								</Size>
 								<css>[local.localCss]styles.css</css>
-								<text>Augmente les dommages de 50%</text>
-								<hyperlinkEnabled>true</hyperlinkEnabled>
 								<useStyleSheet>true</useStyleSheet>
 							</Label>
 
@@ -489,6 +487,7 @@
 						</State>
 					</Button>
 
+					<!-- Rune slots -->
 					<Slot name="slot_simple">
 						<Anchors>
 							<Anchor>
