@@ -80,6 +80,8 @@ package ui
 		private var _bubbleRedUri:Object;
 		private var _bubbleBlueUri:Object;
 		
+		private var _associatedRuneBgColor:int;
+		
 		// Utilisation du modCommon pour l'inputBox du puits
 		[Module(name="Ankama_Common")]
 		public var modCommon:Object;
@@ -140,6 +142,8 @@ package ui
 			_bubbleOrangeUri = uiApi.createUri((uiApi.me().getConstant("assets") + "state_2"));		
 			_bubbleRedUri = uiApi.createUri((uiApi.me().getConstant("assets") + "state_6"));
 			_bubbleBlueUri = uiApi.createUri((uiApi.me().getConstant("assets") + "state_7"));
+			
+			_associatedRuneBgColor = uiApi.me().getConstant("colors_grid_over");
 			
 			_inCooperatingMode = SmithMagic.inCooperatingMode;
 			_isCrafter = (parameterList.crafterInfos === undefined || parameterList.crafterInfos.id == playerApi.getPlayedCharacterInfo().id);
@@ -883,9 +887,15 @@ package ui
 			uiApi.addComponentHook(componentsRef.tx_bulle, ComponentHookList.ON_ROLL_OVER);
 			uiApi.addComponentHook(componentsRef.tx_bulle, ComponentHookList.ON_ROLL_OUT);
 			
-			// Gestion of the selection
-			componentsRef.btn_jet.selected	= selected;
-			componentsRef.btn_jet.state = selected ? StatesEnum.STATE_SELECTED : StatesEnum.STATE_NORMAL;
+			// Highlight the effect modified with the rune in slot_rune
+			if (slot_rune.data && slot_rune.data.effects[0].effectId == bonusEffectId)
+			{
+				componentsRef.btn_jet.bgColor =  _associatedRuneBgColor;
+			}
+			else
+			{
+				componentsRef.btn_jet.bgColor =  -1;
+			}
 			
 			// Display line
 			componentsRef.ctr_jet.visible = true;

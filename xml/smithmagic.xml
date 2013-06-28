@@ -3,6 +3,7 @@
 	<Constants>
 		<Constant name="assets" value="[config.ui.skin]assets.swf|" />
 		<Constant name="css" value="[config.ui.skin]css/" />
+		<Constant name="colors_grid_over" value="[colors.grid.over]" />
 
 		<Constant name="over_uri" value="[config.ui.skin]bitmap/over.png" />
 		<Constant name="selected_uri" value="[config.ui.skin]bitmap/selected.png" />
