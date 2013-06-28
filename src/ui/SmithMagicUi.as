@@ -178,7 +178,7 @@ package ui
 			slot_item.emptyTexture = uiApi.createUri(uiApi.me().getConstant("assets") + pictoNameFromSkillId(SmithMagic.skill.id));
 			slot_item.refresh();
 			
-			displayResultIcon();
+			displayResultIcon(-1);
 			
 			updateItem(null);
 			
@@ -378,6 +378,8 @@ package ui
 			{
 				sysApi.log(2, "Unknow modified item ? (" + item + ")");
 			}
+			
+			displayResultIcon(-1);
 		}
 		
 		/**
@@ -424,6 +426,8 @@ package ui
 			{
 				sysApi.log(2, "Unknow exchange added item type : " + item);
 			}
+			
+			displayResultIcon(-1);
 		}
 		
 		/**
@@ -454,6 +458,8 @@ package ui
 			{
 				sysApi.log(2, "Unknow exchange item removed: " + itemUid);
 			}
+			
+			displayResultIcon(-1);
 		}
 		
 		/**
