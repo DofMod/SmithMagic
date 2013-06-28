@@ -64,18 +64,32 @@ malus {
 bonus {
 	font-family: Tahoma;
 	font-size: 18px;
-	color:#104E15;
+	color: #104E15;
 	letterSpacing: 0.3;
 }
 exotic {
 	font-family: Tahoma;
 	font-size: 18px;
-	color:#0342a1;
+	color: #0342a1;
 	letterSpacing: 0.3;
 }
 overmax {
 	font-family: Tahoma;
 	font-size: 18px;
-	color:#0342a1;
+	color: #0342a1;
 	letterSpacing: 0.3;
+}
+augmentation {
+	font-family: Tahoma;
+	font-size: 18px;
+	font-weight: bold;
+	color: #104E15;
+	text-align: right;
+}
+diminution {
+	font-family: Tahoma;
+	font-size: 18px;
+	font-weight: bold;
+	color: #7e1818;
+	text-align: right;
 }

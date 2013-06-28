@@ -454,10 +454,27 @@
 									</Anchor>
 								</Anchors>
 								<Size>
-									<AbsDimension x="240"
+									<AbsDimension x="195"
 												  y="22" />
 								</Size>
 								<css>[local.localCss]styles.css</css>
+								<useStyleSheet>true</useStyleSheet>
+							</Label>
+
+							<!-- Label jet modification-->
+							<Label name="lbl_jetModification">
+								<Anchors>
+									<Anchor>
+										<AbsDimension x="241"
+													  y="1" />
+									</Anchor>
+								</Anchors>
+								<Size>
+									<AbsDimension x="45"
+												  y="22" />
+								</Size>
+								<css>[local.localCss]styles.css</css>
+								<cssClass>augmentation</cssClass>
 								<useStyleSheet>true</useStyleSheet>
 							</Label>
 

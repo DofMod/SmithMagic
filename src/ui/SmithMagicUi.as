@@ -71,6 +71,7 @@ package ui
 		private var _waitingObject:ItemWrapper;
 		private var _dataOfEffectButtons:Dictionary = new Dictionary(false);
 		private var _dataOfAvailableRuneSlots:Dictionary = new Dictionary(false);
+		private var _modifiedEffects:Dictionary = new Dictionary(false);
 		private var _crafterCanUseHisRessources:Boolean = false;
 		private var _itemsFromBag:Array = null;
 		private var _itemsInBag:Array = null;
@@ -303,6 +304,8 @@ package ui
 				}
 			}
 			
+			_modifiedEffects = new Dictionary();
+			
 			var weightGains:Number = 0;
 			var weightLosses:Number = 0;
 			
@@ -317,18 +320,26 @@ package ui
 				if (effect.oldValue == false && effect.newValue != false)
 				{
 					weightGains += (effect.newValue * SmithMagic.runesWeight[effect.id]);
+					
+					_modifiedEffects[effect.id] = effect.newValue;
 				}
 				else if (effect.newValue == false && effect.oldValue != false)
 				{
 					weightLosses += (effect.oldValue * SmithMagic.runesWeight[effect.id]);
+					
+					_modifiedEffects[effect.id] = -effect.oldValue;
 				}
 				else if (effect.oldValue < effect.newValue)
 				{
 					weightGains += ((effect.newValue - effect.oldValue) * SmithMagic.runesWeight[effect.id]);
+					
+					_modifiedEffects[effect.id] = effect.newValue - effect.oldValue;
 				}
 				else if (effect.oldValue > effect.newValue)
 				{
 					weightLosses += ((effect.oldValue - effect.newValue) * SmithMagic.runesWeight[effect.id]);
+					
+					_modifiedEffects[effect.id] = effect.newValue - effect.oldValue;
 				}
 			}
 			
@@ -850,6 +861,26 @@ package ui
 				else
 				{
 					componentsRef.tx_bulle.uri = _bubbleGreenUri;
+				}
+			}
+			
+			componentsRef.lbl_jetModification.text = "";
+			for (var modifiedEffectBonusId:String in _modifiedEffects)
+			{
+				if (int(modifiedEffectBonusId) == bonusEffectId)
+				{
+					componentsRef.lbl_jetModification.text = _modifiedEffects[modifiedEffectBonusId];
+					
+					if (_modifiedEffects[modifiedEffectBonusId] > 0)
+					{
+						componentsRef.lbl_jetModification.cssClass = "augmentation";
+					}
+					else
+					{
+						componentsRef.lbl_jetModification.cssClass = "diminution";
+					}
+					
+					break;
 				}
 			}
 			
