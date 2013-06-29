@@ -36,7 +36,7 @@ package ui
 	import d2hooks.MouseCtrlDoubleClick;
 	import d2hooks.ObjectModified;
 	import d2hooks.TextInformation;
-	import enum.EffectIdEnum;
+	import enums.EffectIdEnum;
 	import flash.geom.Rectangle;
 	import flash.utils.Dictionary;
 	
