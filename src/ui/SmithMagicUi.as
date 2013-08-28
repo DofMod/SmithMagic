@@ -71,8 +71,6 @@ package ui
 		private var _inCooperatingMode:Boolean;
 		private var _runeWeight:Number = 0;
 		private var _waitingObject:ItemWrapper;
-		private var _dataOfEffectButtons:Dictionary = new Dictionary(false);
-		private var _dataOfAvailableRuneSlots:Dictionary = new Dictionary(false);
 		private var _modifiedEffects:Dictionary = new Dictionary(false);
 		private var _crafterCanUseHisRessources:Boolean = false;
 		private var _itemsFromBag:Array = null;
@@ -516,9 +514,15 @@ package ui
 					
 					break;
 				default:
-					if (_dataOfAvailableRuneSlots[target] != null)
+					if (target.name.search("slot_") != -1)
 					{
-						fillSlot(slot_rune, _dataOfAvailableRuneSlots[target], _dataOfAvailableRuneSlots[target].quantity);
+						var runeSlot:Slot = target as Slot;
+						if (!runeSlot&& !runeSlot.value)
+						{
+							return;
+						}
+						
+						fillSlot(slot_rune, runeSlot.value, runeSlot.value.quantity);
 					}
 			}
 		}		
@@ -542,9 +546,15 @@ package ui
 					
 					break;
 				default:
-					if (_dataOfAvailableRuneSlots[target] != null)
+					if (target.name.search("slot_") != -1)
 					{
-						fillSlot(slot_rune, _dataOfAvailableRuneSlots[target], 1);
+						var runeSlot:Slot = target as Slot;
+						if (!runeSlot&& !runeSlot.value)
+						{
+							return;
+						}
+						
+						fillSlot(slot_rune, runeSlot.value, 1);
 					}
 			}
 		}
@@ -619,17 +629,29 @@ package ui
 					var toolTip:Object;
 					var effectWeight:Number;
 					
-					if (target.name.search("btn_jet") != -1 && _dataOfEffectButtons[target] !== null)
+					if (target.name.search("btn_jet") != -1)
 					{
-						data = _dataOfEffectButtons[target] as EffectInstanceInteger;
+						var buttonEffect:ButtonContainer = target as ButtonContainer;
+						if (!buttonEffect && !buttonEffect.value)
+						{
+							return;
+						}
+						
+						data = buttonEffect.value as EffectInstanceInteger;
 						effectWeight = data.value * RuneWeightUtils.getWeight(EffectIdUtils.getEffectIdFromMalusToBonus(data.effectId));
 						
 						toolTip = uiApi.textTooltipInfo("Poids de l'effet : " + effectWeight);
 						uiApi.showTooltip(toolTip, target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3, null, null, null, "TextInfo");
 					}
-					else if (target.name.search("slot_") != -1 && _dataOfAvailableRuneSlots[target] !== null)
+					else if (target.name.search("slot_") != -1)
 					{
-						data = _dataOfAvailableRuneSlots[target] as ItemWrapper;
+						var runeSlot:Slot = target as Slot;
+						if (!runeSlot&& !runeSlot.value)
+						{
+							return;
+						}
+						
+						data = runeSlot.value as ItemWrapper;
 						effectWeight = RuneWeightUtils.getWeight(data.effects[0].effectId) * data.effects[0].parameter0;
 						
 						toolTip = uiApi.textTooltipInfo(data.name + ", +" + data.effects[0].description + "\nPoids de la rune : " + effectWeight + "\nProbabilité : " + 50 + "%");
@@ -750,10 +772,10 @@ package ui
 		public function updateGrid(effect:EffectInstanceInteger, componentsRef:*, selected:Boolean):void
 		{
 			// Reset globals data tracker
-			_dataOfEffectButtons[componentsRef.btn_jet] = effect;
-			_dataOfAvailableRuneSlots[componentsRef.slot_pa] = null;
-			_dataOfAvailableRuneSlots[componentsRef.slot_ra] = null;
-			_dataOfAvailableRuneSlots[componentsRef.slot_simple] = null;
+			componentsRef.btn_jet.value = effect;
+			componentsRef.slot_pa.value = null;
+			componentsRef.slot_ra.value = null;
+			componentsRef.slot_simple.value = null;
 			
 			// If empty line
 			if (effect == null)
@@ -894,22 +916,19 @@ package ui
 					
 					if (item.name.search("Rune Pa") != -1)
 					{
-						_dataOfAvailableRuneSlots[componentsRef.slot_pa] = item;
-						
+						componentsRef.slot_pa.value = item;
 						componentsRef.slot_pa.data = item;
 						componentsRef.slot_pa.visible = true;
 					}
 					else if (item.name.search("Rune Ra") != -1)
 					{
-						_dataOfAvailableRuneSlots[componentsRef.slot_ra] = item;
-						
+						componentsRef.slot_ra.value = item;
 						componentsRef.slot_ra.data = item;
 						componentsRef.slot_ra.visible = true;
 					}
 					else
 					{
-						_dataOfAvailableRuneSlots[componentsRef.slot_simple] = item;
-						
+						componentsRef.slot_simple.value = item;
 						componentsRef.slot_simple.data = item;
 						componentsRef.slot_simple.visible = true;										
 					}
