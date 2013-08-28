@@ -3,7 +3,6 @@ package ui
 	import d2actions.ExchangeObjectMove;
 	import d2actions.ExchangeObjectUseInWorkshop;
 	import d2api.ContextMenuApi;
-	import d2api.DataApi;
 	import d2api.PlayedCharacterApi;
 	import d2api.StorageApi;
 	import d2api.SystemApi;
@@ -82,7 +81,6 @@ package ui
 		// Déclaration des API dont on veut se servir dans cette classe
 		public var sysApi:SystemApi;
 		public var uiApi:UiApi;
-		public var dataApi:DataApi;
 		public var storageApi:StorageApi;
 		public var playerApi:PlayedCharacterApi;
 		public var menuApi:ContextMenuApi;
