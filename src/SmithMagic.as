@@ -7,9 +7,7 @@ package
 	import d2hooks.ExchangeLeave;
 	import d2hooks.ExchangeStartOkCraft;
 	import d2hooks.ExchangeStartOkMultiCraft;
-	import enums.EffectIdEnum;
 	import flash.display.Sprite;
-	import flash.utils.Dictionary;
 	import ui.SmithMagicUi;
 	
 	/**

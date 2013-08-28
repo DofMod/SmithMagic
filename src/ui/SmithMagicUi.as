@@ -18,13 +18,11 @@ package ui
 	import d2data.EffectInstance;
 	import d2data.EffectInstanceDice;
 	import d2data.EffectInstanceInteger;
-	import d2data.Item;
 	import d2data.ItemWrapper;
 	import d2enums.ChatActivableChannelsEnum;
 	import d2enums.ComponentHookList;
 	import d2enums.CraftResultEnum;
 	import d2enums.LocationEnum;
-	import d2enums.StatesEnum;
 	import d2hooks.BagListUpdate;
 	import d2hooks.DropEnd;
 	import d2hooks.DropStart;
@@ -36,8 +34,9 @@ package ui
 	import d2hooks.MouseCtrlDoubleClick;
 	import d2hooks.ObjectModified;
 	import d2hooks.TextInformation;
-	import enums.EffectIdEnum;
-	import flash.geom.Rectangle;
+	import enums.ItemIdEnum;
+	import enums.ItemTypeIdEnum;
+	import enums.SkillIdEnum;
 	import flash.utils.Dictionary;
 	import utils.EffectIdUtils;
 	import utils.RuneWeightUtils;
@@ -53,18 +52,6 @@ package ui
 		//::///////////////////////////////////////////////////////////
 		//::// Variables
 		//::///////////////////////////////////////////////////////////
-		
-		// Les constantes
-		private static const SIGNATURE_RUNE_ID:int = 7508;
-		private static const SMITHMAGIC_RUNE_ID:int = 78;
-		private static const SMITHMAGIC_POTION_ID:int = 26;
-		private static const SKILL_TYPE_AMULET:int = 169;
-		private static const SKILL_TYPE_RING:int = 168;
-		private static const SKILL_TYPE_BELT:int = 164;
-		private static const SKILL_TYPE_BOOTS:int = 163;
-		private static const SKILL_TYPE_HAT:int = 166;
-		private static const SKILL_TYPE_CLOAK:int = 165;
-		private static const SKILL_TYPE_BAG:int = 167;
 		
 		// Les variables globales
 		private var _isCrafter:Boolean = false;
@@ -416,14 +403,14 @@ package ui
 		 */
 		public function onExchangeObjectAdded(item:ItemWrapper):void
 		{
-			if (item.typeId == SMITHMAGIC_RUNE_ID || item.typeId == SMITHMAGIC_POTION_ID)
+			if (item.typeId == ItemTypeIdEnum.SMITHMAGIC_RUNE || item.typeId == ItemTypeIdEnum.SMITHMAGIC_POTION)
 			{
 				slot_rune.data = item;
 				
 				updateRune(slot_rune.data);
 				updateItem(slot_item.data); // Update the list of runes
 			}
-			else if (item.id == SIGNATURE_RUNE_ID)
+			else if (item.id == ItemIdEnum.RUNE_SIGNATURE)
 			{
 				slot_signature.data = item;
 			}
@@ -909,7 +896,7 @@ package ui
 			{
 				for each (var item:ItemWrapper in items)
 				{
-					if (item.typeId != SMITHMAGIC_RUNE_ID || item.effects[0].effectId != effect.effectId)
+					if (item.typeId != ItemTypeIdEnum.SMITHMAGIC_RUNE || item.effects[0].effectId != effect.effectId)
 					{
 						continue;
 					}
@@ -1153,14 +1140,14 @@ package ui
 					
 					return true;
 				case slot_rune:
-					if (item.typeId != SMITHMAGIC_RUNE_ID && item.typeId != SMITHMAGIC_POTION_ID)
+					if (item.typeId != ItemTypeIdEnum.SMITHMAGIC_RUNE && item.typeId != ItemTypeIdEnum.SMITHMAGIC_POTION)
 					{
 						return false;
 					}
 					
 					return true;
 				case slot_signature:
-					if (item.id != SIGNATURE_RUNE_ID)
+					if (item.id != ItemIdEnum.RUNE_SIGNATURE)
 					{
 						return false;
 					}
@@ -1358,28 +1345,28 @@ package ui
 		{
 			switch(skillId)
 			{
-				case SKILL_TYPE_AMULET:
+				case SkillIdEnum.MAGE_AN_AMULET:
 				{
 					return "tx_slotItem0";
 				}
-				case SKILL_TYPE_RING:
+				case SkillIdEnum.MAGE_A_RING:
 				{
 					return "tx_slotItem2";
 				}
-				case SKILL_TYPE_BELT:
+				case SkillIdEnum.MAGE_A_BELT:
 				{
 					return "tx_slotItem3";
 				}
-				case SKILL_TYPE_BOOTS:
+				case SkillIdEnum.MAGE_BOOTS:
 				{
 					return "tx_slotItem5";
 				}
-				case SKILL_TYPE_HAT:
+				case SkillIdEnum.MAGE_A_HAT:
 				{
 					return "tx_slotItem6";
 				}
-				case SKILL_TYPE_CLOAK:
-				case SKILL_TYPE_BAG:
+				case SkillIdEnum.MAGE_A_CAPE:
+				case SkillIdEnum.MAGE_A_BAG:
 				{
 					return "tx_slotItem7";
 				}
