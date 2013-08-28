@@ -622,15 +622,7 @@ package ui
 					if (target.name.search("btn_jet") != -1 && _dataOfEffectButtons[target] !== null)
 					{
 						data = _dataOfEffectButtons[target] as EffectInstanceInteger;
-						
-						if (EffectIdUtils.isEffectNegative(data.effectId))
-						{
-							effectWeight = 0;
-						}
-						else
-						{
-							effectWeight = data.value * RuneWeightUtils.getWeight(EffectIdUtils.getEffectIdFromMalusToBonus(data.effectId));
-						}
+						effectWeight = data.value * RuneWeightUtils.getWeight(EffectIdUtils.getEffectIdFromMalusToBonus(data.effectId));
 						
 						toolTip = uiApi.textTooltipInfo("Poids de l'effet : " + effectWeight);
 						uiApi.showTooltip(toolTip, target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3, null, null, null, "TextInfo");
