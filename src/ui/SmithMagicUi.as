@@ -39,6 +39,8 @@ package ui
 	import enums.EffectIdEnum;
 	import flash.geom.Rectangle;
 	import flash.utils.Dictionary;
+	import utils.EffectIdUtils;
+	import utils.RuneWeightUtils;
 	
 	/**
 	 * Main ui class.
@@ -278,8 +280,8 @@ package ui
 			{
 				if (oldEffect is EffectInstanceInteger)
 				{
-					oldValue = (EffectIdEnum.isEffectNegative(oldEffect.effectId) ? -1 : 1) * oldEffect.value;
-					effectIdBonus =  EffectIdEnum.getEffectIdFromMalusToBonus(oldEffect.effectId);
+					oldValue = (EffectIdUtils.isEffectNegative(oldEffect.effectId) ? -1 : 1) * oldEffect.value;
+					effectIdBonus =  EffectIdUtils.getEffectIdFromMalusToBonus(oldEffect.effectId);
 					
 					effects[oldEffect.effectId] = ({oldValue : oldValue, newValue : false, id : effectIdBonus});
 				}
@@ -292,12 +294,12 @@ package ui
 				{
 					if (effects[newEffect.effectId])
 					{
-						effects[newEffect.effectId].newValue = (EffectIdEnum.isEffectNegative(newEffect.effectId) ? -1 : 1) * newEffect.value;
+						effects[newEffect.effectId].newValue = (EffectIdUtils.isEffectNegative(newEffect.effectId) ? -1 : 1) * newEffect.value;
 					}
 					else
 					{
-						newValue = (EffectIdEnum.isEffectNegative(newEffect.effectId) ? -1 : 1) * newEffect.value;
-						effectIdBonus = EffectIdEnum.getEffectIdFromMalusToBonus(newEffect.effectId);
+						newValue = (EffectIdUtils.isEffectNegative(newEffect.effectId) ? -1 : 1) * newEffect.value;
+						effectIdBonus = EffectIdUtils.getEffectIdFromMalusToBonus(newEffect.effectId);
 						
 						effects[newEffect.effectId] = ({oldValue : false, newValue : newValue, id : effectIdBonus});
 					}
@@ -319,25 +321,25 @@ package ui
 				
 				if (effect.oldValue == false && effect.newValue != false)
 				{
-					weightGains += (effect.newValue * SmithMagic.runesWeight[effect.id]);
+					weightGains += (effect.newValue * RuneWeightUtils.getWeight(effect.id));
 					
 					_modifiedEffects[effect.id] = effect.newValue;
 				}
 				else if (effect.newValue == false && effect.oldValue != false)
 				{
-					weightLosses += (effect.oldValue * SmithMagic.runesWeight[effect.id]);
+					weightLosses += (effect.oldValue * RuneWeightUtils.getWeight(effect.id));
 					
 					_modifiedEffects[effect.id] = -effect.oldValue;
 				}
 				else if (effect.oldValue < effect.newValue)
 				{
-					weightGains += ((effect.newValue - effect.oldValue) * SmithMagic.runesWeight[effect.id]);
+					weightGains += ((effect.newValue - effect.oldValue) * RuneWeightUtils.getWeight(effect.id));
 					
 					_modifiedEffects[effect.id] = effect.newValue - effect.oldValue;
 				}
 				else if (effect.oldValue > effect.newValue)
 				{
-					weightLosses += ((effect.oldValue - effect.newValue) * SmithMagic.runesWeight[effect.id]);
+					weightLosses += ((effect.oldValue - effect.newValue) * RuneWeightUtils.getWeight(effect.id));
 					
 					_modifiedEffects[effect.id] = effect.newValue - effect.oldValue;
 				}
@@ -621,13 +623,13 @@ package ui
 					{
 						data = _dataOfEffectButtons[target] as EffectInstanceInteger;
 						
-						if (EffectIdEnum.isEffectNegative(data.effectId))
+						if (EffectIdUtils.isEffectNegative(data.effectId))
 						{
 							effectWeight = 0;
 						}
 						else
 						{
-							effectWeight = data.value * SmithMagic.runesWeight[EffectIdEnum.getEffectIdFromMalusToBonus(data.effectId)];
+							effectWeight = data.value * RuneWeightUtils.getWeight(EffectIdUtils.getEffectIdFromMalusToBonus(data.effectId));
 						}
 						
 						toolTip = uiApi.textTooltipInfo("Poids de l'effet : " + effectWeight);
@@ -636,7 +638,7 @@ package ui
 					else if (target.name.search("slot_") != -1 && _dataOfAvailableRuneSlots[target] !== null)
 					{
 						data = _dataOfAvailableRuneSlots[target] as ItemWrapper;
-						effectWeight = SmithMagic.runesWeight[data.effects[0].effectId] * data.effects[0].parameter0;
+						effectWeight = RuneWeightUtils.getWeight(data.effects[0].effectId) * data.effects[0].parameter0;
 						
 						toolTip = uiApi.textTooltipInfo(data.name + ", +" + data.effects[0].description + "\nPoids de la rune : " + effectWeight + "\nProbabilité : " + 50 + "%");
 						uiApi.showTooltip(toolTip, target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3, null, null, null, "TextInfo");
@@ -773,10 +775,10 @@ package ui
 			var effectDice:EffectInstanceDice = null;
 			var effectIsExotique:Boolean = true;
 			
-			var bonusEffectId:int = EffectIdEnum.getEffectIdFromMalusToBonus(effect.effectId);
+			var bonusEffectId:int = EffectIdUtils.getEffectIdFromMalusToBonus(effect.effectId);
 			for each (effectDice in slot_item.data.possibleEffects)
 			{
-				if (EffectIdEnum.getEffectIdFromMalusToBonus(effectDice.effectId) == bonusEffectId)
+				if (EffectIdUtils.getEffectIdFromMalusToBonus(effectDice.effectId) == bonusEffectId)
 				{
 					effectIsExotique = false;
 					
@@ -800,8 +802,8 @@ package ui
 				var jetMax:int;
 				var jetValue:int;
 				
-				var isEffectNegative:Boolean = EffectIdEnum.isEffectNegative(effect.effectId);
-				var isEffectDiceNegative:Boolean = EffectIdEnum.isEffectNegative(effectDice.effectId);
+				var isEffectNegative:Boolean = EffectIdUtils.isEffectNegative(effect.effectId);
+				var isEffectDiceNegative:Boolean = EffectIdUtils.isEffectNegative(effectDice.effectId);
 				
 				// Get and set jet min & jet max & description.
 				if (isEffectDiceNegative)
@@ -1021,9 +1023,9 @@ package ui
 			lbl_rune_name.text = rune.name;
 			lbl_rune_effect.text = "+" + effect.description;
 			
-			if (SmithMagic.runesWeight[effect.effectId])
+			if (RuneWeightUtils.getWeight(effect.effectId))
 			{
-				_runeWeight = SmithMagic.runesWeight[effect.effectId] * effect.value;
+				_runeWeight = RuneWeightUtils.getWeight(effect.effectId) * effect.value;
 				
 				lbl_rune_weight.text = "Poids : " + _runeWeight;
 			}
@@ -1062,16 +1064,16 @@ package ui
 			
 			for each (effect in item.effects)
 			{
-				if (EffectIdEnum.isForgeableEffect(effect.effectId))
+				if (EffectIdUtils.isForgeableEffect(effect.effectId))
 				{
 					forgeableEffectList.push(effect);
-					presentEffectList[EffectIdEnum.getEffectIdFromMalusToBonus(effect.effectId)] = true;
+					presentEffectList[EffectIdUtils.getEffectIdFromMalusToBonus(effect.effectId)] = true;
 				}
 			}
 			
 			for each (effect in item.possibleEffects)
 			{
-				if (EffectIdEnum.isForgeableEffect(effect.effectId) && !(presentEffectList[EffectIdEnum.getEffectIdFromMalusToBonus(effect.effectId)]))
+				if (EffectIdUtils.isForgeableEffect(effect.effectId) && !(presentEffectList[EffectIdUtils.getEffectIdFromMalusToBonus(effect.effectId)]))
 				{
 					forgeableEffectList.push(effect);
 				}
