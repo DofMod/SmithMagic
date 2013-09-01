@@ -18,6 +18,7 @@ package ui
 	import d2data.EffectInstanceDice;
 	import d2data.EffectInstanceInteger;
 	import d2data.ItemWrapper;
+	import d2data.Skill;
 	import d2enums.ChatActivableChannelsEnum;
 	import d2enums.ComponentHookList;
 	import d2enums.CraftResultEnum;
@@ -54,14 +55,16 @@ package ui
 		//::///////////////////////////////////////////////////////////
 		
 		// Les variables globales
+		private var _well:int = 0;
 		private var _isCrafter:Boolean = false;
 		private var _inCooperatingMode:Boolean;
 		private var _runeWeight:Number = 0;
-		private var _waitingObject:ItemWrapper;
+		private var _waitingObject:ItemWrapper = null;
 		private var _modifiedEffects:Dictionary = new Dictionary(false);
 		private var _crafterCanUseHisRessources:Boolean = false;
 		private var _itemsFromBag:Array = null;
 		private var _itemsInBag:Array = null;
+		private var _skill:Skill = null;
 		private var _langManager:LangManager = null;
 		
 		private var _bubbleGreyUri:Object;
@@ -141,8 +144,8 @@ package ui
 			_associatedRuneBgColor = uiApi.me().getConstant("colors_grid_over");
 			
 			_langManager = parameterList.langManager;
-			
-			_inCooperatingMode = SmithMagic.inCooperatingMode;
+			_skill = parameterList.skill;
+			_inCooperatingMode = parameterList.inCooperatingMode;
 			_isCrafter = (parameterList.crafterInfos === undefined || parameterList.crafterInfos.id == playerApi.getPlayedCharacterInfo().id);
 			
 			for each (var slot:Slot in [slot_item, slot_rune, slot_signature])
@@ -165,14 +168,12 @@ package ui
 				}
 			}
 			
-			slot_item.emptyTexture = uiApi.createUri(uiApi.me().getConstant("assets") + pictoNameFromSkillId(SmithMagic.skill.id));
+			slot_item.emptyTexture = uiApi.createUri(uiApi.me().getConstant("assets") + pictoNameFromSkillId(_skill.id));
 			slot_item.refresh();
 			
 			displayResultIcon(-1);
 			
 			updateItem(null);
-			
-			setWell(SmithMagic.well);
 			
 			sysApi.addHook(ObjectModified, onObjectModified);
 			sysApi.addHook(ExchangeObjectAdded, onExchangeObjectAdded);
@@ -699,7 +700,7 @@ package ui
 					break;
 				
 				case btn_wellInput:
-					modCommon.openInputPopup("Réglage manuel du puits", "Entrez la valeur souhaitée", onValidWellValue, null, SmithMagic.well, "0-9.", 5);
+					modCommon.openInputPopup("Réglage manuel du puits", "Entrez la valeur souhaitée", onValidWellValue, null, _well, "0-9.", 5);
 					
 					break;
 			}
@@ -1099,9 +1100,9 @@ package ui
 		 */
 		private function setWell(well:Number):void
 		{
-			SmithMagic.well = well;
+			_well = well;
 			
-			lbl_well.text = "Puits : " + well;
+			lbl_well.text = "Puits : " + _well;
 		}
 		
 		/**
@@ -1127,15 +1128,10 @@ package ui
 		 */
 		private function isValidSlot(slot:Slot, item:ItemWrapper):Boolean
 		{
-			if (!SmithMagic.skill)
-			{
-				return false;
-			}
-			
 			switch (slot)
 			{
 				case slot_item:
-					if (SmithMagic.skill.modifiableItemType != item.typeId)
+					if (_skill.modifiableItemType != item.typeId)
 					{
 						return false;
 					}

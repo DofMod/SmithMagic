@@ -38,11 +38,6 @@ package
 		public var fileApi:FileApi;
 		
 		// Some globals
-		public static var well:Number = 0;
-		public static var skill:Skill = null;
-		public static var inCooperatingMode:Boolean;
-		
-		// Others
 		private var _langManager:LangManager;
 		
 		//::///////////////////////////////////////////////////////////
@@ -71,16 +66,15 @@ package
 		 */
 		private function onExchangeStartOkCraft(recipes:Object, skillId:uint, nbCases:uint):void
 		{
-			skill = jobsApi.getSkillFromId(skillId as uint) as Skill;
+			var skill:Skill = jobsApi.getSkillFromId(skillId) as Skill;
 			if (!skill || !skill.isForgemagus)
 			{
 				return;
 			}
 			
-			inCooperatingMode = false;
-			
 			var params:Object;
-			params.skillId = skillId;
+			params.skill = skill;
+			params.inCooperatingMode = false;
 			params.langManager = _langManager;
 			
 			uiApi.loadUi(uiName, uiInstanceName, params);
@@ -97,18 +91,17 @@ package
 		 */
 		private function onExchangeStartOkMultiCraft(skillId:int, recipes:Object, nbCases:uint, crafterInfos:Object, customerInfos:Object):void
 		{
-			skill = jobsApi.getSkillFromId(skillId as uint) as Skill;
+			var skill:Skill = jobsApi.getSkillFromId(skillId) as Skill;
 			if (!skill || !skill.isForgemagus)
 			{
 				return;
 			}
 			
-			inCooperatingMode = true;
-			
 			var params:Object;
-			params.skillId = skillId;
+			params.skill = skill;
 			params.crafterInfos = crafterInfos;
 			params.customerInfos = customerInfos;
+			params.inCooperatingMode = true;
 			params.langManager = _langManager;
 			
 			uiApi.loadUi(uiName, uiInstanceName, params);
