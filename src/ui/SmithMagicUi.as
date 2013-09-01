@@ -37,6 +37,7 @@ package ui
 	import enums.ItemTypeIdEnum;
 	import enums.SkillIdEnum;
 	import flash.utils.Dictionary;
+	import managers.LangManager;
 	import utils.EffectIdUtils;
 	import utils.RuneWeightUtils;
 	
@@ -61,6 +62,7 @@ package ui
 		private var _crafterCanUseHisRessources:Boolean = false;
 		private var _itemsFromBag:Array = null;
 		private var _itemsInBag:Array = null;
+		private var _langManager:LangManager = null;
 		
 		private var _bubbleGreyUri:Object;
 		private var _bubbleGreenUri:Object;
@@ -137,6 +139,8 @@ package ui
 			_bubbleBlueUri = uiApi.createUri((uiApi.me().getConstant("assets") + "state_7"));
 			
 			_associatedRuneBgColor = uiApi.me().getConstant("colors_grid_over");
+			
+			_langManager = parameterList.langManager;
 			
 			_inCooperatingMode = SmithMagic.inCooperatingMode;
 			_isCrafter = (parameterList.crafterInfos === undefined || parameterList.crafterInfos.id == playerApi.getPlayedCharacterInfo().id);

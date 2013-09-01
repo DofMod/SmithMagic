@@ -1,5 +1,6 @@
 package
 {
+	import d2api.FileApi;
 	import d2api.JobsApi;
 	import d2api.SystemApi;
 	import d2api.UiApi;
@@ -8,6 +9,7 @@ package
 	import d2hooks.ExchangeStartOkCraft;
 	import d2hooks.ExchangeStartOkMultiCraft;
 	import flash.display.Sprite;
+	import managers.LangManager;
 	import ui.SmithMagicUi;
 	
 	/**
@@ -33,11 +35,15 @@ package
 		public var sysApi:SystemApi;
 		public var uiApi:UiApi;
 		public var jobsApi:JobsApi;
+		public var fileApi:FileApi;
 		
 		// Some globals
 		public static var well:Number = 0;
 		public static var skill:Skill = null;
 		public static var inCooperatingMode:Boolean;
+		
+		// Others
+		private var _langManager:LangManager;
 		
 		//::///////////////////////////////////////////////////////////
 		//::// Public methods
@@ -45,6 +51,8 @@ package
 		
 		public function main():void
 		{
+			_langManager = new LangManager(sysApi, fileApi, sysApi.getCurrentLanguage());
+			
 			sysApi.addHook(ExchangeStartOkCraft, onExchangeStartOkCraft);
 			sysApi.addHook(ExchangeStartOkMultiCraft, onExchangeStartOkMultiCraft);
 			sysApi.addHook(ExchangeLeave, onExchangeLeave);
@@ -70,7 +78,12 @@ package
 			}
 			
 			inCooperatingMode = false;
-			uiApi.loadUi(uiName, uiInstanceName, {skillId:skillId, recipes:recipes, nbCase:nbCases});
+			
+			var params:Object;
+			params.skillId = skillId;
+			params.langManager = _langManager;
+			
+			uiApi.loadUi(uiName, uiInstanceName, params);
 		}
 		
 		/**
@@ -78,11 +91,11 @@ package
 		 * 
 		 * @param	skillId	The skill identifier.
 		 * @param	recipes	The recipes list.
-		 * @param	nbCase	The maximum number of case that amy by used.
+		 * @param	nbCases	The maximum number of case that amy by used.
 		 * @param	crafterInfos	The crafter informations.
 		 * @param	curtomerInfos	The customer informations.
 		 */
-		private function onExchangeStartOkMultiCraft(skillId:int, recipes:Object, nbCase:uint, crafterInfos:Object, customerInfos:Object):void
+		private function onExchangeStartOkMultiCraft(skillId:int, recipes:Object, nbCases:uint, crafterInfos:Object, customerInfos:Object):void
 		{
 			skill = jobsApi.getSkillFromId(skillId as uint) as Skill;
 			if (!skill || !skill.isForgemagus)
@@ -91,7 +104,14 @@ package
 			}
 			
 			inCooperatingMode = true;
-			uiApi.loadUi(uiName, uiInstanceName, {skillId:skillId, recipes:recipes, nbCase:nbCase, crafterInfos:crafterInfos, customerInfos:customerInfos});
+			
+			var params:Object;
+			params.skillId = skillId;
+			params.crafterInfos = crafterInfos;
+			params.customerInfos = customerInfos;
+			params.langManager = _langManager;
+			
+			uiApi.loadUi(uiName, uiInstanceName, params);
 		}
 		
 		/**
