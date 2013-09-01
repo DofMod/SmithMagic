@@ -72,7 +72,7 @@ package
 				return;
 			}
 			
-			var params:Object;
+			var params:Object = {};
 			params.skill = skill;
 			params.inCooperatingMode = false;
 			params.langManager = _langManager;
@@ -97,7 +97,7 @@ package
 				return;
 			}
 			
-			var params:Object;
+			var params:Object = {};
 			params.skill = skill;
 			params.crafterInfos = crafterInfos;
 			params.customerInfos = customerInfos;
