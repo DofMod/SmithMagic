@@ -1,4 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lang>
-	<others>Others</others>
+	<result>Results : #0</result>
+	<well>Well : #0</well>
+	<level>Lvl. #0</level>
+	<weight>Weight : #0</weight>
+	<unknowWeight>Unknow weight</unknowWeight>
+	<shortcutMin>Min</shortcutMin>
+	<shortcutMax>Max</shortcutMax>
+	<characteristic>Characteristics</characteristic>
+	<shortcutRuneSimple>BA</shortcutRuneSimple>
+	<shortcutRunePA>PA</shortcutRunePA>
+	<shortcutRuneRA>RA</shortcutRuneRA>
+	<tooltipMinEffects>Minimum effets</tooltipMinEffects>
+	<tooltipMaxEffects>Maximum effets</tooltipMaxEffects>
+	<tooltipActualEffects>Actual effets</tooltipActualEffects>
+	<tooltipRuneSimple>Simple runes</tooltipRuneSimple>
+	<tooltipRunePA>PA runes</tooltipRunePA>
+	<tooltipRuneRA>RA runes</tooltipRuneRA>
+	<tooltipAvancedMode>Toogle avanced mode</tooltipAvancedMode>
+	<tooltipBasicMode>Toogle basic mode</tooltipBasicMode>
+	<tooltipOptions>Options</tooltipOptions>
+	<tooltipEffectWeight>Effect weight : #0</tooltipEffectWeight>
+	<tooltipRune>#0, #1\nRune weight : #2</tooltipRune>
+	<tooltipBad>Less than minimal</tooltipBad>
+	<tooltipNormal>Normal</tooltipNormal>
+	<tooltipGood>Good (>80% of max)</tooltipGood>
+	<tooltipOvermax>Overmax</tooltipOvermax>
+	<tooltipExotic>Exotic</tooltipExotic>
+	<popupWellTitle>Well</popupWellTitle>
+	<popupWellMessage>Enter well value</popupWellMessage>
 </lang>

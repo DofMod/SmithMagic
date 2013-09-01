@@ -100,7 +100,6 @@
 				</Size>
 				<css>[local.localCss]styles.css</css>
 				<cssClass>bold</cssClass>
-				<!--<text>Poids : 100</text>-->
 			</Label>
 
 			<!-- Label Effet Rune-->
@@ -117,7 +116,6 @@
 				</Size>
 				<css>[local.localCss]styles.css</css>
 				<cssClass>normal</cssClass>
-				<!--<text>Effet : +1 % de résistance neutre</text>-->
 			</Label>
 
 			<!-- Label Résultat-->
@@ -134,7 +132,6 @@
 				</Size>
 				<css>[local.localCss]styles.css</css>
 				<cssClass>bold</cssClass>
-				<text>Résultat :</text>
 			</Label>
 
 			<iconButton name="btn_wellInput">
@@ -300,7 +297,6 @@
 				</Size>
 				<css>[local.localCss]styles.css</css>
 				<cssClass>centerbold</cssClass>
-				<text>Min</text>
 			</Label>
 
 			<!-- Label Max-->
@@ -317,7 +313,6 @@
 				</Size>
 				<css>[local.localCss]styles.css</css>
 				<cssClass>centerbold</cssClass>
-				<text>Max</text>
 			</Label>
 
 			<!-- Label Caractéristiques-->
@@ -334,7 +329,6 @@
 				</Size>
 				<css>[local.localCss]styles.css</css>
 				<cssClass>centerbold</cssClass>
-				<text>Caractéristiques</text>
 			</Label>
 			
 			<!-- Label rune simple-->
@@ -351,7 +345,6 @@
 				</Size>
 				<css>[local.localCss]styles.css</css>
 				<cssClass>centerbold</cssClass>
-				<text>BA</text>
 			</Label>
 			
 			<!-- Label rune PA-->
@@ -368,7 +361,6 @@
 				</Size>
 				<css>[local.localCss]styles.css</css>
 				<cssClass>centerbold</cssClass>
-				<text>PA</text>
 			</Label>
 			
 			<!-- Label rune RA-->
@@ -385,7 +377,6 @@
 				</Size>
 				<css>[local.localCss]styles.css</css>
 				<cssClass>centerbold</cssClass>
-				<text>RA</text>
 			</Label>
 
 			<Grid name="effectsGrid">
@@ -442,7 +433,6 @@
 								</Size>
 								<css>[local.localCss]styles.css</css>
 								<cssClass>center</cssClass>
-								<text>1</text>
 							</Label>
 
 							<!-- Label jetactuel-->
@@ -492,7 +482,6 @@
 								</Size>
 								<css>[local.localCss]styles.css</css>
 								<cssClass>center</cssClass>
-								<text>100</text>
 							</Label>
 
 						</Common>

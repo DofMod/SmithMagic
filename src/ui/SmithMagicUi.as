@@ -36,6 +36,7 @@ package ui
 	import d2hooks.TextInformation;
 	import enums.ItemIdEnum;
 	import enums.ItemTypeIdEnum;
+	import enums.LangEnum;
 	import enums.SkillIdEnum;
 	import flash.utils.Dictionary;
 	import managers.LangManager;
@@ -148,6 +149,8 @@ package ui
 			_inCooperatingMode = parameterList.inCooperatingMode;
 			_isCrafter = (parameterList.crafterInfos === undefined || parameterList.crafterInfos.id == playerApi.getPlayedCharacterInfo().id);
 			
+			initLabels();
+			
 			for each (var slot:Slot in [slot_item, slot_rune, slot_signature])
 			{
 				addHooksToSlot(slot);
@@ -239,7 +242,7 @@ package ui
 				return;
 			}
 			
-			lbl_result.text = "Résultat : ";
+			lbl_result.text = _langManager.getText(LangEnum.RESULT, "");
 		}
 		
 		/**
@@ -578,45 +581,44 @@ package ui
 					
 					break;
 				case lbl_min:
-					uiApi.showTooltip(uiApi.textTooltipInfo("Effets minimums"), target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3, null, null, null, "TextInfo");
+					showDefaultTextTooltip(_langManager.getText(LangEnum.TOOLTIP_MIN_EFFECTS), target);
 					
 					break;
 				case lbl_max:
-					uiApi.showTooltip(uiApi.textTooltipInfo("Effets maximum"), target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3, null, null, null, "TextInfo");
+					showDefaultTextTooltip(_langManager.getText(LangEnum.TOOLTIP_MAX_EFFECTS), target);
 					
 					break;
 				case lbl_effect:
-					uiApi.showTooltip(uiApi.textTooltipInfo("Effets actuels"), target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3, null, null, null, "TextInfo");
+					showDefaultTextTooltip(_langManager.getText(LangEnum.TOOLTIP_ACTUAL_EFFECTS), target);
 					
 					break;
 				case lbl_rune_ba:
-					uiApi.showTooltip(uiApi.textTooltipInfo("Runes de base"), target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3, null, null, null, "TextInfo");
+					showDefaultTextTooltip(_langManager.getText(LangEnum.TOOLTIP_RUNE_SIMPLE), target);
 					
 					break;
 				case lbl_rune_pa:
-					uiApi.showTooltip(uiApi.textTooltipInfo("Runes PA"), target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3, null, null, null, "TextInfo");
+					showDefaultTextTooltip(_langManager.getText(LangEnum.TOOLTIP_RUNE_PA), target);
 					
 					break;
 				case lbl_rune_ra:
-					uiApi.showTooltip(uiApi.textTooltipInfo("Runes RA"), target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3, null, null, null, "TextInfo");
+					showDefaultTextTooltip(_langManager.getText(LangEnum.TOOLTIP_RUNE_RA), target);
 					
 					break;
 				case btn_open:
 				case btn_open_cooperative:
-					uiApi.showTooltip(uiApi.textTooltipInfo("Basculer en mode avancé"), target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3, null, null, null, "TextInfo");
+					showDefaultTextTooltip(_langManager.getText(LangEnum.TOOLTIP_AVANCED_MODE), target);
 					
 					break;
 				case btn_close:
-					uiApi.showTooltip(uiApi.textTooltipInfo("Basculer en mode basique"), target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3, null, null, null, "TextInfo");
+					showDefaultTextTooltip(_langManager.getText(LangEnum.TOOLTIP_BASIC_MODE), target);
 					
 					break;
 				case btn_option:
-					uiApi.showTooltip(uiApi.textTooltipInfo("Options"), target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3, null, null, null, "TextInfo");
+					showDefaultTextTooltip(_langManager.getText(LangEnum.TOOLTIP_OPTIONS), target);
 					
 					break;
 				default:
 					var data:Object;
-					var toolTip:Object;
 					var effectWeight:Number;
 					
 					if (target.name.search("btn_jet") != -1)
@@ -630,8 +632,7 @@ package ui
 						data = buttonEffect.value as EffectInstanceInteger;
 						effectWeight = data.value * RuneWeightUtils.getWeight(EffectIdUtils.getEffectIdFromMalusToBonus(data.effectId));
 						
-						toolTip = uiApi.textTooltipInfo("Poids de l'effet : " + effectWeight);
-						uiApi.showTooltip(toolTip, target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3, null, null, null, "TextInfo");
+						showDefaultTextTooltip(_langManager.getText(LangEnum.TOOLTIP_WEIGHT, effectWeight), target);
 					}
 					else if (target.name.search("slot_") != -1)
 					{
@@ -644,37 +645,37 @@ package ui
 						data = runeSlot.value as ItemWrapper;
 						effectWeight = RuneWeightUtils.getWeight(data.effects[0].effectId) * data.effects[0].parameter0;
 						
-						toolTip = uiApi.textTooltipInfo(data.name + ", +" + data.effects[0].description + "\nPoids de la rune : " + effectWeight + "\nProbabilité : " + 50 + "%");
-						uiApi.showTooltip(toolTip, target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3, null, null, null, "TextInfo");
+						showDefaultTextTooltip(_langManager.getText(LangEnum.TOOLTIP_RUNE, data.name, data.effects[0].description, effectWeight), target);
 					}
 					else if (target.name.search("tx_bulle") != -1)
 					{
+						var text:String;
 						if (target.uri.toString() == _bubbleGreyUri.toString())
 						{
-							toolTip = uiApi.textTooltipInfo("Jet inférieur au jet min");
+							text = _langManager.getText(LangEnum.TOOLTIP_BAD)
 						}
 						else if (target.uri.toString() == _bubbleGreenUri.toString())
 						{
-							toolTip = uiApi.textTooltipInfo("Jet moyen");
+							text = _langManager.getText(LangEnum.TOOLTIP_NORMAL)
 						}
 						else if (target.uri.toString() == _bubbleOrangeUri.toString())
 						{
-							toolTip = uiApi.textTooltipInfo("Bon jet (>80% du jet max)");
+							text = _langManager.getText(LangEnum.TOOLTIP_GOOD)
 						}
 						else if (target.uri.toString() == _bubbleRedUri.toString())
 						{
-							toolTip = uiApi.textTooltipInfo("Jet overmax");
+							text = _langManager.getText(LangEnum.TOOLTIP_OVERMAX)
 						}
 						else if (target.uri.toString() == _bubbleBlueUri.toString())
 						{
-							toolTip = uiApi.textTooltipInfo("Jet éxotique");
+							text = _langManager.getText(LangEnum.TOOLTIP_EXOTIC)
 						}
 						else
 						{
 							break;
 						}
 						
-						uiApi.showTooltip(toolTip, target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3, null, null, null, "TextInfo");
+						showDefaultTextTooltip(text, target);
 					}
 			}
 		}
@@ -700,7 +701,7 @@ package ui
 					break;
 				
 				case btn_wellInput:
-					modCommon.openInputPopup("Réglage manuel du puits", "Entrez la valeur souhaitée", onValidWellValue, null, _well, "0-9.", 5);
+					modCommon.openInputPopup(_langManager.getText(LangEnum.POPUP_WELL_TITLE), _langManager.getText(LangEnum.POPUP_WELL_MESSAGE), onValidWellValue, null, _well, "0-9.", 5);
 					
 					break;
 			}
@@ -954,6 +955,21 @@ package ui
 		//::///////////////////////////////////////////////////////////
 		
 		/**
+		 * Init UI labels.
+		 */
+		private function initLabels():void
+		{
+			lbl_well.text = _langManager.getText(LangEnum.WELL, 0);
+			lbl_result.text = _langManager.getText(LangEnum.RESULT, "");
+			lbl_min.text = _langManager.getText(LangEnum.SHORTCUT_MINIMUM);
+			lbl_max.text = _langManager.getText(LangEnum.SHORTCUT_MAXIMUM);
+			lbl_effect.text = _langManager.getText(LangEnum.CHARACTERISTIC);
+			lbl_rune_ba.text = _langManager.getText(LangEnum.SHORTCUT_RUNE_SIMPLE);
+			lbl_rune_pa.text = _langManager.getText(LangEnum.SHORTCUT_RUNE_PA);
+			lbl_rune_ra.text = _langManager.getText(LangEnum.SHORTCUT_RUNE_RA);
+		}
+		
+		/**
 		 * Display the right texture according to the craft result.
 		 * 
 		 * @param	result
@@ -1028,13 +1044,13 @@ package ui
 			{
 				_runeWeight = RuneWeightUtils.getWeight(effect.effectId) * effect.value;
 				
-				lbl_rune_weight.text = "Poids : " + _runeWeight;
+				lbl_rune_weight.text = _langManager.getText(LangEnum.WEIGHT, _runeWeight);
 			}
 			else
 			{
 				_runeWeight = 0;
 				
-				lbl_rune_weight.text = "Poids : Inconnu";
+				lbl_rune_weight.text = _langManager.getText(LangEnum.UNKNOW_WEIGHT);
 			}
 		}
 		
@@ -1056,7 +1072,7 @@ package ui
 				return;
 			}
 			
-			lbl_level.text = String("Niv. " + item.level);
+			lbl_level.text = _langManager.getText(LangEnum.LEVEL, item.level);
 			lbl_name.text = item.name;
 			
 			var effect:EffectInstance;
@@ -1102,7 +1118,7 @@ package ui
 		{
 			_well = well;
 			
-			lbl_well.text = "Puits : " + _well;
+			lbl_well.text = _langManager.getText(LangEnum.WELL, _well);
 		}
 		
 		/**
@@ -1374,6 +1390,14 @@ package ui
 					break;
 				}
 			}
+		}
+		
+		/**
+		 * Display tooltip
+		 */
+		private function showDefaultTextTooltip(text:String, target:*):void
+		{
+			uiApi.showTooltip(uiApi.textTooltipInfo(text), target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3, null, null, null, "TextInfo");
 		}
 	}	
 }
