@@ -21,7 +21,7 @@
 	<tooltipBasicMode>Basculer en mode basique</tooltipBasicMode>
 	<tooltipOptions>Options</tooltipOptions>
 	<tooltipEffectWeight>Poids de l'effet : #0</tooltipEffectWeight>
-	<tooltipRune>#0, #1\nPoids de la rune : #2</tooltipRune>
+	<tooltipRune>#0, #1%0APoids de la rune : #2</tooltipRune>
 	<tooltipBad>Jet inférieur au jet min</tooltipBad>
 	<tooltipNormal>Jet moyen</tooltipNormal>
 	<tooltipGood>Bon jet (>80% du jet max)</tooltipGood>

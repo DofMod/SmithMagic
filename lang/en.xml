@@ -21,7 +21,7 @@
 	<tooltipBasicMode>Toogle basic mode</tooltipBasicMode>
 	<tooltipOptions>Options</tooltipOptions>
 	<tooltipEffectWeight>Effect weight : #0</tooltipEffectWeight>
-	<tooltipRune>#0, #1\nRune weight : #2</tooltipRune>
+	<tooltipRune>#0, #1%0ARune weight : #2</tooltipRune>
 	<tooltipBad>Less than minimal</tooltipBad>
 	<tooltipNormal>Normal</tooltipNormal>
 	<tooltipGood>Good (>80% of max)</tooltipGood>

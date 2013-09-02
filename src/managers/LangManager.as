@@ -94,7 +94,7 @@ package managers
 				resultText += args[indexArg] + splitedText[index].substring(pos);
 			}
 			
-			return resultText;
+			return unescape(resultText);
 		}
 		
 		public function isInit():Boolean
