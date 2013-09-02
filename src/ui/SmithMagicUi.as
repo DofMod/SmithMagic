@@ -41,7 +41,7 @@ package ui
 	import flash.utils.Dictionary;
 	import managers.LangManager;
 	import utils.EffectIdUtils;
-	import utils.RuneWeightUtils;
+	import utils.SmithmagicUtils;
 	
 	/**
 	 * Main ui class.
@@ -312,25 +312,25 @@ package ui
 				
 				if (effect.oldValue == false && effect.newValue != false)
 				{
-					weightGains += (effect.newValue * RuneWeightUtils.getWeight(effect.id));
+					weightGains += (effect.newValue * SmithmagicUtils.getEffectWeight(effect.id));
 					
 					_modifiedEffects[effect.id] = effect.newValue;
 				}
 				else if (effect.newValue == false && effect.oldValue != false)
 				{
-					weightLosses += (effect.oldValue * RuneWeightUtils.getWeight(effect.id));
+					weightLosses += (effect.oldValue * SmithmagicUtils.getEffectWeight(effect.id));
 					
 					_modifiedEffects[effect.id] = -effect.oldValue;
 				}
 				else if (effect.oldValue < effect.newValue)
 				{
-					weightGains += ((effect.newValue - effect.oldValue) * RuneWeightUtils.getWeight(effect.id));
+					weightGains += ((effect.newValue - effect.oldValue) * SmithmagicUtils.getEffectWeight(effect.id));
 					
 					_modifiedEffects[effect.id] = effect.newValue - effect.oldValue;
 				}
 				else if (effect.oldValue > effect.newValue)
 				{
-					weightLosses += ((effect.oldValue - effect.newValue) * RuneWeightUtils.getWeight(effect.id));
+					weightLosses += ((effect.oldValue - effect.newValue) * SmithmagicUtils.getEffectWeight(effect.id));
 					
 					_modifiedEffects[effect.id] = effect.newValue - effect.oldValue;
 				}
@@ -630,7 +630,7 @@ package ui
 						}
 						
 						data = buttonEffect.value as EffectInstanceInteger;
-						effectWeight = data.value * RuneWeightUtils.getWeight(EffectIdUtils.getEffectIdFromMalusToBonus(data.effectId));
+						effectWeight = data.value * SmithmagicUtils.getEffectWeight(EffectIdUtils.getEffectIdFromMalusToBonus(data.effectId));
 						
 						showDefaultTextTooltip(_langManager.getText(LangEnum.TOOLTIP_WEIGHT, effectWeight), target);
 					}
@@ -643,7 +643,7 @@ package ui
 						}
 						
 						data = runeSlot.value as ItemWrapper;
-						effectWeight = RuneWeightUtils.getWeight(data.effects[0].effectId) * data.effects[0].parameter0;
+						effectWeight = SmithmagicUtils.getEffectWeight(data.effects[0].effectId) * data.effects[0].parameter0;
 						
 						showDefaultTextTooltip(_langManager.getText(LangEnum.TOOLTIP_RUNE, data.name, data.effects[0].description, effectWeight), target);
 					}
@@ -905,13 +905,14 @@ package ui
 						continue;
 					}
 					
-					if (item.name.search("Rune Pa") != -1)
+					var runeSubtype:int = SmithmagicUtils.getRuneSubtype(item.id);
+					if (runeSubtype == 2)
 					{
 						componentsRef.slot_pa.value = item;
 						componentsRef.slot_pa.data = item;
 						componentsRef.slot_pa.visible = true;
 					}
-					else if (item.name.search("Rune Ra") != -1)
+					else if (runeSubtype == 3)
 					{
 						componentsRef.slot_ra.value = item;
 						componentsRef.slot_ra.data = item;
@@ -1040,9 +1041,9 @@ package ui
 			lbl_rune_name.text = rune.name;
 			lbl_rune_effect.text = "+" + effect.description;
 			
-			if (RuneWeightUtils.getWeight(effect.effectId))
+			if (SmithmagicUtils.getEffectWeight(effect.effectId))
 			{
-				_runeWeight = RuneWeightUtils.getWeight(effect.effectId) * effect.value;
+				_runeWeight = SmithmagicUtils.getEffectWeight(effect.effectId) * effect.value;
 				
 				lbl_rune_weight.text = _langManager.getText(LangEnum.WEIGHT, _runeWeight);
 			}
