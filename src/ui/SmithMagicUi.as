@@ -900,7 +900,7 @@ package ui
 			{
 				for each (var item:ItemWrapper in items)
 				{
-					if (item.typeId != ItemTypeIdEnum.SMITHMAGIC_RUNE || item.effects[0].effectId != effect.effectId)
+					if (item.typeId != ItemTypeIdEnum.SMITHMAGIC_RUNE || item.effects[0].effectId != bonusEffectId)
 					{
 						continue;
 					}
