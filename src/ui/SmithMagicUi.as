@@ -573,10 +573,27 @@ package ui
 			{
 				case slot_rune:
 				case slot_signature:
+					if (target.data)
+					{
+						showDefaultTextTooltip(target.data.name, target);
+					}
+					
+					break;
 				case slot_item:
 					if (target.data)
 					{
-						uiApi.showTooltip(uiApi.textTooltipInfo(target.data.name), target, false, "standard", LocationEnum.POINT_BOTTOM, LocationEnum.POINT_TOP, 3, null, null, null, "TextInfo");
+						var item:ItemWrapper = target.data;
+						var weight:Number = 0;
+						for each(var effect:EffectInstance in item.effects)
+						{
+							if (effect is EffectInstanceInteger && EffectIdUtils.isForgeableEffect(effect.effectId))
+							{
+								var weightOfEffect:Number = (effect as EffectInstanceInteger).value * SmithmagicUtils.getEffectWeight(EffectIdUtils.getEffectIdFromMalusToBonus(effect.effectId));
+								weight += EffectIdUtils.isEffectNegative(effect.effectId) ? -weightOfEffect : weightOfEffect;
+							}
+						}
+						
+						showDefaultTextTooltip(_langManager.getText(LangEnum.NAME_AND_PWRG, target.data.name, weight), target);
 					}
 					
 					break;

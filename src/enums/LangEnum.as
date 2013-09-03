@@ -14,6 +14,7 @@ package enums
 		public static const LEVEL:String = "level";
 		public static const WEIGHT:String = "weight";
 		public static const UNKNOW_WEIGHT:String = "unknowWeight";
+		public static const NAME_AND_PWRG:String = "nameAndPWRG"
 		
 		public static const SHORTCUT_MINIMUM:String = "shortcutMin";
 		public static const SHORTCUT_MAXIMUM:String = "shortcutMax";
