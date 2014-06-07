@@ -4,10 +4,10 @@
     "author": "ExiTeD",
     "contributos": ["Relena"],
     "url": "https://github.com/DofMod/SmithMagic/releases/download/v2.11_1.0/SmithMagic_2.11_1.0.zip",
-    "description": "This add a new way to use Zaaps",
-    "category": "Zaap",
+    "description": "An improved Smithmagic interface",
+    "category": "GUI, Forgemagie",
     "version": "1.0",
     "dofusVersion": "2.11",
-    "lastUpdateDate": "2014-06-07"
+    "lastUpdateDate": "2013-09-03"
 }
 ]
