@@ -2,7 +2,6 @@
 
 from __future__ import print_function
 
-import datetime
 import json
 import os
 import os.path as op
@@ -55,6 +54,13 @@ def updateModFile():
 	version = result.group(2)
 	revision = result.group(3)
 
+	command = ['git', 'log', '--tags', '--simplify-by-decoration', '-1', '--pretty=%ai']
+	out = subprocess.Popen(command, stdout=subprocess.PIPE)
+	(sout, serr) = out.communicate()
+
+	result = re.match(r"(-?[0-9|\.]+)-(-?[0-9|\.]+)-(-?[0-9|\.]+)", sout)
+	date = result.group(0)
+
 	with open(op.normpath(op.join(srcPath, "mod.info")), "r") as file:
 		data = file.read()
 		data = data.replace("${name}", moduleName)
@@ -62,7 +68,7 @@ def updateModFile():
 		data = data.replace("${dofusVersion}", dofusVersion)
 		data = data.replace("${version}", version)
 		data = data.replace("${tag}", "v" + dofusVersion + "_" + version)
-		data = data.replace("${date}", datetime.date.today().isoformat())
+		data = data.replace("${date}", date)
 		data = data.replace("${filename}", moduleName + "_" + dofusVersion + "_" + version)
 		data = data.replace("${contributors}", json.dumps(contributorsName))
 		with open(op.normpath(op.join(srcPath, "mod.json")), "w") as outFile:
